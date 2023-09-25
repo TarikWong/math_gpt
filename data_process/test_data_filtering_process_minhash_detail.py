@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time : 2023/9/20 3:57 下午
 # @Author : tuo.wang
-# @Version : 
+# @Version :
 # @Function :
 from datasketch import MinHash, MinHashLSH
 import jieba
@@ -16,15 +16,14 @@ CONSTANT__TEST_PATH = '/mnt/pfs/zitao_team/big_model/wangtuo_data/test_data/'
 ## 训练集语料路径
 CONSTANT__TRAIN_PATH_LIST = [
     '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/personal_paper_q2a.jsonl',
-    '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/peiyou_paper_q2a.jsonl',
-    '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/cloud_paper_q2a.jsonl',
-    '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/tipaipai_q2a.jsonl',
+    # '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/peiyou_paper_q2a.jsonl',
+    # '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/cloud_paper_q2a.jsonl',
+    # '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/tipaipai_q2a.jsonl',
     # '/Users/tuo/train_data/',
 ]
 
 ## 输出文件路径
-CONSTANT__OUTPUT_PATH_DIR = '/mnt/pfs/zitao_team/big_model/wangtuo_data/output_data/'
-# CONSTANT__OUTPUT_PATH_DIR = '/Users/tuo/output_data/'
+CONSTANT__OUTPUT_PATH_DIR = '/mnt/pfs/zitao_team/big_model/wangtuo_data/output_data_details/'
 
 
 # 加载指定目录下的所有文件，返回dict，key为文件全路径，value为json列表
@@ -60,7 +59,6 @@ def load_test_data(param_input_path):
         with open(param_input_path + file, 'r', encoding="utf-8") as f:
             test_data_list = json.load(f)
             result[param_input_path + file] = test_data_list
-
     return result
 
 
@@ -77,20 +75,21 @@ def words2hash(param_set, param_num_perm=128):
 
 # create lsh index
 def minhash_lsh_initialize(param_path):
+    original_test_data_dict = {}
     lsh = MinHashLSH(threshold=0.8, num_perm=128)
     data_dict = load_test_data(param_input_path=param_path)
     print('[{}]测试语料加载完成.'.format(get_current_time_string()))
 
     counter = 0
     for key_path, value_json_list in data_dict.items():
-        # print("key_path: ", key_path)
         for i in range(len(value_json_list)):
             text = clean_text(value_json_list[i]['question'])
             cut_text_set = text2words(param_text=text)
             text_minhash = words2hash(param_set=cut_text_set)
             lsh.insert(str(counter), text_minhash)
+            original_test_data_dict[str(counter)] = value_json_list[i]['question']
             counter += 1
-    return lsh
+    return lsh, original_test_data_dict
 
 
 def get_current_time_string(format='%Y-%m-%d %H:%M:%S'):
@@ -105,33 +104,30 @@ def clean_text(text):
 if __name__ == '__main__':
     print('[{}]任务开始...'.format(get_current_time_string()))
     result_list = []
-    lsh = minhash_lsh_initialize(param_path=CONSTANT__TEST_PATH)  # 加载训练集语料初始化MinHashLSH
+    lsh, original_test_data_dict = minhash_lsh_initialize(param_path=CONSTANT__TEST_PATH)  # 加载训练集语料初始化MinHashLSH
     print('[{}]MinHashLSH初始化完成.'.format(get_current_time_string()))
     train_data_list = load_train_data(param_path_list=CONSTANT__TRAIN_PATH_LIST)  # 加载测试数据
     print('[{}]训练语料加载完成.'.format(get_current_time_string()))
-
-    # print("train_data_list: ", train_data_list)
 
     for data in train_data_list:
         result_dict = {}
         for path, json_list in data.items():
             new_json_list = []
-            # print("path: ", path)
             if 'tipaipai' not in path:
                 for value_json in json_list:
-                    # print("非题拍拍prompt: ", value_json[param_json_prompt])
                     prompt_text = clean_text(value_json['prompt'])
                     words_set = set(text2words(param_text=prompt_text))
                     hash = words2hash(param_set=words_set)
-                    # print("lsh.query(hash): ", lsh.query(hash))
-                    if len(lsh.query(hash)) == 0:
+                    query_reault_list = lsh.query(hash)
+                    if len(query_reault_list) == 0:
                         new_json_list.append(value_json)
-                        # print('lsh.query(hash) == 0')
+                    else:
+                        for minhash_index in query_reault_list:
+                            print("train:{}, test:{}".format(prompt_text, original_test_data_dict[minhash_index]))
             else:
                 for value_json in json_list:
                     flag = 0
                     for c in value_json['conversations']:
-                        # print("题拍拍prompt: ", c['value'])
                         prompt_text = clean_text(c['value'])
                         words_set = set(text2words(param_text=prompt_text))
                         hash = words2hash(param_set=words_set)
@@ -142,7 +138,6 @@ if __name__ == '__main__':
             result_dict[path] = new_json_list
         result_list.append(result_dict)
 
-    # print("result_list: ", result_list)
     print('[{}]开始数据校验...'.format(get_current_time_string()))
     print('original data: ')
     for i in train_data_list:
@@ -154,15 +149,13 @@ if __name__ == '__main__':
         for key, value in i.items():
             print('file: {}, data length: {}'.format(key, len(value)))
 
-    print('[{}]保存过滤完成的数据...'.format(get_current_time_string()))
-    for i in result_list:
-        for key, value in i.items():
-            json_data = json.dumps(value, ensure_ascii=False)
-
-            output_path = '{}{}/{}'.format(CONSTANT__OUTPUT_PATH_DIR, key.split('/')[-2], key.split('/')[-1])
-            # print("output_path: ", output_path)
-            # print("json_data: ", json_data)
-            with open(output_path, 'w', encoding='utf-8') as f:
-                f.write(json_data)
+    # print('[{}]保存过滤完成的数据...'.format(get_current_time_string()))
+    # for i in result_list:
+    #     for key, value in i.items():
+    #         json_data = json.dumps(value, ensure_ascii=False)
+    #
+    #         output_path = '{}{}/{}'.format(CONSTANT__OUTPUT_PATH_DIR, key.split('/')[-2], key.split('/')[-1])
+    #         with open(output_path, 'w', encoding='utf-8') as f:
+    #             f.write(json_data)
 
     print('[{}]任务完成!'.format(get_current_time_string()))

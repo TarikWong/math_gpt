@@ -40,9 +40,11 @@ if __name__ == '__main__':
     m3 = words2hash(text2words(clean_text(text3)))
 
     # Create LSH index
-    threshold = 0.87
+    threshold = 0.8
     lsh = MinHashLSH(threshold=threshold, num_perm=128)
     lsh.insert("m2", m2)
     lsh.insert("m3", m3)
     result = lsh.query(m1)
+    print(type(result[0]))
+    print(type(result))
     print("Approximate neighbours with Jaccard similarity > {} : ".format(threshold), result)

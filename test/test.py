@@ -19,4 +19,7 @@
 #         result[file_path] += file_data_len
 #
 # print(result)
-print(2336879-2331408)
+
+
+
+print(1290890*1237190)

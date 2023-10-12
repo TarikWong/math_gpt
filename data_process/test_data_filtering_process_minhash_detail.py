@@ -15,7 +15,7 @@ CONSTANT__TEST_PATH = '/mnt/pfs/zitao_team/big_model/wangtuo_data/test_data/'
 
 ## 训练集语料路径
 CONSTANT__TRAIN_PATH_LIST = [
-    '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/personal_paper_q2a.jsonl',
+    '/mnt/pfs/zitao_team/big_model/wangtuo_data/train_data/beautiful_analysis.jsonl',
     # '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/peiyou_paper_q2a.jsonl',
     # '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/cloud_paper_q2a.jsonl',
     # '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/tipaipai_q2a.jsonl',
@@ -24,6 +24,8 @@ CONSTANT__TRAIN_PATH_LIST = [
 
 ## 输出文件路径
 CONSTANT__OUTPUT_PATH_DIR = '/mnt/pfs/zitao_team/big_model/wangtuo_data/output_data_details/'
+## 输出diff文件路径
+CONSTANT__OUTPUT_DIFF_PATH_DIR = '/mnt/pfs/zitao_team/big_model/wangtuo_data/output_data_details/diff.txt'
 
 
 # 加载指定目录下的所有文件，返回dict，key为文件全路径，value为json列表
@@ -104,6 +106,7 @@ def clean_text(text):
 if __name__ == '__main__':
     print('[{}]任务开始...'.format(get_current_time_string()))
     result_list = []
+    diff_list = []
     lsh, original_test_data_dict = minhash_lsh_initialize(param_path=CONSTANT__TEST_PATH)  # 加载训练集语料初始化MinHashLSH
     print('[{}]MinHashLSH初始化完成.'.format(get_current_time_string()))
     train_data_list = load_train_data(param_path_list=CONSTANT__TRAIN_PATH_LIST)  # 加载测试数据
@@ -115,7 +118,7 @@ if __name__ == '__main__':
             new_json_list = []
             if 'tipaipai' not in path:
                 for value_json in json_list:
-                    prompt_text = clean_text(value_json['prompt'])
+                    prompt_text = clean_text(value_json['question'])
                     words_set = set(text2words(param_text=prompt_text))
                     hash = words2hash(param_set=words_set)
                     query_reault_list = lsh.query(hash)
@@ -123,7 +126,8 @@ if __name__ == '__main__':
                         new_json_list.append(value_json)
                     else:
                         for minhash_index in query_reault_list:
-                            print("train:{}, test:{}".format(prompt_text, original_test_data_dict[minhash_index]))
+                            diff_list.append("train:{},   test:{}".format(prompt_text, original_test_data_dict[minhash_index]))
+                            # print("train:{},   test:{}".format(prompt_text, original_test_data_dict[minhash_index]))
             else:
                 for value_json in json_list:
                     flag = 0
@@ -149,13 +153,19 @@ if __name__ == '__main__':
         for key, value in i.items():
             print('file: {}, data length: {}'.format(key, len(value)))
 
-    # print('[{}]保存过滤完成的数据...'.format(get_current_time_string()))
-    # for i in result_list:
-    #     for key, value in i.items():
-    #         json_data = json.dumps(value, ensure_ascii=False)
-    #
-    #         output_path = '{}{}/{}'.format(CONSTANT__OUTPUT_PATH_DIR, key.split('/')[-2], key.split('/')[-1])
-    #         with open(output_path, 'w', encoding='utf-8') as f:
-    #             f.write(json_data)
+    print('[{}]保存过滤完成的数据...'.format(get_current_time_string()))
+    for i in result_list:
+        for key, value in i.items():
+            json_data = json.dumps(value, ensure_ascii=False)
+
+            output_path = '{}{}/{}'.format(CONSTANT__OUTPUT_PATH_DIR, key.split('/')[-2], key.split('/')[-1])
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(json_data)
+
+    print('[{}]保存相似度大于阈值的数据...'.format(get_current_time_string()))
+    with open(CONSTANT__OUTPUT_DIFF_PATH_DIR, 'w', encoding='utf-8') as f:
+        for i in diff_list:
+            f.write(i)
+            f.write('\n')
 
     print('[{}]任务完成!'.format(get_current_time_string()))

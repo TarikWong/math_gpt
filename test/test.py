@@ -21,5 +21,11 @@
 # print(result)
 
 
+# a = ['1', '2', '3', '4', '5']
+#
+# with open('/Users/tuo/test.txt', 'w', encoding='utf-8') as f:
+#     for i in a:
+#         f.write(i)
+#         f.write('\n')
 
-print(1290890*1237190)
+print(7291021-7261048)

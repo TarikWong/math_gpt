@@ -15,7 +15,7 @@ CONSTANT__TEST_PATH = '/mnt/pfs/zitao_team/big_model/wangtuo_data/test_data/'
 
 ## 训练集语料路径
 CONSTANT__TRAIN_PATH_LIST = [
-    '/mnt/pfs/zitao_team/big_model/wangtuo_data/train_data/beautiful_analysis.jsonl',
+    '/mnt/pfs/zitao_team/big_model/wangtuo_data/train_data/beautiful_analysis/beautiful_analysis.jsonl',
     # '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/peiyou_paper_q2a.jsonl',
     # '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/cloud_paper_q2a.jsonl',
     # '/mnt/pfs/zitao_team/big_model/processed_data/jiaoyanyun_data/tq_tmp/glm_training/tipaipai_q2a.jsonl',
@@ -155,12 +155,13 @@ if __name__ == '__main__':
 
     print('[{}]保存过滤完成的数据...'.format(get_current_time_string()))
     for i in result_list:
-        for key, value in i.items():
-            json_data = json.dumps(value, ensure_ascii=False)
-
-            output_path = '{}{}/{}'.format(CONSTANT__OUTPUT_PATH_DIR, key.split('/')[-2], key.split('/')[-1])
+        for path, new_json_list in i.items():
+            output_path = '{}{}/{}'.format(CONSTANT__OUTPUT_PATH_DIR, path.split('/')[-2], path.split('/')[-1])
             with open(output_path, 'w', encoding='utf-8') as f:
-                f.write(json_data)
+                for json_dict in new_json_list:
+                    json_string = json.dumps(json_dict, ensure_ascii=False)
+                    f.write(json_string)
+                    f.write('\n')
 
     print('[{}]保存相似度大于阈值的数据...'.format(get_current_time_string()))
     with open(CONSTANT__OUTPUT_DIFF_PATH_DIR, 'w', encoding='utf-8') as f:

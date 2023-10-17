@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # @Time : 2023/9/21 10:12 上午
 # @Author : tuo.wang
-# @Version : 
+# @Version :
 # @Function :
 from __future__ import print_function
 from sklearn.decomposition import PCA
@@ -19,7 +19,7 @@ from sklearn.cluster import DBSCAN
 import pandas as pd
 import jieba
 
-file_path = '/Users/tuo/Downloads/none_mapping10000.json'
+file_path = '/Users/tuo/Downloads/none_mapping.json'
 output_file_path = "{}.csv".format(file_path.split('.')[0])
 
 df_dict = {}
@@ -59,8 +59,8 @@ print("#########################################################################
 print("使用稀疏向量（Sparse Vectorizer）从训练集中抽取特征")
 t0 = time()
 
-vectorizer = TfidfVectorizer(max_df=0.8,
-                             min_df=5,
+vectorizer = TfidfVectorizer(max_df=0.5,
+                             min_df=20,
                              max_features=40000,
                              ngram_range=(1, 2),
                              use_idf=True)
@@ -79,7 +79,7 @@ t0 = time()
 # Vectorizer的结果被归一化，这使得KMeans表现为球形k均值（Spherical K-means）以获得更好的结果。
 # 由于LSA / SVD结果并未标准化，我们必须重做标准化。
 
-svd = TruncatedSVD(15)
+svd = TruncatedSVD(25)
 normalizer = Normalizer(copy=False)
 lsa = make_pipeline(svd, normalizer)
 
@@ -94,7 +94,7 @@ print('PCA文本特征抽取完成！')
 print("##############################################################################")
 
 # 进行实质性的DBScan聚类
-db = DBSCAN(eps=0.2, min_samples=4).fit(X)
+db = DBSCAN(eps=0.3, min_samples=50).fit(X)
 core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
 core_samples_mask[db.core_sample_indices_] = True
 

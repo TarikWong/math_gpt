@@ -1,39 +1,44 @@
-# from call_gpt import send_chat_request
-# import time
+import json
+
+# import pandas as pd
 #
-# # 定义要测试的引擎列表
-# engines = ["AT:70b-at", "GPT4"]
+# data = pd.DataFrame({'name': ['wencky', 'stany', 'barbio'],
+#                      'age': [29, 29, 3],
+#                      'gender': ['w', 'm', 'm']})
 #
-#
-# temperatures = [0.7] * len(engines)
-#
-# # 共用的系统消息和问题
-# system_message = "You are a helpful assistant."
-# examples = []
-# question = "帮我计算88*89"
-#
-# # 遍历每个引擎和温度组合并执行测试
-# for engine, temperature in zip(engines, temperatures):
-#     # 记录开始时间
-#     start_time = time.time()
-#
-#     response = send_chat_request(
-#         system_message,
-#         examples,
-#         question,
-#         engine=engine,
-#         temperature=temperature,
-#         max_retry=1,
-#         at_url='https://api.openai.com/v1/embeddings'
-#     )
-#
-#     # 记录结束时间
-#     end_time = time.time()
-#
-#     # 计算执行时间
-#     execution_time = end_time - start_time
-#
-#     print(f"{engine} response:", response["response"])
-#     print(f"Execution time for {engine}: {execution_time} seconds")
-#     print("----------")
-print(30 / 36 * 100)
+# print(data)
+# # print('age去重', data["age"].unique(), sep='\n')
+# print('去重后数量', len(data["age"].unique()), sep='\n')
+
+
+
+json_string = """{
+    "subjectName":"数学",
+    "gradeGroupName":"初中",
+    "content":" 某商品的价格标签已丢失，售货员只知道“它的进价为80元，打七折售出后，仍可获利5%”．你认为售货员应标在标签上的价格为$$underline{------------}$$元． ",
+    "answer":[
+        [
+            " 120  解：设售货员应标在标签上的价格为x元，依据题意70%x=80×（1+5%）可求得：x=120，价格应为120元． "
+        ]
+    ],
+    "analysis":[
+        ""
+    ],
+    "logicQuesTypeName":"填空题",
+    "que_id":"100551313",
+    "examOptionList":"一元一次方程的定义,一元一次方程的解法,一元一次方程中的待定系数,一元一次方程的应用",
+    "source_text":"魔方格",
+    "origin_text":"抓取",
+    "question_id":"xpombNmz3e60VXlg",
+    "source_id":1,
+    "source_group":"qingzhou",
+    "en_question_id":"YTFZTXVEQ1h5TzFWUFNaTGZKQVU3ZFpuV1lYckVjZ2YvdWo2TERiaWdhK0k9",
+    "path":"1_26368.json"
+}"""
+
+# a = json.loads(json_string)
+# print(type(a))
+# print(a.get('aaa', '-').split(','))
+
+a = ['1', '2', '3', '4']
+print(','.join(a))

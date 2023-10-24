@@ -1,0 +1,94 @@
+[
+  {
+    "question_id": "43_2552.json_197237119",
+    "source": 2,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "因式分解：x$$^{2}$$-1=$$\\underline{     }$$.",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "应用差平方公式",
+            "detail": "根据差平方公式，$a^2 - b^2 = (a+b)(a-b)$，所以$x^2 - 1 = (x+1)(x-1)$。"
+          },
+          "kc": {
+            "1": [
+              "平方差公式"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "作答",
+            "detail": "答：$x^2 - 1 = (x+1)(x-1)$。"
+          },
+          "kc": {
+            "2": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "乘法公式",
+      "因式分解"
+    ]
+  },
+  {
+    "question_id": "43_13909.json_230004709",
+    "source": 2,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "不等式x-1≥-3的解集为$$\\underline{  }$$，其中不等式的负整数解为$$\\underline{  }$$.",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "解不等式",
+            "detail": "解不等式$x-1\\geq -3$，移项得到$x\\geq -2$"
+          },
+          "kc": {
+            "1": [
+              "一元一次不等式的解集",
+              "不等式的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "找出负整数解",
+            "detail": "在解集$x\\geq -2$中，负整数解为$-2$和$-1$"
+          },
+          "kc": {
+            "2": [
+              "一元一次不等式的解集"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "作答",
+            "detail": "答案：x≥-2；-2，-1."
+          },
+          "kc": {
+            "3": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "一元一次不等式",
+      "不等式"
+    ]
+  }
+]

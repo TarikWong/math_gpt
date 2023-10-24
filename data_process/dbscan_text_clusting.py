@@ -15,21 +15,17 @@ import pandas as pd
 import jieba
 import matplotlib.pyplot as plt
 import datetime
+import optparse
 
 # INPUT_FILE_PATH = '/Users/tuo/Downloads/none_mapping.json'
 INPUT_FILE_PATH = '/mnt/pfs/zitao_team/big_model/wangtuo_data/beautiful_analysis_knowledge_tag/text_clustering/none_mapping.json'
-# OUTPUT_FILE_PATH = "{}.csv".format(INPUT_FILE_PATH.split('.')[0])
-
-df_dict = {}
-org_data = []
-data = []
 
 
 def get_dataframe_from_local_file(file_path):
+    df_dict, org_data, data = {}, [], []
     with open(file_path, 'r') as f:
         for line in f.readlines():
             if line.strip() != '{' and line.strip() != '}':
-                # print(line)
                 org_data.append(line.strip())
                 data.append(line.strip().replace('": [],', '').replace('": []', '').replace('"', ''))
     df_dict['org_data'] = org_data
@@ -61,16 +57,16 @@ def word_cut(input_df):
     return input_df
 
 
-def word2vec(input_df):
+def word2vec(input_df, max_df=0.5, min_df=20, max_features=40000, use_idf=1, compress=False):
     # 提取稀疏文本特征
     print("使用稀疏向量（Sparse Vectorizer）从训练集中抽取特征")
     t0 = time()
-
-    vectorizer = TfidfVectorizer(max_df=0.5,
-                                 min_df=20,
-                                 max_features=40000,
+    vec_use_idf = True if use_idf == 1 else False
+    vectorizer = TfidfVectorizer(max_df=max_df,
+                                 min_df=min_df,
+                                 max_features=max_features,
                                  ngram_range=(1, 2),
-                                 use_idf=True)
+                                 use_idf=vec_use_idf)
 
     X = vectorizer.fit_transform(input_df['data_cut'])
 
@@ -80,35 +76,32 @@ def word2vec(input_df):
     print("##############################################################################")
 
     # 降维，使其适用于DBSCAN算法
-    # print("用LSA进行维度规约（降维）...")
-    # t0 = time()
-    #
-    # # Vectorizer的结果被归一化，这使得KMeans表现为球形k均值（Spherical K-means）以获得更好的结果。
-    # # 由于LSA / SVD结果并未标准化，我们必须重做标准化。
-    #
-    # svd = TruncatedSVD(100)
-    # normalizer = Normalizer(copy=False)
-    # lsa = make_pipeline(svd, normalizer)
-    #
-    # X = lsa.fit_transform(X)
-    #
-    # print("完成所耗费时间： %fs" % (time() - t0))
-    #
-    # explained_variance = svd.explained_variance_ratio_.sum()
-    # print("SVD解释方差的step: {}%".format(int(explained_variance * 100)))
-    #
-    # print('PCA文本特征抽取完成！')
-    # print("##############################################################################")
+    if compress:
+        print("用LSA进行维度规约（降维）...")
+        t0 = time()
+
+        # Vectorizer的结果被归一化，这使得KMeans表现为球形k均值（Spherical K-means）以获得更好的结果。
+        # 由于LSA / SVD结果并未标准化，我们必须重做标准化。
+        svd = TruncatedSVD(100)
+        normalizer = Normalizer(copy=False)
+        lsa = make_pipeline(svd, normalizer)
+
+        X = lsa.fit_transform(X)
+
+        print("完成所耗费时间： %fs" % (time() - t0))
+        explained_variance = svd.explained_variance_ratio_.sum()
+        print("SVD解释方差的step: {}%".format(int(explained_variance * 100)))
+
+        print('PCA文本特征抽取完成！')
+        print("##############################################################################")
     return X
 
 
 # 进行实质性的DBScan聚类
-def text_clustering(input_X, input_df, input_file_path=INPUT_FILE_PATH):
-    db = DBSCAN(eps=0.5, min_samples=15).fit(input_X)
+def text_clustering(input_X, input_df, eps=0.5, min_samples=15, input_file_path=INPUT_FILE_PATH):
+    db = DBSCAN(eps=eps, min_samples=min_samples).fit(input_X)
     core_samples_mask = np.zeros_like(db.labels_, dtype=bool)
     core_samples_mask[db.core_sample_indices_] = True
-
-    # print(db.core_sample_indices_)
 
     labels = db.labels_
     n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
@@ -142,7 +135,7 @@ def text_clustering(input_X, input_df, input_file_path=INPUT_FILE_PATH):
 
 
 # 对结果可视化
-def cluster_data_visualized(input_X, labels, n_clusters_):
+def cluster_data_visualized(input_X, labels, n_clusters_, core_samples_mask):
     # 黑色点是噪点，不参与聚类
     unique_labels = set(labels)
     colors = [plt.cm.Spectral(each)
@@ -167,16 +160,38 @@ def cluster_data_visualized(input_X, labels, n_clusters_):
 
 
 if __name__ == '__main__':
-    input_nonull_unique_df = get_dataframe_from_local_file(file_path=INPUT_FILE_PATH)
-    word_cut_df = word_cut(input_df=input_nonull_unique_df)
-    input_X = word2vec(input_df=word_cut_df)
-    core_samples_mask, dbscan_df, labels = text_clustering(input_X=input_X, input_df=word_cut_df)
+    parser = optparse.OptionParser()
+    parser.add_option('--max_df', dest='max_df', type='float', default=0.5, help='TfidfVectorizer参数：max_df.')
+    parser.add_option('--min_df', dest='min_df', type='float', default=20.0, help='TfidfVectorizer参数：min_df.')
+    parser.add_option('--max_features', dest='max_features', type='int', default=40000, help='TfidfVectorizer参数：max_features.')
+    parser.add_option('--use_idf', type='int', default=1, help='TfidfVectorizer参数：use_idf.')
+    parser.add_option('--eps', dest='eps', type='float', default=0.5, help='DBSCAN参数：eps.')
+    parser.add_option('--min_samples', dest='min_samples', type='int', default=15, help='DBSCAN参数：min_samples.')
 
-    # 聚类数及噪点计算
-    n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
-    n_noise_ = list(labels).count(-1)
-    print('聚类数：', n_clusters_)
-    print('噪点数：', n_noise_)
+    options, args = parser.parse_args()
+    print('\n传入参数: {}'.format(options))
 
-    # cluster_data_visualized(input_X=input_X, labels=labels, n_clusters_=n_clusters_)
-    print('done.')
+    # input_nonull_unique_df = get_dataframe_from_local_file(file_path=INPUT_FILE_PATH)
+    # word_cut_df = word_cut(input_df=input_nonull_unique_df)
+    # input_X = word2vec(input_df=word_cut_df,
+    #                    max_df=options.max_df,
+    #                    min_df=options.min_df,
+    #                    max_features=options.max_features,
+    #                    use_idf=options.use_idf)
+    #
+    # core_samples_mask, dbscan_df, labels = text_clustering(input_X=input_X,
+    #                                                        input_df=word_cut_df,
+    #                                                        eps=options.eps,
+    #                                                        min_samples=options.min_samples)
+    # # 聚类数及噪点计算
+    # n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
+    # n_noise_ = list(labels).count(-1)
+    # print('聚类数：', n_clusters_)
+    # print('噪点数：', n_noise_)
+    #
+    # # 可视化
+    # # cluster_data_visualized(input_X=input_X,
+    # #                         labels=labels,
+    # #                         n_clusters_=n_clusters_,
+    # #                         core_samples_mask=core_samples_mask)
+    # print('done.')

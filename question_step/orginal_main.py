@@ -44,11 +44,11 @@ class Level:
 
     def generate(self, sample):
         system = self.load_system()
-        # print("system:", system)
+        print("system:", system)
         examples = self.load_examples()
-        # print("example:", examples)
+        print("example:", examples)
         query = json.dumps(sample, ensure_ascii=False, default=obj_to_dict)
-        # print("query:", query)
+        print("query:", query)
         response = send_chat_request(
             system=system,
             examples=examples,
@@ -138,6 +138,7 @@ class Service:
             first = self.modify_first_response(first_response=first)
             print("first:", first)
             sample.add_first_step(first)
+            print('second generate start...')
             second = LastLevel(sub_level_kc=first).generate(sample=sample)
             second = self.modify_second_response(
                 second_response=second, first_response=first

@@ -8,8 +8,11 @@ import json
 import os
 from collections import defaultdict
 from typing import *
+from config import config_dict
 
-kc_dir = "/Users/tuo/PycharmProjects/math_gpt/question_step/kc"
+config = config_dict["test"]
+kc_dir = config["kc_dir"]
+kc_file = config["kc_file"]
 
 
 class Knowledge:
@@ -30,7 +33,7 @@ class Knowledge:
     def __init__(
             self, sheet_list=None, lask_kc_file_name: str = "kc_extend_mapping.json"
     ) -> None:
-        self.kc_file = "/Users/tuo/PycharmProjects/math_gpt/question_step/kc/初中知识点（纯）.xlsx"
+        self.kc_file = "{}/{}".format(kc_dir, kc_file)
         self.last_kc_file_name = lask_kc_file_name
         if sheet_list is not None:
             self.sheet_name = sheet_list
@@ -109,3 +112,4 @@ if __name__ == "__main__":
     kc = Knowledge()
     print(kc.sub_level_kc_cnt)
     print(kc.last_level_kc_cnt)
+    print(kc.last_level_kc)

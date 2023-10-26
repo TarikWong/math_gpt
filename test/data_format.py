@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+# @Time : 2023/10/25 6:24 下午
+# @Author : tuo.wang
+# @Version : 
+# @Function :
 import pandas as pd
 import json
 from typing import *
@@ -7,7 +12,7 @@ class DataFormatProcessing(object):
     def __init__(self,
                  sample_cnt: int = 3,
                  input_file: str = "/Users/tuo/PycharmProjects/math_gpt/question_step/tmp/source2_sample2000_result.json",
-                 output_file: str = "/Users/tuo/PycharmProjects/math_gpt/question_step/tmp/source2_sample_result.csv",
+                 output_file: str = "/Users/tuo/PycharmProjects/math_gpt/question_step/tmp/source2_sample_result.xlsx",
                  ):
         self.lastlevel_kc_dict = {}
         self.output_list = []
@@ -63,7 +68,7 @@ class DataFormatProcessing(object):
         df["first_string"] = df['first'].apply(self.to_string)
         print("去重后数量", len(self.lastlevel_kc_dict))
         # print(self.lastlevel_kc_dict)
-        df.to_csv(self.output_file, index=False, encoding='utf-8')
+        df.to_excel(self.output_file, index=False, encoding='utf-8')
 
 
 if __name__ == "__main__":

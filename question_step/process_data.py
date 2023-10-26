@@ -6,9 +6,10 @@ from typing import *
 from dataclasses import dataclass
 from kc_handler import Knowledge
 from utils import obj_to_dict
+from config import config_dict
 
-# DATA_DIR = "/Users/tuo/PycharmProjects/math_gpt/question_step/data/"
-DATA_DIR = "/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/"
+config = config_dict["test"]
+DATA_DIR = config["data_dir"]
 
 
 def split_dataset(
@@ -88,7 +89,8 @@ FUNC_KC_DICT = {
 
 
 class SingleSourceData:
-    def __init__(self, file_dir: str = "source2.csv", output_dir: str = "source2_sample_2000_add_info.csv", source: str = "2") -> None:
+    def __init__(self, file_dir: str = "source2.csv", output_dir: str = "source2_sample_2000_add_info.csv",
+                 source: str = "2") -> None:
         self.source = source
         self.data = pd.read_csv(os.path.join(DATA_DIR, file_dir))
         self.output_dir = output_dir
@@ -122,7 +124,6 @@ class SingleSourceData:
         self.data["new_kc"] = self.data["original_kc"].apply(self.filter_last_kc)
         self.data["new_kc_str"] = self.data["new_kc"].apply(self.concat_list)
         # self.data["new_kc"] = self.data["original_kc"]
-
 
     @property
     def new_data(self):
@@ -181,15 +182,14 @@ def to_json_file(file_name: str, obj: List[Any], default=obj_to_dict):
 class DataProcessor:
     def __init__(
             self,
-            file_path: str = "/Users/tuo/PycharmProjects/math_gpt/question_step/data/source2_sample_20.csv",
-            sample_cnt: int = 2,
-            out_tmp: str = '/Users/tuo/PycharmProjects/math_gpt/question_step/tmp/source2_solutions_20.json',
-            out_tmp_sub: str = "/Users/tuo/PycharmProjects/math_gpt/question_step/tmp/source2_solutions_sub_20.json",
-            out_tmp_result: str = "source2_solutions_result_20.json"
-    ) -> None:
+            file_path: str,
+            sample_cnt: int,
+            out_tmp: str,
+            out_tmp_sub: str,
+            out_tmp_result: str) -> None:
         self.data = pd.read_csv(file_path)
-        self.out_tmp = (out_tmp)
-        self.out_tmp_sub = out_tmp_sub
+        self.out_tmp = "{}{}_solutions.json".format(out_tmp, file_path.split("/")[-1].split(".")[0])
+        self.out_tmp_sub = "{}{}_solutions_sub.json".format(out_tmp, file_path.split("/")[-1].split(".")[0])
         self.out_tmp_result = out_tmp_result
         self.sample_cnt = sample_cnt
 
@@ -267,9 +267,8 @@ def check_data(file_dir: str = "source1_sample_2000.csv"):
 
 
 if __name__ == "__main__":
-    # pass
     # 解析某个字段
-    # data = pd.read_csv('/Users/tuo/PycharmProjects/math_gpt/question_step/data/source2_sample_20.csv').head(10)
+    # data = pd.read_csv('/Users/tuo/PycharmProjects/math_gpt/question_step/data/source2_sample20.csv').head(10)
     # print('=========== original start ===========')
     # for _, line in data.iterrows():
     #     print(line['original'])
@@ -277,15 +276,15 @@ if __name__ == "__main__":
     # print('=========== original end ===========')
 
     # 随机抽样数据写入临时文件
-    sample_cnt = 3000
-    df = pd.read_csv('/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/source2.csv')
+    sample_cnt = 30
+    df = pd.read_csv('/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/source3.csv')
     data = df.sample(sample_cnt)
-    data.to_csv(os.path.join(DATA_DIR, "source2_sample_{}.csv".format(str(sample_cnt))), index=False)
-
+    data.to_csv(os.path.join(DATA_DIR, "source3_sample_{}.csv".format(str(sample_cnt))), index=False)
 
     # 数据处理
     # ssd = SingleSourceData(file_dir='source2_sample_2000.csv', source='2')
     # data = ssd.new_data
     # print(data.head(3))
     # print('去重后new_kc数量：', len(data["new_kc_str"].unique()))
-    # print('done.')
+
+    print('done.')

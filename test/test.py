@@ -2,71 +2,28 @@ import pandas as pd
 import json
 from typing import *
 
-
-class DataFormatProcessing(object):
-    def __init__(self,
-                 sample_cnt: int = 3,
-                 input_file: str = "/Users/tuo/PycharmProjects/math_gpt/question_step/tmp/source2_sample2000_result.json",
-                 output_file: str = "/Users/tuo/PycharmProjects/math_gpt/question_step/tmp/source2_sample_result.csv",
-                 ):
-        self.lastlevel_kc_dict = {}
-        self.output_list = []
-        self.sample_cnt = sample_cnt
-        self.output_file = output_file
-        with open(input_file, "r", encoding="utf-8") as f:
-            self.input_list = json.load(f)
-
-    def new_sub_question(self, sub_question: List[List[Dict]]):
-        real_list = sub_question[0]
-        new_list = []
-        for i in real_list:
-            new_dict = i["solution"]
-            new_dict["kc"] = i["kc"]
-            new_list.append(new_dict)
-        return new_list
-
-    def to_string(self, first):
-        return str(first)
-
-    def check_sub_question(self, sub_question: List[List[Dict]]):
-        real_list = sub_question[0]
-        question_id_set = set([])
-        for i in real_list:
-            question_id_set.add(i["question"])
-        if len(question_id_set) == 1:
-            return list(question_id_set)[0]
-        else:
-            return "-"
-
-    def data_process(self):
-        # 对数据格式做处理
-        for i in self.input_list:
-            i["sub_question_id"] = self.check_sub_question(i["sub_question"])
-            i["sub_question"] = self.new_sub_question(i["sub_question"])
-            i.pop("info")
-            if "first" in i:
-                for first_kc in i["first"]:
-                    self.lastlevel_kc_dict[first_kc] = 0
-
-        # 根据知识点抽样
-        for i in self.input_list:
-            counter = 0
-            if "first" in i:
-                for first_kc in i["first"]:
-                    if self.lastlevel_kc_dict[first_kc] < self.sample_cnt:
-                        counter += 1
-                        self.lastlevel_kc_dict[first_kc] += 1
-            if counter > 0:
-                self.output_list.append(i)
-
-        df = pd.json_normalize(self.output_list)
-        df["first_string"] = df['first'].apply(self.to_string)
-        print("去重后数量", len(self.lastlevel_kc_dict))
-        # print(self.lastlevel_kc_dict)
-        df.to_csv(self.output_file, index=False, encoding='utf-8')
+# class Test(object):
+#     def __init__(self,
+#                  sample_cnt: int,
+#                  input_file: str,
+#                  output_file: str,):
+#         print(sample_cnt)
+#         print(input_file)
+#         print(output_file)
+#
+#
+#
+# if __name__ == "__main__":
+#     c = [
+#         'A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user\'s questions. USER: 给出解题步骤：$0.4444+0.5555+$?$=1$（   ）．A. $0.00001$B. $0.0001$C. $0.0111$D. $0.1111$ ASSISTANT: 题目中的式子是$0.4444+0.5555+$（   ）$=1$。我们可以通过计算$0.4444+0.5555$来找到缺失的数字。$0.4444+0.5555=$ <thought>这里需要计算加法，我需要在这里调用 Calculator API <API>[{"ActionName": "Calculator", "Args": {"equation":"0.4444+0.5555"}}] </API> => 1.0009</thought> $1.0009$。因此，缺失的数字是$1-1.0009=$ <thought>这里需要计算减法，我需要在这里调用 Calculator API <API>[{"ActionName": "Calculator", "Args": {"equation":"1-1.0009"}}] </API> => 0.0001</thought> $0.0001$。因此，答案是B. $0.0001$。</s>',
+#         "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: Which is equal to $0.11$ （   ）．A. $\\frac{1}{9}$B. $\\frac{10}{11}$C. $\\frac{11}{100}$D. $\\frac{1}{11}$ 帮我解答 ASSISTANT: To find which fraction is equal to $0.11$, we can convert $0.11$ to a fraction. $0.11$ can be written as $\\frac{11}{100}$, which is choice $\\text{C}$. Therefore, the answer is $\\text{C}$.</s>"
+#     ]
+#     print(len(c))
 
 
-if __name__ == "__main__":
-    dfp = DataFormatProcessing()
-    dfp.data_process()
-    print("done.")
+a = "unknown"
+
+if "unknown" in a:
+    print("yes")
+else:
+    print('no')

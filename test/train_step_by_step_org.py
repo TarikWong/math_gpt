@@ -390,7 +390,7 @@ def train():
     print(training_args)
 
     local_rank = training_args.local_rank
-    print('model path is', model_args.model_name_or_path)
+    print("model path is: ", model_args.model_name_or_path)
     tokenizer = transformers.AutoTokenizer.from_pretrained(
         model_args.model_name_or_path,
         cache_dir=training_args.cache_dir,

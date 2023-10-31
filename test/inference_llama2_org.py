@@ -1,29 +1,17 @@
 """Inference for FastChat models."""
-# from fastchat.train.llama2_flash_attn_monkey_patch import (
-#     replace_llama_attn_with_flash_attn,
-# )
-
-# replace_llama_attn_with_flash_attn()
-
 import abc
 import gc
 import math
 from typing import Iterable, Optional
 import sys
+import time
 import warnings
-import os
-import copy
-import transformers
-from fastchat.model.model_adapter import load_model, get_conversation_template
+import argparse
+import os, json
+import re
+import signal
 
-base_path = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.join(base_path, "../"))
-from utils.parser import extract_api
-# from utils.cal_api_remote import *
-from utils.cal_api import *
-import json
-import jsonlines
-
+import psutil
 import torch
 from transformers import (
     AutoTokenizer,
@@ -42,10 +30,55 @@ from transformers.generation.logits_process import (
     TopKLogitsWarper,
     TopPLogitsWarper,
 )
-from tqdm import tqdm
-import pandas as pd
-import argparse
+
+from fastchat.conversation import get_conv_template, SeparatorStyle
+from fastchat.model.model_adapter import load_model, get_conversation_template
+# from fastchat.model.chatglm_model import chatglm_generate_stream
+# from fastchat.model.falcon_model import falcon_generate_stream
+# from fastchat.modules.gptq import GptqConfig
 from fastchat.utils import is_partial_stop
+import queue
+
+
+class Streamer:
+    def __init__(self, ):
+        self.stream_data = queue.Queue()
+        self.cnt = 0
+        self.chunk_cache = []
+
+    def write_step(self, status, item, skip_mode=False, output_tokens_collector=None):
+        if output_tokens_collector is None:
+            output_tokens_collector = []
+        if skip_mode:
+            return
+        output_tokens_collector.append(item)
+        self.stream_data.put([status, item])
+        self.cnt += 1
+
+    def add_cache(self, text):
+        self.chunk_cache.append(text)
+
+    def return_cache(self, last_word=False):
+        if last_word:
+            output = "".join(self.chunk_cache).split()[-1]
+        else:
+            output = "".join(self.chunk_cache)
+        self.chunk_cache = []
+        return output
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        while self.stream_data.empty():
+            time.sleep(0.1)
+            continue
+        return self.stream_data.get()
+
+
+def put_queue(status, word):
+    print([status, word])
+    # raise NotImplementedError
 
 
 def prepare_logits_processor(
@@ -64,36 +97,11 @@ def prepare_logits_processor(
     return processor_list
 
 
-def calculate(cal_json, logger=None):
-    # TODO: should fix in future, ugly writing style
-    try:
-        api_name = cal_json["ActionName"].replace(" ", "")
-        api_args = cal_json["Args"]
-        result = api_map[api_name](api_args)
-        output = {"result": result}
-    except Exception as e:
-        output = {"result": ""}
-        if logger is not None:
-            logger.error(f"Error in calculate: {e},input: {cal_json}")
-    return output
-
-
-def find_nearest_thought(generated_text):
-    # Split the text at each occurrence of "<thought>"
-    segments = generated_text.split("<thought>")
-
-    # Return the last segment (which is the content after the last occurrence of "<thought>")
-    return "<thought>" + segments[-1]
-
-
 @torch.inference_mode()
 def generate_stream(
-        model, tokenizer, params, device, context_len=2048, stream_interval=2, current_prefix_with_api=5,
-        bagging_times=5
+        model, tokenizer, params, device, context_len=2048, stream_interval=2
 ):
-    print("Generating stream...")
-    print(f"Params: {params}")
-    use_plugin = params.get("use_plugin", True)
+    output_streamer = Streamer()
     prompt = params["prompt"]
     len_prompt = len(prompt)
     temperature = float(params.get("temperature", 1.0))
@@ -102,37 +110,68 @@ def generate_stream(
     top_k = int(params.get("top_k", -1))  # -1 means disable
     max_new_tokens = int(params.get("max_new_tokens", 256))
     stop_str = params.get("stop", None)
-    echo = bool(params.get("echo", True))
+    echo = bool(params.get("echo", False))
+    inner_stop_str = params.get("inner_stop", None)
     stop_token_ids = params.get("stop_token_ids", None) or []
     stop_token_ids.append(tokenizer.eos_token_id)
 
-    logits_processor = prepare_logits_processor(
-        temperature, repetition_penalty, top_p, top_k
-    )
+    logits_processor = None
 
     input_ids = tokenizer(prompt).input_ids
-    input_echo_len = len(input_ids)
     output_ids = list(input_ids)
-    max_src_len = context_len - max_new_tokens - 8
+
+    if model.config.is_encoder_decoder:
+        max_src_len = context_len
+    else:
+        max_src_len = context_len - max_new_tokens - 8
 
     input_ids = input_ids[-max_src_len:]
+    input_echo_len = len(input_ids)
+
+    if model.config.is_encoder_decoder:
+        encoder_output = model.encoder(
+            input_ids=torch.as_tenosr([input_ids], device=device)
+        )[0]
+        start_ids = torch.as_tensor(
+            [[model.generation_config.decoder_start_token_id]],
+            dtype=torch.int64,
+            device=device,
+        )
+    # whether stop when meet special token during generation
+    stopped_inner = False
 
     past_key_values = out = None
-    gen_tokens = []
+
     for i in range(max_new_tokens):
-        # print(f"Input ids: {tokenizer.decode(input_ids)}")
-        if i == 0 or restart_gen:
-            out = model(torch.as_tensor([input_ids], device=device), use_cache=True)
-            logits = out.logits
+        if i == 0:
+            if model.config.is_encoder_decoder:
+                out = model.decoder(
+                    input_ids=start_ids,
+                    encoder_hidden_states=encoder_output,
+                    use_cache=True,
+                )
+                logits = model.lm_head(out[0])
+            else:
+                out = model(torch.as_tensor([input_ids], device=device), use_cache=True)
+                logits = out.logits
             past_key_values = out.past_key_values
-            restart_gen = False
         else:
-            out = model(
-                input_ids=torch.as_tensor([[token]], device=device),
-                use_cache=True,
-                past_key_values=past_key_values,
-            )
-            logits = out.logits
+            if model.config.is_encoder_decoder:
+                out = model.decoder(
+                    input_ids=torch.as_tensor([[token]], device=device),
+                    encoder_hidden_states=encoder_output,
+                    use_cache=True,
+                    past_key_values=past_key_values,
+                )
+
+                logits = model.lm_head(out[0])
+            else:
+                out = model(
+                    input_ids=torch.as_tensor([[token]], device=device),
+                    use_cache=True,
+                    past_key_values=past_key_values,
+                )
+                logits = out.logits
             past_key_values = out.past_key_values
 
         if logits_processor:
@@ -154,46 +193,8 @@ def generate_stream(
             probs = torch.softmax(last_token_logits, dim=-1)
             token = int(torch.multinomial(probs, num_samples=1))
 
-        gen_tokens.append(token)
         output_ids.append(token)
-        api_token_index = tokenizer.additional_special_tokens.index("</API>")
-        api_token_id = tokenizer.additional_special_tokens_ids[api_token_index]
-
-        if token == api_token_id and use_plugin:  # </API>
-            print("开始检测API")
-            msg = tokenizer.decode(gen_tokens).replace(" ", "")
-            api_json = extract_api(msg)
-            print(f"api_json is {api_json}")
-            if len(api_json) != 0:
-                api_json = api_json[-1]
-            if api_json is None:
-                print("没有检测到任何API")
-                pass
-            if type(api_json) != dict:
-                print(f"API Json不是合法的形式: {api_json}")
-            elif "ActionName" not in api_json or "Args" not in api_json:
-                print(f"检测到API, 但是参数不完整: {api_json}")
-            else:
-                print(f"尝试调用 API: {api_json['ActionName']}, 参数是: {api_json['Args']}")
-                answer = calculate(api_json)
-
-                if answer is None:
-                    print(f"调用 {api_json['ActionName']} 失败, 参数是 {api_json['Args']}")
-                else:
-                    answer = answer["result"]
-                    print(f"{api_json['ActionName']} 结果为 {answer}")
-                    answer = f"=> {str(answer)}</thought>"
-                    answer_tokens = tokenizer(
-                        [answer],
-                    ).input_ids[0][1:]
-                    gen_tokens.extend(answer_tokens)
-                    output_ids.extend(answer_tokens)
-                    # 重启生成
-                    input_ids += gen_tokens
-                    gen_tokens = []
-                    restart_gen = True
-                    past_key_values = out = None
-                    print("重启生成")
+        # TODO: output by token
 
         if token in stop_token_ids:
             stopped = True
@@ -210,14 +211,31 @@ def generate_stream(
 
             output = tokenizer.decode(
                 tmp_output_ids,
+                skip_special_tokens=True,
                 spaces_between_special_tokens=False,
             )
+
+            partially_stopped = False
+            if inner_stop_str:
+                for each_stop in inner_stop_str:
+                    pos = output.rfind(each_stop, rfind_start)
+                    if pos != -1:
+                        output = output[:pos]
+                        stopped_inner = True
+                        break
+                    else:
+                        partially_stopped = is_partial_stop(output, each_stop)
+                        if partially_stopped:
+                            break
+
             if stop_str:
                 if isinstance(stop_str, str):
                     pos = output.rfind(stop_str, rfind_start)
                     if pos != -1:
                         output = output[:pos]
                         stopped = True
+                    else:
+                        partially_stopped = is_partial_stop(output, stop_str)
                 elif isinstance(stop_str, Iterable):
                     for each_stop in stop_str:
                         pos = output.rfind(each_stop, rfind_start)
@@ -225,25 +243,35 @@ def generate_stream(
                             output = output[:pos]
                             stopped = True
                             break
+                        else:
+                            partially_stopped = is_partial_stop(output, each_stop)
+                            if partially_stopped:
+                                break
                 else:
                     raise ValueError("Invalid stop field type.")
 
-            yield {
-                "text": output,
-                "usage": {
-                    "prompt_tokens": input_echo_len,
-                    "completion_tokens": i,
-                    "total_tokens": input_echo_len + i,
-                },
-                "finish_reason": None,
-            }
+            # prevent yielding partial stop sequence
+            if not partially_stopped:
+                yield {
+                    "text": output,
+                    "usage": {
+                        "prompt_tokens": input_echo_len,
+                        "completion_tokens": i,
+                        "total_tokens": input_echo_len + i,
+                    },
+                    "finish_reason": None,
+                }
+        if stopped_inner:
+            break
 
         if stopped:
             break
 
-    # Finish stream event, which contains finish reason
+    # finish stream event, which contains finish reason
     if i == max_new_tokens - 1:
         finish_reason = "length"
+    elif stopped_inner:
+        finish_reason = "inner_stop"
     elif stopped:
         finish_reason = "stop"
     else:
@@ -259,174 +287,390 @@ def generate_stream(
         "finish_reason": finish_reason,
     }
 
-    # Clean
+    # clean
     del past_key_values, out
     gc.collect()
     torch.cuda.empty_cache()
 
 
-def load_json(file_path):
-    print("file path here: ", file_path)
-    with open(file_path, "r") as file:
-        data = json.load(file)
-    return data
+def transfer_test_data_to_template(test_data):
+    new_test_data = []
+    for one_data in test_data:
+        one_data["conversations"] = [{"value": "求解以下题目:" + one_data["question"]}, {"value": one_data["answer"]}]
+        new_test_data.append(one_data)
+    return new_test_data
 
 
-def save_jsonl(file_path, data):
-    # 写入JSONL文件
-    with jsonlines.open(file_path, mode="w") as writer:
-        writer.write_all(data)
+def predict_one_iter(input_prompt, args):
+    # Set CUDA visible devices
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_visible_devices
+    if "simple_cal" in args.model_name:
+        args.template = "simple_cal"
+    elif "galactica" in args.model_name:
+        args.template = "galactica"
+    elif "llama" in args.model_name:
+        args.template = "llama"
 
-
-def generate_chat_response(model, tokenizer, device, prompt):
-    system_template = """A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions. USER: {} ASSISTANT:"""
-    params = {
-        "prompt": system_template.format(prompt),
-        "temperature": 0.01,
-        "top_p": 1.0,
-        "max_new_tokens": 1024,
-        "use_plugin": True,
-        "stream_interval": 1,
-    }
-    completion = generate_stream(model, tokenizer, params, device)
-    for one_text in completion:
-        pass
-    return one_text
-
-
-def process_data_with_chat_responses(data, model, tokenizer, device, output_file, dataset_name):
-    processed_data = []
-    output_file = output_file.replace(".json", ".jsonl")
-    fw = open(output_file, "a")
-    for item in tqdm(data):
-        if "dataset_name" in item and item["dataset_name"] != dataset_name:
-            continue
-        prompt = item["question"]
-        response = generate_chat_response(model, tokenizer, device, prompt)
-        item["response"] = response["text"]
-        item["raw_response"] = response
-        processed_data.append(item)
-        print("Raw prompt:", prompt)
-        print("Raw answer:", item["answer"])
-        print("Generated chat response:", response)
-        cols = ["que_id", "kc", "question", "analysis", "response", "answer"]
-        if "dataset_name" in item:
-            cols.append("dataset_name")
-        new_item = {}
-        for col in cols:
-            new_item[col] = item[col]
-        new_item["response"] = response["text"].replace("</s>", "")
-        new_item["response_last_10_words"] = new_item["response"][-20:]
-        new_item["analysis_last_10_words"] = item["analysis"][-20:]
-        fw.write(json.dumps(new_item, ensure_ascii=False) + "\n")
-        fw.flush()
-    fw.close()
-    return processed_data
-
-
-def generate_chat_responses(model_path, data_file, output_file, args):
-    # output dir is
-    output_dir = os.path.dirname(output_file)
-    os.makedirs(output_dir, exist_ok=True)
-
+    print(args)
+    # Set device
     device = "cpu" if not torch.cuda.is_available() else "cuda"
-    model, tokenizer = load_model(model_path, device=device, num_gpus=2)
 
-    data = load_json(data_file)
-    data = [x for x in data if "应用题" in x["kc"]]  # [:2]
-    print("Number of samples:", len(data))
+    # Load test data
+    test_file_path = args.test_file_path
+    test_data = json.load(open(test_file_path, encoding="utf-8"))
+    test_data = transfer_test_data_to_template(test_data)
+
+    # Load model and tokenizer
     model_name = args.model_name
-    dataset_name = args.dataset_name
-    processed_data = process_data_with_chat_responses(data, model, tokenizer, device, output_file, dataset_name)
-    # save_jsonl(output_file, processed_data)
+    model_path = args.model_path
+    if "llama" in model_name:
+        model, tokenizer = load_model(model_path, device=device, num_gpus=args.num_gpus)
+    elif "galactica" in model_name:
+        from transformers import AutoTokenizer, OPTForCausalLM
 
-    # save to excel
-    if "dataset_name" in processed_data[0]:
-        save_cols = ["que_id", "kc", "dataset_name", "question", "analysis", "response", "answer"]
-    else:
-        save_cols = ["que_id", "kc", "question", "analysis", "response", "answer"]
-    df = pd.DataFrame(processed_data)
-    for col in save_cols:
-        if col not in df.columns:
-            df[col] = ""
-    df = df[save_cols]
-    df["response"] = df["response"].apply(lambda x: x.replace("</s>", ""))
-    df["response_last_10_words"] = df["response"].apply(lambda x: x[-20:])
-    df["analysis_last_10_words"] = df["analysis"].apply(lambda x: x[-20:])
-    df.to_excel(output_file.replace(".json", ".xlsx"), index=False, engine="xlsxwriter")
+        tokenizer = AutoTokenizer.from_pretrained(model_path)
+        model = OPTForCausalLM.from_pretrained(model_path, device_map="auto")
+
+    gen_params = {
+        "model": args.model_path,
+        "prompt": input_prompt,
+        "temperature": args.sample_temperature,
+        "repetition_penalty": 1.0,
+        "max_new_tokens": 1024,
+        "stop": ["</thought>", "</s>"],  # </s> is the end of sentence
+        "echo": False,
+    }
+    output_stream = generate_stream(model, tokenizer, gen_params, device)
+    return output_stream
+
+
+def main(args):
+    # Set CUDA visible devices
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_visible_devices
+    if "simple_cal" in args.model_name:
+        args.template = "simple_cal"
+    elif "galactica" in args.model_name:
+        args.template = "galactica"
+    elif "llama" in args.model_name:
+        args.template = "llama"
+
+    print(args)
+    # Set device
+    device = "cpu" if not torch.cuda.is_available() else "cuda"
+
+    # Load test data
+    test_file_path = args.test_file_path
+    test_data = json.load(open(test_file_path, encoding="utf-8"))
+    test_data = transfer_test_data_to_template(test_data)
+
+    # Load model and tokenizer
+    model_name = args.model_name
+    model_path = args.model_path
+    if "llama" in model_name:
+        model, tokenizer = load_model(model_path, device=device, num_gpus=args.num_gpus)
+    elif "galactica" in model_name:
+        from transformers import AutoTokenizer, OPTForCausalLM
+
+        tokenizer = AutoTokenizer.from_pretrained(model_path)
+        model = OPTForCausalLM.from_pretrained(model_path, device_map="auto")
+
+
+def construct_first_prompt(user_input_prefix):
+    input_question = user_input_prefix
+
+    prefix_prompt = "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user\'s questions. USER: "
+
+    constructed_prompt = prefix_prompt + input_question + ' ASSISTANT: '
+    return constructed_prompt
+
+
+def extract_thought(target_generation):
+    # list of string where the string is between <thought> and </though>
+    return re.findall("<thought>.*?</thought>", target_generation, re.S)
+
+
+def timeout_handler(signum, frame):
+    raise TimeoutError("Function timed out.")
+
+
+def set_timeout(seconds):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            # Set the timeout alarm
+            signal.signal(signal.SIGALRM, timeout_handler)
+            signal.alarm(seconds)
+
+            try:
+                # Call the function
+                result = func(*args, **kwargs)
+                return result
+            finally:
+                # Cancel the timeout alarm
+                signal.alarm(0)
+
+        return wrapper
+
+    return decorator
+
+
+@set_timeout(5)
+def execute_code_list(code_list):
+    variables = {}
+    try:
+        code_doc = "\n".join(code_list)
+        if "result" not in code_list[-1]:
+            variables['result'] = ""
+            return variables
+        exec(code_doc, variables)
+    except Exception as e:
+        variables['result'] = ""
+        print(f"meet error: {e}")
+    return variables
+
+
+def add_quotes(input_json):
+    count_quotes = input_json.count('"')
+    if count_quotes % 2 == 1:
+        # not valid
+        if input_json[-2] != '"':
+            input_json = input_json[:-1] + '"' + input_json[-1]
+    return input_json
+
+
+def extract_thought_code_result(the_final_thought):
+    # the final thought is the thought of the last step
+    new_target_thought = the_final_thought
+    extracted_code = re.findall("<code>(.*?)</code>", the_final_thought, re.S)
+    # 如果抽取的代码不为1
+    if len(extracted_code) != 1:
+        # 不对的code形式
+        return False, new_target_thought
+    new_code_str = extracted_code[0]
+
+    code_list = json.loads(new_code_str)
+
+    result_variable = execute_code_list(code_list)
+
+    if result_variable['result'] != "":
+        previous_thought = re.findall("<thought>.*?</code>", new_target_thought, re.S)[0]
+        new_target_thought = previous_thought + " => 运行结果为{}".format(
+            json.dumps(result_variable['result'], ensure_ascii=False, default=str)).replace('"', "'") + "</thought>"
+    # if "=>" in new_target_thought:
+    #     exec_res = new_target_thought.split("=>")[1].strip().replace("运行结果为","")
+    # elif "运行结果为" in new_target_thought:
+    #     exec_res = new_target_thought.split("运行结果为")[1].strip().replace("运行结果为","")
+    #     split_new_thought = new_target_thought.split("运行结果为")
+    #     new_target_thought = split_new_thought[0].strip() + " => 运行结果为" + split_new_thought[1]
+    # else:
+    #     # not generated the result
+    #     exec_res = {}
+    # exec_res_obj = eval(exec_res)
+    # if result_variable['result'] != "":
+    #     if not result_variable['result'] == exec_res_obj:
+    #         # the predict is not equal to origin generated result
+    #         previous_thought = re.findall("<thought>.*?</code>", new_target_thought, re.S)[0]
+    #         new_target_thought = previous_thought + " => 运行结果为{}".format(json.dumps(result_variable['result'], ensure_ascii=False)).replace('"',"'") + "</thought>"
+    return True, new_target_thought
+
+
+def refresh_thought_and_code(generated_result, round_int, calculated_thought):
+    extracted_thought = extract_thought(generated_result)
+    round_int += 1
+    if len(extracted_thought) > 0:
+        ori_thought = extracted_thought[-1]
+        if ori_thought in calculated_thought:
+            return generated_result, round_int, calculated_thought, "error"
+        else:
+            calculated_thought.add(ori_thought)
+        try:
+            whether_leagal, new_thought = extract_thought_code_result(ori_thought)
+            generated_result = generated_result.replace(ori_thought, new_thought)
+        except Exception as e:
+            print(e)
+            new_thought = ori_thought
+    if not generated_result.endswith(" "):
+        generated_result = generated_result + " "
+    return generated_result, round_int, calculated_thought, "normal"
+
+
+def get_one_generation_result(input_question, args, model, tokenizer, device):
+    round_int = 0
+    basic_prompt = construct_first_prompt(input_question)
+    gen_target = ""
+    new_target = ""
+    one_calculated_thought = set()
+    while True:
+        if round_int == 0:
+            input_prompt = basic_prompt
+        else:
+            input_prompt = basic_prompt + gen_target
+        gen_params = {
+            "model": args.model_path,
+            "prompt": input_prompt,
+            "temperature": args.sample_temperature,
+            "repetition_penalty": 1.0,
+            "max_new_tokens": 1024,
+            "inner_stop": ["</thought>"],
+            "stop": ["</s>"],  # </s> is the end of sentence
+            "echo": False,
+        }
+        output_stream = generate_stream(model, tokenizer, gen_params, device)
+        for one_stream in output_stream:
+            if round_int == 0:
+                gen_target = one_stream['text']
+                # print(gen_target)
+            else:
+                new_target = one_stream['text']
+                # print(gen_target+new_target)
+        gen_target = gen_target + new_target
+        if one_stream["finish_reason"] == "inner_stop":
+            gen_target = gen_target + "</thought>"
+
+        if one_stream["finish_reason"] == "stop":
+            break
+
+        if one_stream['finish_reason'] == "length":
+            break
+
+        refreshed_target, round_int, one_calculated_thought, status = refresh_thought_and_code(gen_target, round_int,
+                                                                                               one_calculated_thought)
+        if status == "error":
+            break
+        gen_target = refreshed_target
+        print(gen_target)
+    return gen_target
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Generate responses using trained models"
+    )
+    parser.add_argument("--model_name", type=str, help="Name of the model to use", default="llama")
+    parser.add_argument("--model_path", type=str, help="Path to the model checkpoint",
+                        default="/mnt/pfs/zitao_team/wangtuo/llm_team/source/training/sft/train_scripts/models/llama_7b_hf_sft_question_step/checkpoint-60")
+    parser.add_argument("--test_file_path", type=str, help="Path to the test data file",
+                        default="/mnt/pfs/zitao_team/big_model/processed_data/test_data_junior_small_with_full.json")
     parser.add_argument(
-        "--model_name", type=str, default="chatglm2-6b", help="Name of the model"
+        "--result_save_dir",
+        type=str,
+        default="results",
+        help="Path to the test data file",
     )
-    parser.add_argument("--model_path", type=str,
-                        default="/mnt/pfs/zitao_team/tianqiaoliu/public_github/ChatGLM2-6B/ptuning/output/mathgpt-chatglm2-6b-ft-2e-5/checkpoint-POINTNUM")
-    parser.add_argument("--data_file", type=str, help="Path to the input data file",
-                        default="/mnt/pfs/zitao_team/big_model/processed_data/test_data_junior_small.json")
-    parser.add_argument("--output_file", type=str, help="Path to the output file",
-                        default='./results/chatglm2-6b/test_data_small_with_response_chatglm2_POINTNUM.json')
-    parser.add_argument("--gpu_id", type=str, default="7", help="ID of the GPU to use")
-    parser.add_argument("--device_num", type=int, default=1, help="number of gpus to use")
-    parser.add_argument("--checkpoint", type=str, default="420")
-    parser.add_argument("--no_api", type=bool, default=True)
-    parser.add_argument("--dataset_name", type=str, default="GSM8K")
-
+    parser.add_argument(
+        "--test_num", type=int, default=20, help="Number of test items to use"
+    )
+    parser.add_argument(
+        "--num_gen", type=int, default=1, help="Number of generations per test item"
+    )
+    parser.add_argument("--num_gpus", type=int, default=1)
+    parser.add_argument("--sample_temperature", type=float, default=0.0)
+    parser.add_argument("--max_new_tokens", type=int, default=1024)
+    parser.add_argument(
+        "--cuda_visible_devices",
+        type=str,
+        default="1",
+        help="CUDA visible devices (comma-separated indices)",
+    )
+    parser.add_argument("--template", type=str, default="llama")
+    parser.add_argument("--lazy_preprocess", type=str, default="llama")
     args = parser.parse_args()
-    os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpu_id)
-    # source_modeling_py_file = "/mnt/pfs/zitao_team/tianqiaoliu/public_github/ChatGLM2-6B/ptuning/output/mathgpt-chatglm2-6b-ft-2e-5/checkpoint-420/modeling_chatglm.py"
-    point_num = args.checkpoint
+    # main(args)
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.cuda_visible_devices
+    if "simple_cal" in args.model_name:
+        args.template = "simple_cal"
+    elif "galactica" in args.model_name:
+        args.template = "galactica"
+    elif "llama" in args.model_name:
+        args.template = "llama"
 
-    # cmd_str = "scp {} {}".format(source_modeling_py_file, args.model_path)
-    # os.system(cmd_str)
-    # tokeniz_files = glob.glob("/mnt/pfs/zitao_team/tianqiaoliu/public_github/ChatGLM2-6B/ptuning/output/mathgpt-chatglm2-6b-ft-2e-5/checkpoint-420/tokeniz*")
-    # for one_tokeniz_file in tokeniz_files:
-    #     cmd_str = "scp {} {}".format(one_tokeniz_file, os.path.join(args.model_path, "checkpoint-{}".format(str(point_num))))
-    #     os.system(cmd_str)
-    args.model_path = args.model_path.replace("POINTNUM", str(point_num))
-    args.output_file = args.output_file.replace("POINTNUM", str(point_num))
-    generate_chat_responses(
-        args.model_path,
-        args.data_file,
-        args.output_file.format(model_name=args.model_name),
-        args,
-    )
+    # print(args)
+    # Set device
+    device = "cpu" if not torch.cuda.is_available() else "cuda"
 
-    ### 美丽的分割线
+    # Load test data
+    test_file_path = args.test_file_path
+    test_data = json.load(open(test_file_path, encoding="utf-8"))
+    test_data = transfer_test_data_to_template(test_data)
 
-    # model_path = "/mnt/pfs/zitao_team/yinzhibo/llm_team/source/training/sft/train_scripts/models/llama2-70B-api-data-sft/checkpoint-400"
-    # tokenizer = transformers.AutoTokenizer.from_pretrained(
-    #         model_path,
-    #         model_max_length=2048,
-    #         padding_side="right",
-    #         use_fast=False,
-    #         trust_remote_code=True
-    #     )
-    # os.environ["CUDA_VISIBLE_DEVICES"] = "6,7"
-    # print(f"Using GPU is CUDA:{os.environ['CUDA_VISIBLE_DEVICES']}")
-    # device = "cpu" if not torch.cuda.is_available() else "cuda"
+    # Load model and tokenizer
+    model_name = args.model_name
+    model_path = args.model_path
+    if "llama" in model_name:
+        model, tokenizer = load_model(model_path, device=device, num_gpus=args.num_gpus)
+    elif "galactica" in model_name:
+        from transformers import AutoTokenizer, OPTForCausalLM
 
-    # model, tokenizer = load_model(model_path, device=device, num_gpus=2)
-    # tokenizer.pad_token = tokenizer.unk_token
-    # model = transformers.AutoModelForCausalLM.from_pretrained(
-    #     model_path,
-    #     trust_remote_code=True
-    # )
-    # model.eval()
-    # model.to(device)
+        tokenizer = AutoTokenizer.from_pretrained(model_path)
+        model = OPTForCausalLM.from_pretrained(model_path, device_map="auto")
+
+    for idx in [1]:
+        input_question = test_data[idx]['conversations'][0]['value']
+        one_res = get_one_generation_result(input_question, args, model, tokenizer, device)
+        print("question is: {}".format(input_question))
+        print("result is: {}".format(one_res))
+        print("answer is: {}".format(test_data[idx]['answer']))
+
+    print("done.")
+
+    # input_question = "求解以下题目:小明一共有12890个苹果，再给小明10个苹果，小明一共有多少个苹果？"
+    # one_res = get_one_generation_result(input_question, args, model, tokenizer, device)
+    # print("question is: {}".format(input_question))
+    # print("result is: {}".format(one_res))
+
+    # --------------------------------
     # while True:
     #     query = input("query: ")
-    #     query_question = "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user's questions." + "USER: " + query + " ASSISTANT: "
+    #     query_question = "求解以下题目:" + query
+    #     one_res = get_one_generation_result(query_question, args, model, tokenizer, device)
     #     print("question is: {}".format(query_question))
-    #     params = {
-    #         "prompt": query_question,
-    #         "temperature": 0.5,
-    #         "top_p": 1.0,
-    #         "max_new_tokens": 512,
-    #         "use_plugin": True,
-    #         "stream_interval": 3,
+    #     print("result is: {}".format(one_res))
+
+    # --------------------------------
+    # input_question = r"求解以下题目:小明参加知识竞赛，一共回答了$20$道题，答对一题加$5$分，答错一题不但不加分，还倒扣$3$分，小明一共得了$76$分，求小明答对了 $\\underline\{\}$ 道题."
+    # round_int = 0
+    # basic_prompt = construct_first_prompt(input_question)
+    # gen_target = ""
+    # new_target = ""
+    # while True:
+    #     if round_int == 0:
+    #         input_prompt = basic_prompt
+    #     else:
+    #         input_prompt = basic_prompt + gen_target
+    #     gen_params = {
+    #         "model": args.model_path,
+    #         "prompt": input_prompt,
+    #         "temperature": args.sample_temperature,
+    #         "repetition_penalty": 1.0,
+    #         "max_new_tokens": 1024,
+    #         "inner_stop": ["</thought>"],
+    #         "stop": ["</s>"], # </s> is the end of sentence
+    #         "echo": False,
     #     }
-    #     output_stream = generate_stream(model, tokenizer, params, device, context_len=2048, stream_interval=3, bagging_times=5)
+    #     output_stream = generate_stream(model, tokenizer, gen_params, device)
     #     for one_stream in output_stream:
-    # print(one_stream)
+    #         if round_int == 0:
+    #             gen_target = one_stream['text']
+    #             print(gen_target)
+    #         else:
+    #             new_target = one_stream['text']
+    #             print(gen_target+new_target)
+    #     gen_target = gen_target + new_target
+    #     if one_stream["finish_reason"] == "inner_stop":
+    #         gen_target = gen_target + "</thought>"
+
+    #     if one_stream["finish_reason"] == "stop":
+    #         break
+
+    #     refreshed_target,round_int = refresh_thought_and_code(gen_target, round_int)
+    #     gen_target = refreshed_target
+    #     print("*"*10)
+    # print("end")
+    # --------------------------------
+    # input_question = "某快递公司收费方法如下，$1$千克以内（含$1$千克）收费$12$元；超过$1$千克的部分（不足$1$千克按$1$千克算）按每千克$2$元收费．涛涛的快递包裹重$3.4$千克，他需要付快递费 $\\underline{          }$ 元．"
+
+    # prefix_prompt = "A chat between a curious user and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the user\'s questions. USER: "
+
+    # input_prompt = prefix_prompt + input_question + " ASSISTANT: "
+
+    # tmp_output = predict_one_iter(input_prompt, args)
+    # print("hi")

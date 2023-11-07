@@ -8,7 +8,7 @@ from kc_handler import Knowledge
 from utils import obj_to_dict
 from config import config_dict
 
-config = config_dict["test"]
+config = config_dict["online"]
 DATA_DIR = config["data_dir"]
 
 
@@ -276,10 +276,10 @@ if __name__ == "__main__":
     # print('=========== original end ===========')
 
     # 随机抽样数据写入临时文件
-    sample_cnt = 30
-    df = pd.read_csv('/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/source3.csv')
+    sample_cnt = 5000
+    df = pd.read_csv('/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/source2.csv')
     data = df.sample(sample_cnt)
-    data.to_csv(os.path.join(DATA_DIR, "source3_sample_{}.csv".format(str(sample_cnt))), index=False)
+    data.to_csv(os.path.join(DATA_DIR, "source2_sample{}.csv".format(str(sample_cnt))), index=False)
 
     # 数据处理
     # ssd = SingleSourceData(file_dir='source2_sample_2000.csv', source='2')

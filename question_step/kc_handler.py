@@ -110,6 +110,8 @@ class Knowledge:
 
 if __name__ == "__main__":
     kc = Knowledge()
-    print(kc.sub_level_kc_cnt)
-    print(kc.last_level_kc_cnt)
-    print(kc.last_level_kc)
+    print("kc: {}".format(set(kc.sub_level_kc)))
+    print(len("{}".format(set(kc.sub_level_kc))))
+    # print(kc.sub_level_kc_cnt)
+    # print(kc.last_level_kc_cnt)
+    # print(kc.last_level_kc)

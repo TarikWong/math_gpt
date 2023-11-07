@@ -1,8 +1,3 @@
-# -*- coding: utf-8 -*-
-# @Time : 2023/10/26 2:59 下午
-# @Author : tuo.wang
-# @Version : 
-# @Function :
 # Adopted from tatsu-lab@stanford_alpaca. Below is the original copyright:
 #    Copyright 2023 Rohan Taori, Ishaan Gulrajani, Tianyi Zhang, Yann Dubois, Xuechen Li
 #
@@ -108,7 +103,10 @@ def safe_save_model_for_hf_trainer(trainer: transformers.Trainer, output_dir: st
         trainer._save(output_dir, state_dict=cpu_state_dict)  # noqa
 
 
-def preprocess(sources, tokenizer: transformers.PreTrainedTokenizer) -> Dict:
+def preprocess(
+        sources,
+        tokenizer: transformers.PreTrainedTokenizer,
+) -> Dict:
     # convert to llama2 in future
     # conv = get_conversation_template("llama-2")
     conv = get_conversation_template("vicuna")
@@ -127,8 +125,7 @@ def preprocess(sources, tokenizer: transformers.PreTrainedTokenizer) -> Dict:
             assert role == conv.roles[j % 2], f"{i}"
             conv.append_message(role, sentence["value"])
         conversations.append(conv.get_prompt())
-    # logging.info(conversations)
-
+    logging.info(conversations)
     # Tokenize conversations
     input_ids = tokenizer(
         conversations,
@@ -138,11 +135,6 @@ def preprocess(sources, tokenizer: transformers.PreTrainedTokenizer) -> Dict:
         truncation=True,
     ).input_ids
     targets = input_ids.clone()
-
-    print("=== befor mask ===")
-    print("conversations: ", conversations)
-    print("targets : ", targets)
-    print("=== befor mask ===")
 
     assert conv.sep_style == SeparatorStyle.ADD_COLON_TWO
 
@@ -183,14 +175,6 @@ def preprocess(sources, tokenizer: transformers.PreTrainedTokenizer) -> Dict:
                     f" (ignored)"
                 )
     # print("input ids shape is: {}".format(input_ids.shape))
-
-    print("=== after mask ===")
-    print("conversations: ", conversations)
-    print("targets : ", targets)
-    print("input_ids: ", input_ids)
-    print("input_ids.ne(tokenizer.pad_token_id): ", input_ids.ne(tokenizer.pad_token_id))
-    print("=== after mask ===")
-
     return dict(
         input_ids=input_ids,
         labels=targets,
@@ -343,7 +327,6 @@ def load_all_data(data_args):
 def load_all_dataV2(data_args):
     raw_data = json.load(open(data_args.data_path, "r"))
     random.shuffle(raw_data)
-    # print("raw_data: ", raw_data)
     return raw_data
 
 
@@ -393,20 +376,6 @@ def make_supervised_data_module(
     rank0_print("Loading data...")
     new_data = load_all_dataV2(data_args)
     train_dataset = dataset_cls(new_data, data_args, tokenizer=tokenizer)
-    print("=== train_dataset ===")
-    for i in train_dataset:
-        print(i)
-        labels = i["labels"]
-        not_ignore = 0
-        ignore = 0
-        for i in labels.flatten():
-            if i == -100:
-                ignore += 1
-            else:
-                not_ignore += 1
-        print("ignore: ", ignore)
-        print("not_ignore: ", not_ignore)
-    print("=== train_dataset ===")
     return dict(train_dataset=train_dataset)
 
 
@@ -416,12 +385,12 @@ def train():
         (ModelArguments, DataArguments, TrainingArguments)
     )
     model_args, data_args, training_args = parser.parse_args_into_dataclasses()
-    print("model_args: ", model_args)
-    print("data_args: ", data_args)
-    # print("training_args: ", training_args)
+    print(model_args)
+    print(data_args)
+    print(training_args)
 
-    # local_rank = training_args.local_rank
-    # print('model path is', model_args.model_name_or_path)
+    local_rank = training_args.local_rank
+    print('model path is', model_args.model_name_or_path)
     tokenizer = transformers.AutoTokenizer.from_pretrained(
         model_args.model_name_or_path,
         cache_dir=training_args.cache_dir,
@@ -442,32 +411,29 @@ def train():
     tokenizer.add_special_tokens(special_tokens_dict)
 
     data_module = make_supervised_data_module(tokenizer=tokenizer, data_args=data_args)
-    print("data_module: ", data_module)
 
-    #
-    # config = transformers.AutoConfig.from_pretrained(model_args.model_name_or_path)
-    # model = transformers.AutoModelForCausalLM.from_pretrained(
-    #     model_args.model_name_or_path,
-    #     cache_dir=training_args.cache_dir,
-    #     config=config,
-    #     trust_remote_code=True
-    # )
-    #
-    # model.resize_token_embeddings(len(tokenizer))
-    # model.config.use_cache = False
+    config = transformers.AutoConfig.from_pretrained(model_args.model_name_or_path)
+    model = transformers.AutoModelForCausalLM.from_pretrained(
+        model_args.model_name_or_path,
+        cache_dir=training_args.cache_dir,
+        config=config,
+        trust_remote_code=True
+    )
+
+    model.resize_token_embeddings(len(tokenizer))
+    model.config.use_cache = False
     # data_module = make_supervised_data_module(tokenizer=tokenizer, data_args=data_args)
-    # trainer = Trainer(
-    #     model=model, tokenizer=tokenizer, args=training_args, **data_module
-    # )
+    trainer = Trainer(
+        model=model, tokenizer=tokenizer, args=training_args, **data_module
+    )
 
-    # if list(pathlib.Path(training_args.output_dir).glob("checkpoint-*")):
-    #     trainer.train(resume_from_checkpoint=True)
-    # else:
-    #     trainer.train()
-    # trainer.save_state()
-    # safe_save_model_for_hf_trainer(trainer=trainer, output_dir=training_args.output_dir)
+    if list(pathlib.Path(training_args.output_dir).glob("checkpoint-*")):
+        trainer.train(resume_from_checkpoint=True)
+    else:
+        trainer.train()
+    trainer.save_state()
+    safe_save_model_for_hf_trainer(trainer=trainer, output_dir=training_args.output_dir)
 
 
 if __name__ == "__main__":
     train()
-    print("done.")

@@ -17,7 +17,7 @@ from utils import obj_to_dict
 from config import config_dict
 
 warnings.filterwarnings("ignore")
-config = config_dict["test"]
+config = config_dict["online"]
 
 logger.add("{}{}.log".format(config["log_dir"], config["input_file_name"].split(".")[0]))  ## 日志文件目录
 INPUT_FILE = "{}{}".format(config["input_dir"], config["input_file_name"])  ## 输入文件
@@ -66,7 +66,6 @@ class Level:
             question=query,
             engine="GPT4",
         )
-        print("=== generate success ===")
         try:
             kc_result = json.loads(response["response"])
             assert type(kc_result) is list, "GPT4 response failed!"
@@ -100,9 +99,17 @@ class SubLevel(Level):
         system = self.load_system()
         examples = self.load_examples()
         query = json.dumps(sample, ensure_ascii=False, default=obj_to_dict)
+
+        # messages = [{"role": "system", "content": system}]
+        # messages += examples
+        # messages.append({"role": "user", "content": query})
+        #
         # print("system:", system)
         # print("example:", examples)
         # print("query:", query)
+        # print("messages: ", messages)
+        # print("===")
+
         response = send_chat_request(
             system=system,
             examples=examples,
@@ -144,9 +151,17 @@ class LastLevel(Level):
         system = self.load_system()
         examples = self.load_examples()
         query = json.dumps(sample, ensure_ascii=False, default=obj_to_dict)
+
+        # messages = [{"role": "system", "content": system}]
+        # messages += examples
+        # messages.append({"role": "user", "content": query})
+        #
         # print("system:", system)
         # print("example:", examples)
         # print("query:", query)
+        # print("messages: ", messages)
+        # print("===")
+
         response = send_chat_request(
             system=system,
             examples=examples,
@@ -213,7 +228,6 @@ class Service:
             data = self.data_processor.load_json()
 
         print("len(data): ", len(data))
-        # print("data[0]: ", data[0])
         self.parallel_execution(data_list=data)
         # 最后结果写入json文件...
         to_json_file(file_name="{}{}".format(OUTPUT_DIR, self.data_processor.out_tmp_result), obj=data)

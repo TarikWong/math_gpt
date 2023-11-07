@@ -1,18 +1,18 @@
 [
   {
-    "question_id": "shiti0724_0f580451ab54a6961804c85865e5cffa",
+    "question_id": "shiti0712065d77d2d495d44e94724635a5873b8f",
     "source": 3,
     "subject_id": 2,
     "info": [],
-    "combine_content": "我们已学习了角平分线的概念，那么你会用他们解决有关问题吗？\n（1）如图1所示，将长方形笔记本活页纸片的一角折过去，使角的顶点A落在A′处，BC为折痕．若∠ABC＝50°，求∠A′BD的度数．\n（2）在（1）条件下，如果又将它的另一个角也斜折过去，并使BD边与BA′重合，折痕为BE，如图2所示，求∠2和∠CBE的度数．\n（3）如果将图2中改变∠ABC的大小，则BA′的位置也随之改变，那么（2）中∠CBE的大小会不会改变？请说明．\n<img alt=\"@@@77f23170-c163-4575-878a-c3c32512e7ec\" height=\"147\" src=\"https://static0.xesimg.com/ai-math-question/que_media/26589db5-f9a4-47f7-bff6-a4b1e62cb50d.png\" width=\"239\"/>  \n",
+    "combine_content": "九（3）班组织数学文化知识竞赛，共设20道选择题，各题分值相同，答对一题得5分，不答得1分，答错扣2分．在前10道题中，孙华同学答对8题，1题放弃不答，1题答错，若后面10题都作答，孙华同学的得分不低于79分，那么他至少要再答对(  )\nA．6题    B．7题    C．8题    D．9题\n",
     "sub_question": [
       [
         {
           "question": "1",
           "solution": {
             "step": "1",
-            "title": "利用折叠的性质",
-            "detail": "由折叠的性质可得$\\angle A'BC=\\angle ABC=50°$。"
+            "title": "计算前10道题的得分",
+            "detail": "根据题目描述，孙华在前10道题中答对了8题，每题得5分，所以得分为$8*5=40$分。他放弃了1题，得1分，答错了1题，扣2分。所以前10道题的总得分为$40+1-2=39$分。"
           },
           "kc": null
         },
@@ -20,8 +20,55 @@
           "question": "1",
           "solution": {
             "step": "2",
-            "title": "计算角度",
-            "detail": "由平角的定义可得$\\angle A'BD=180°-\\angle ABC-\\angle A'BC=180°-50°-50°=80°$。"
+            "title": "建立后10道题的得分和答对题数的关系",
+            "detail": "设孙华在后10道题中答对了$x$题，那么他答错了$10-x$题。答对一题得5分，答错一题扣2分，所以后10道题的得分为$5x-2(10-x)$。"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "建立总得分的不等式",
+            "detail": "根据题目描述，孙华的总得分不低于79分，所以有$39+5x-2(10-x) \\geq 79$。"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "解不等式",
+            "detail": "解这个不等式，可以得到孙华在后10道题中至少要答对的题数。"
+          },
+          "kc": null
+        }
+      ]
+    ]
+  },
+  {
+    "question_id": "shiti0814_cf28f22d07f07e8a995b8d9233c9b4c6",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如果一个多边形的各边都相等且各角也都相等，那么这样的多边形叫做正多边形，如正三角形就是等边三角形，正四边形就是正方形，如下图，就是一组正多边形，\n<img alt=\"@@@1fdf187c3ea54a4e932be20f844a3aa7\" height=\"89\" src=\"https://static0.xesimg.com/ai-math-question/que_media/ddcbdda3-b645-462f-992d-933319763af2.png\" width=\"486\"/>\n(1)观察上面每个正多边形中的∠α，填写下表：\n\n$#table{| 正多边形边数|3|4|5|6|……|n|\n|∠α的度数|______°|_____°|______°|______°|……|_____°|\n\n}#$\n(2)根据规律，计算正八边形中的∠α的度数.\n(3)是否存在正n边形使得∠α=21°？若存在，请求出n的值，若不存在，请说明理由.\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "观察规律",
+            "detail": "根据计算、观察，可发现规律：正n边形中的∠α=（$\\frac{180}{n}$）°。"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "填写表格",
+            "detail": "根据规律，填写表格：\n正三角形中的∠α=60°；\n正四边形中的∠α=45°；\n正五边形中的∠α=36°；\n正六边形中的∠α=30°；\n正n边形中的∠α=（$\\frac{180}{n}$）°。"
           },
           "kc": null
         }
@@ -31,17 +78,8 @@
           "question": "2",
           "solution": {
             "step": "1",
-            "title": "利用折叠的性质",
-            "detail": "由（1）的结论可得$\\angle DBD'=80°$，由折叠的性质可得$\\angle 2=\\frac{1}{2}\\angle DBD'=\\frac{1}{2}\\times80°=40°$。"
-          },
-          "kc": null
-        },
-        {
-          "question": "2",
-          "solution": {
-            "step": "2",
-            "title": "利用角平分线的性质",
-            "detail": "由角平分线的性质可得$\\angle CBE=\\angle A'BC+\\angle D'BE=\\frac{1}{2}\\times180°=90°$。"
+            "title": "计算角度",
+            "detail": "根据规律，计算正八边形中的∠α=（$\\frac{180}{8}$）°=22.5°。"
           },
           "kc": null
         }
@@ -51,8 +89,8 @@
           "question": "3",
           "solution": {
             "step": "1",
-            "title": "利用折叠的性质",
-            "detail": "由折叠的性质可得，$\\angle 1=\\angle ABC=\\frac{1}{2}\\angle ABA'$，$\\angle 2=\\angle EBD=\\frac{1}{2}\\angle DBD'$。"
+            "title": "设立方程",
+            "detail": "设存在正n边形使得∠α=21°，得∠α=21°=（$\\frac{180}{n}$）°。"
           },
           "kc": null
         },
@@ -60,17 +98,8 @@
           "question": "3",
           "solution": {
             "step": "2",
-            "title": "计算角度",
-            "detail": "因此，$\\angle 1+\\angle 2=\\frac{1}{2} (\\angle ABA'+\\angle DBD')=\\frac{1}{2}\\times180°=90°$。"
-          },
-          "kc": null
-        },
-        {
-          "question": "3",
-          "solution": {
-            "step": "3",
-            "title": "作答",
-            "detail": "所以，无论如何改变$\\angle ABC$的大小，$\\angle CBE$的大小都不会改变，永远是平角的一半。"
+            "title": "解方程",
+            "detail": "解得n=8$\\frac{4}{7}$，n是正整数，n=8$\\frac{4}{7}$（不符合题意要舍去），不存在正n边形使得∠α=21°。"
           },
           "kc": null
         }
@@ -78,19 +107,19 @@
     ]
   },
   {
-    "question_id": "shiti0712_1cb7e5d9fe772fbafa272c0bff72cd56",
+    "question_id": "shiti0814202deb7ff7ed17d321b19cbba86ac693",
     "source": 3,
     "subject_id": 2,
     "info": [],
-    "combine_content": "如图，在平面直角坐标系中，O为坐标原点，$$ \\Delta AOB$$为$$ Rt\\Delta $$，点A的坐标是$$ (1，0)$$，$$ \\angle BAO=60°$$，把$$ Rt\\Delta AOB$$绕点A按顺时针方向旋转$$ 90°$$后，得到$$ Rt\\Delta A{O}^{\\prime }{B}^{\\prime }$$，则$$ Rt\\Delta A{O}^{\\prime }{B}^{\\prime }$$的外接圆圆心坐标是（  ）\n<img alt=\"\" height=\"78\" src=\"https://static0.xesimg.com/ai-math-question/que_media/4229fb6d-5d41-4544-92bf-2152e3f763c5.png\" width=\"96\"/>\nA．$$ (1+\\frac{\\sqrt{3}}{2}，\\frac{1}{2})$$    B．$$ (\\frac{\\sqrt{3}}{2}，\\frac{1}{2})$$    C．$$ (\\frac{1+\\sqrt{3}}{2}，1)$$    D．$$ (\\frac{1}{2}，\\frac{1+\\sqrt{3}}{2})$$\n",
+    "combine_content": "当1＜x＜2时，化简$$ \\sqrt{{{x}}^{{2}}{-4x+4}}$$ +$$ \\sqrt{{{x}}^{{2}}{-2x+1}}$$得（  ）\nA．2x-3    B．1    C．3-2x    D．-1\n",
     "sub_question": [
       [
         {
           "question": "1",
           "solution": {
             "step": "1",
-            "title": "理解题目给出的信息",
-            "detail": "根据题目描述，我们知道三角形$AOB$是一个直角三角形，且点A的坐标是$(1,0)$，$\\angle BAO=60°$。然后，三角形$AOB$绕点A顺时针旋转$90°$，得到三角形$A{O}^{\\prime }{B}^{\\prime }$。我们需要找到三角形$A{O}^{\\prime }{B}^{\\prime }$的外接圆的圆心坐标。"
+            "title": "将原式转化为平方差形式",
+            "detail": "原式可以转化为$\\sqrt{(x-2)^2}+\\sqrt{(x-1)^2}$"
           },
           "kc": null
         },
@@ -98,8 +127,8 @@
           "question": "1",
           "solution": {
             "step": "2",
-            "title": "分析旋转后的三角形",
-            "detail": "由于三角形$AOB$绕点A顺时针旋转$90°$，得到三角形$A{O}^{\\prime }{B}^{\\prime }$，所以三角形$A{O}^{\\prime }{B}^{\\prime }$的外接圆的圆心就是三角形$AOB$的外接圆的圆心。"
+            "title": "将平方差转化为绝对值形式",
+            "detail": "根据平方差的性质，$\\sqrt{(x-2)^2}+\\sqrt{(x-1)^2}$可以转化为$|x-2|+|x-1|$"
           },
           "kc": null
         },
@@ -107,8 +136,8 @@
           "question": "1",
           "solution": {
             "step": "3",
-            "title": "计算外接圆的圆心坐标",
-            "detail": "由于三角形$AOB$是一个等腰直角三角形，所以其外接圆的圆心就是直角顶点，即点A，坐标为$(1,0)$。然后，三角形$AOB$绕点A顺时针旋转$90°$，得到三角形$A{O}^{\\prime }{B}^{\\prime }$，其外接圆的圆心坐标为$(\\frac{1}{2}, \\frac{1+\\sqrt{3}}{2})$。"
+            "title": "根据x的取值范围化简绝对值",
+            "detail": "由于$1<x<2$，所以$|x-2|=2-x$，$|x-1|=x-1$，所以原式化简为$2-x+x-1=1$"
           },
           "kc": null
         },
@@ -116,8 +145,8 @@
           "question": "1",
           "solution": {
             "step": "4",
-            "title": "选择正确的选项",
-            "detail": "因此，三角形$A{O}^{\\prime }{B}^{\\prime }$的外接圆的圆心坐标为$(\\frac{1}{2}, \\frac{1+\\sqrt{3}}{2})$，对应选项D。"
+            "title": "得出答案",
+            "detail": "所以，原式化简后的结果为$1$，对应选项B"
           },
           "kc": null
         }
@@ -125,19 +154,19 @@
     ]
   },
   {
-    "question_id": "shiti072401571e222899fb6ae1cda19932bacbcc",
+    "question_id": "shiti0724e17e4fee8b3fec1ba4dbebac59007edd",
     "source": 3,
     "subject_id": 2,
     "info": [],
-    "combine_content": "为了解某市七年级8000名学生的身高情况，从中抽取了60名学生进行身高检查．下列判断：\n①这种调查方式是抽样调查；②8000名学生是总体；③每名学生的身高是个体；④60名学生是总体的一个样本；⑤60名学生是样本容量．其中正确的判断有（  ）\nA．5个    B．4个    C．3个    D．2个\n",
+    "combine_content": "三角形各边（从小到大）长度的平方比，如下列各组，其中不是直角三角形的是 （     ）\nA．9∶25∶26    B．1∶3∶4    C．1∶1∶2    D．25∶144∶169\n",
     "sub_question": [
       [
         {
           "question": "1",
           "solution": {
             "step": "1",
-            "title": "理解抽样调查的概念",
-            "detail": "抽样调查是从总体中抽取一部分个体进行研究，以了解总体的情况。在这个问题中，从8000名学生中抽取60名学生进行身高检查，这是一种抽样调查，所以判断①正确。"
+            "title": "理解题目要求",
+            "detail": "题目要求我们找出不是直角三角形的选项，我们可以利用勾股定理的逆定理，即如果一个三角形的两小边的平方和等于最长边的平方，那么这个三角形就是直角三角形。"
           },
           "kc": null
         },
@@ -145,8 +174,8 @@
           "question": "1",
           "solution": {
             "step": "2",
-            "title": "理解总体的概念",
-            "detail": "总体是指研究的对象的全体。在这个问题中，8000名学生的身高情况是我们要研究的对象，所以判断②错误。"
+            "title": "验证选项A",
+            "detail": "对于选项A，我们有$9+25\\neq26$，所以选项A不是直角三角形。"
           },
           "kc": null
         },
@@ -154,8 +183,8 @@
           "question": "1",
           "solution": {
             "step": "3",
-            "title": "理解个体的概念",
-            "detail": "个体是总体中的每一个研究的对象。在这个问题中，每名学生的身高是我们研究的个体，所以判断③正确。"
+            "title": "验证选项B",
+            "detail": "对于选项B，我们有$1+3=4$，所以选项B是直角三角形。"
           },
           "kc": null
         },
@@ -163,8 +192,8 @@
           "question": "1",
           "solution": {
             "step": "4",
-            "title": "理解样本的概念",
-            "detail": "样本是总体中所抽取的一部分个体。在这个问题中，60名学生的身高情况是我们抽取的样本，所以判断④错误。"
+            "title": "验证选项C",
+            "detail": "对于选项C，我们有$1+1=2$，所以选项C是直角三角形。"
           },
           "kc": null
         },
@@ -172,8 +201,8 @@
           "question": "1",
           "solution": {
             "step": "5",
-            "title": "理解样本容量的概念",
-            "detail": "样本容量是指样本中个体的数目。在这个问题中，60是我们抽取的样本的个体数目，所以判断⑤错误。"
+            "title": "验证选项D",
+            "detail": "对于选项D，我们有$25+144=169$，所以选项D是直角三角形。"
           },
           "kc": null
         },
@@ -181,8 +210,8 @@
           "question": "1",
           "solution": {
             "step": "6",
-            "title": "总结正确的判断",
-            "detail": "所以正确的判断有①③，共2个。故选：D。"
+            "title": "得出结论",
+            "detail": "因此，选项A是不是直角三角形的选项。"
           },
           "kc": null
         }
@@ -190,28 +219,68 @@
     ]
   },
   {
-    "question_id": "shiti07127d2474d7067459fdaa455c8dfe995c9d",
+    "question_id": "shiti0814_c3cee0f0d69ab0e97621d70dff6ce249",
     "source": 3,
     "subject_id": 2,
     "info": [],
-    "combine_content": "某暗箱中放有10个形状大小一样的球，其中有三个红球、若干个白球和蓝球，若从中任取一个是白球的概率为$$ \\frac{1}{2}$$，则蓝球的个数是$$\\underline{      }$$．\n",
+    "combine_content": "水果店张阿姨以每千克2元的价格购进某种水果若干千克，销售一部分后，根据市场行情降价销售，销售额y (元)与销售量x (千克)之间的关系如图所示.\n<img alt=\"@@@d175eb67-9958-4322-a5e3-f7ddab137cb6\" height=\"134\" src=\"https://static0.xesimg.com/ai-math-question/que_media/7def85f3-e059-4f6e-8a8d-496a36830281.png\" width=\"183\"/>  \n(1)情境中的变量有_______________.\n(2)求降价后销售额y (元)与销售量x (千克)之间的函数表达式;\n(3)当销售量为多少千克时，张阿姨销售此种水果的利润为150元?\n",
     "sub_question": [
       [
         {
           "question": "1",
           "solution": {
             "step": "1",
-            "title": "计算白球的个数",
-            "detail": "根据题目描述，从暗箱中任取一个球是白球的概率为$\\frac{1}{2}$，暗箱中总共有10个球，因此，白球的数目为$10\\times \\frac{1}{2}=5$个。"
+            "title": "确定变量",
+            "detail": "由题意可知，变量为：x与y（或销售额，销售量）。"
+          },
+          "kc": null
+        }
+      ],
+      [
+        {
+          "question": "2",
+          "solution": {
+            "step": "1",
+            "title": "设定函数表达式",
+            "detail": "设降价后，直线AB的解析式为：$y=kx+b$。"
           },
           "kc": null
         },
         {
-          "question": "1",
+          "question": "2",
           "solution": {
             "step": "2",
-            "title": "计算蓝球的个数",
-            "detail": "暗箱中总共有10个球，其中红球有3个，白球有5个，因此，蓝球的个数为$10-3-5=2$个。"
+            "title": "代入点A、B的坐标",
+            "detail": "把点A、B的坐标代入，得：$\\left\\{\\begin{array}{c}40k+b=160\\ 80k+b=260\\end{array}\\right.$。"
+          },
+          "kc": null
+        },
+        {
+          "question": "2",
+          "solution": {
+            "step": "3",
+            "title": "求解函数表达式",
+            "detail": "解得：$\\left\\{\\begin{array}{c}k=\\frac{5}{2}\\ b=60\\end{array}\\right.$，∴降价后y 与x 之间的函数表达式为：$y=\\frac{5}{2}x+60$（$0\\le x\\le 40$）。"
+          },
+          "kc": null
+        }
+      ],
+      [
+        {
+          "question": "3",
+          "solution": {
+            "step": "1",
+            "title": "分析利润情况",
+            "detail": "由张阿姨销售此种水果的利润为150元，则可分为两种情况：第一种情况：降价前（0≤x≤40），单价为：$\\frac{160}{40}=4$元，∴利润为：$4x-2x=150$，解得：x=75＞40（不合题意）；第二种情况：降价后（x＞40），利润为：$\\frac{5}{2}x+60-2x=150$，解得：x=180。"
+          },
+          "kc": null
+        },
+        {
+          "question": "3",
+          "solution": {
+            "step": "2",
+            "title": "作答",
+            "detail": "∴当销售量为180千克时，张阿姨销售此种水果的利润为150元。"
           },
           "kc": null
         }
@@ -219,19 +288,19 @@
     ]
   },
   {
-    "question_id": "shiti0712_5a01780f4a4ab118c62b301c5ae84b1c",
+    "question_id": "shiti08146e23727265779a1ed7dc4bb5f9e3bc81",
     "source": 3,
     "subject_id": 2,
     "info": [],
-    "combine_content": "如图，将一副三角板的直角顶点重合放置，其中$$ \\angle A=30°$$，$$ \\angle CDE=45°$$.若三角板$$ ACB$$的位置保持不动，将三角板$$ DCE$$绕其直角顶点$$ C$$逆时针旋转一周.当$$ \\Delta DCE$$的边与$$ AB$$平行时，$$ \\angle ECB$$的度数为______.\n<img alt=\"@@@05d46431-3535-4e39-b254-cd45c3e947f1\" height=\"173\" src=\"https://static0.xesimg.com/ai-math-question/que_media/3c43457e-67b2-401b-8038-48775650d20d.png\" width=\"124\"/>\n",
+    "combine_content": "方程$$ x+2=3$$的解是（    ）\nA．$$ x=-1$$    B．$$ x=1$$    C．$$ x=2$$    D．$$ x=3$$\n",
     "sub_question": [
       [
         {
           "question": "1",
           "solution": {
             "step": "1",
-            "title": "分析三角板旋转的情况",
-            "detail": "三角板$\\Delta CDE$的每条边与$AB$平行都有两种情况，共有6种不同情况"
+            "title": "解一元一次方程",
+            "detail": "根据一元一次方程的解法，我们可以将方程$x+2=3$转化为$x=3-2$"
           },
           "kc": null
         },
@@ -239,8 +308,37 @@
           "question": "1",
           "solution": {
             "step": "2",
-            "title": "计算当CD与AB平行时的角度",
-            "detail": "当$CD$与$AB$平行时，根据平行线的性质，有$\\angle ACD=30°$或$\\angle ACD=150°$，所以$\\angle ECB=30°$或$\\angle ECB=150°$"
+            "title": "求解",
+            "detail": "计算得到$x=1$，所以答案是选项B"
+          },
+          "kc": null
+        }
+      ]
+    ]
+  },
+  {
+    "question_id": "shiti0814_fd72e42d62700d0f6ceb75688ed05d17",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "在平面直角坐标系$$ xOy$$中，抛物线$$ y=a{x}^{2}+2x+c\\left(a\\ne 0\\right)$$经过点$$ A\\left(-\\mathrm{3,4}\\right)$$和$$ B\\left(\\mathrm{0,1}\\right)$$．\n（1）求抛物线的表达式和顶点坐标；\n（2）将抛物线在A、B之间的部分记为图象M（含A、B两点）．将图象M沿$$ y$$轴翻折，得到图象N．如果过点$$ C\\left(-\\mathrm{3,0}\\right)$$和$$ D\\left(0,b\\right)$$的直线与图象M、图象N都相交，且只有两个交点，求b的取值范围．\n<img alt=\"@@@d5d42c76129f40ccbd0e2fe2dcecbbb0\" height=\"235\" src=\"https://static0.xesimg.com/ai-math-question/que_media/ff1ac1f0-35fb-4767-86f7-d7aed9cb8a53.png\" width=\"236\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "列出二元一次方程组",
+            "detail": "由于抛物线$y=a{x}^{2}+2x+c$经过点$A(-3,4)$和$B(0,1)$，我们可以列出关于a和c的二元一次方程组：$\\left\\{\\begin{array}{c}9a-6+c=4,\\\\ c=1.\\end{array}\\right.$"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "求解二元一次方程组",
+            "detail": "解这个二元一次方程组，我们得到$a=1$和$c=1$。"
           },
           "kc": null
         },
@@ -248,8 +346,8 @@
           "question": "1",
           "solution": {
             "step": "3",
-            "title": "计算当DE与AB平行时的角度",
-            "detail": "当$DE$与$AB$平行时，根据平行线的性质，有$\\angle ECB=165°$或$\\angle ECB=15°$"
+            "title": "得到抛物线的表达式",
+            "detail": "将$a=1$和$c=1$代入抛物线的一般式，我们得到抛物线的表达式为$y={x}^{2}+2x+1={\\left(x+1\\right)}^{2}$。"
           },
           "kc": null
         },
@@ -257,17 +355,28 @@
           "question": "1",
           "solution": {
             "step": "4",
-            "title": "计算当CE与AB平行时的角度",
-            "detail": "当$CE$与$AB$平行时，根据平行线的性质，有$\\angle ECB=120°$或$\\angle ECB=60°$"
+            "title": "求出顶点坐标",
+            "detail": "由抛物线的顶点坐标式，我们可以得到顶点坐标为$\\left(-1,0\\right)$。"
+          },
+          "kc": null
+        }
+      ],
+      [
+        {
+          "question": "2",
+          "solution": {
+            "step": "1",
+            "title": "求出点A关于y轴的对称点A'",
+            "detail": "设点$A(-3,4)$关于 y轴的对称点为$A'$，则点$A'\\left(3,4\\right)$。"
           },
           "kc": null
         },
         {
-          "question": "1",
+          "question": "2",
           "solution": {
-            "step": "5",
-            "title": "总结所有可能的角度",
-            "detail": "综上，$\\angle ECB$的可能度数为$15°$、$30°$、$60°$、$120°$、$150°$、$165°$"
+            "step": "2",
+            "title": "求出b的取值范围",
+            "detail": "若直线CD经过点$A'\\left(3,4\\right)$，可得$b=2$。若直线CD经过点$B\\left(0,1\\right)$，可得$b=1$。若点D与坐标原点重合，$b=0$。综上，$1<b\\le 2$或$b=0$。"
           },
           "kc": null
         }
@@ -313,19 +422,19 @@
     ]
   },
   {
-    "question_id": "shiti0724_ecee97385c8314550250e45f71ac6bcd",
+    "question_id": "shiti07247c05a836dfed3ae5b82785729f3df4ec",
     "source": 3,
     "subject_id": 2,
     "info": [],
-    "combine_content": "一个几何体的主视图和俯视图如图所示，若这个几何体最多有m个小正方体组成，最少有n个小正方体组成，m+n＝$$\\underline{}$$．\n<img alt=\"@@@9b6ef1850fcd4c71993796dee6a562df\" height=\"116\" src=\"https://static0.xesimg.com/ai-math-question/que_media/c8d78c36-92d7-435b-90b7-6f1c21fd0c6c.png\" width=\"202\"/>\n",
+    "combine_content": "用列表法画二次函数 $$ y={x}^{2}+bx+c$$ 的图象时先列一个表，当表中对自变量 $$ x$$ 的值以相等间隔的值增加时，函数 $$ y$$ 所对应的值依次为：20，56，110，182，274，380，506，650，其中有一个值不正确，这个不正确的值是（  ）\nA．506    B．380    C．274    D．182\n",
     "sub_question": [
       [
         {
           "question": "1",
           "solution": {
             "step": "1",
-            "title": "分析主视图和俯视图",
-            "detail": "主视图和俯视图是分别从物体正面、上面看所得到的图形。通过观察，我们可以看出第一层有4个正方体，第二层最多有3个正方体，最少有2个正方体，第三层最多有2个正方体，最少有1个正方体"
+            "title": "设定自变量的值",
+            "detail": "设相邻的两个自变量的值为$x_{1}$、$x_{2}$"
           },
           "kc": null
         },
@@ -333,8 +442,8 @@
           "question": "1",
           "solution": {
             "step": "2",
-            "title": "计算m和n的值",
-            "detail": "根据上一步的分析，我们可以得到m=4+3+2=9，n=4+2+1=7"
+            "title": "计算函数值的差值",
+            "detail": "根据函数的解析式，计算差值$y_{1}-y_{2}=(x_{1}^{2}-x_{2}^{2})+b(x_{1}-x_{2})=(x_{1}-x_{2})(x_{1}+x_{2}+b)$"
           },
           "kc": null
         },
@@ -342,151 +451,8 @@
           "question": "1",
           "solution": {
             "step": "3",
-            "title": "计算m+n的值",
-            "detail": "将m和n的值相加，得到m+n=9+7=16"
-          },
-          "kc": null
-        }
-      ]
-    ]
-  },
-  {
-    "question_id": "shiti08146e23727265779a1ed7dc4bb5f9e3bc81",
-    "source": 3,
-    "subject_id": 2,
-    "info": [],
-    "combine_content": "方程$$ x+2=3$$的解是（    ）\nA．$$ x=-1$$    B．$$ x=1$$    C．$$ x=2$$    D．$$ x=3$$\n",
-    "sub_question": [
-      [
-        {
-          "question": "1",
-          "solution": {
-            "step": "1",
-            "title": "解一元一次方程",
-            "detail": "根据一元一次方程的解法，我们可以将方程$x+2=3$转化为$x=3-2$"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "2",
-            "title": "求解",
-            "detail": "计算得到$x=1$，所以答案是选项B"
-          },
-          "kc": null
-        }
-      ]
-    ]
-  },
-  {
-    "question_id": "shiti071258be7167b2d091c69a7a33808554ed37",
-    "source": 3,
-    "subject_id": 2,
-    "info": [],
-    "combine_content": "计算：$$ \\frac{a}{a+2}+\\frac{2}{a+2}$$ =$$\\underline{  }$$．\n",
-    "sub_question": [
-      [
-        {
-          "question": "1",
-          "solution": {
-            "step": "1",
-            "title": "识别同分母分式",
-            "detail": "这是一个同分母分式的问题，我们可以直接将分子相加。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "2",
-            "title": "进行计算",
-            "detail": "将分子相加，得到$a+2$，所以原式变为$\frac{a+2}{a+2}$。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "3",
-            "title": "简化结果",
-            "detail": "分子分母相同，所以结果为1。"
-          },
-          "kc": null
-        }
-      ]
-    ]
-  },
-  {
-    "question_id": "shiti0829_f9ae3aa2a4bec1e5e485cc0a30310d48",
-    "source": 3,
-    "subject_id": 2,
-    "info": [],
-    "combine_content": "某校同学去春游，包一辆面包车，租价是180元，出发时又增加2名同学，结果每位同学比原来少分摊3元车费，设实际参加春游的同学有x人，则所列的方程为$$\\underline{      }$$．",
-    "sub_question": [
-      [
-        {
-          "question": "1",
-          "solution": {
-            "step": "1",
-            "title": "理解题意",
-            "detail": "根据题意，原来的同学人数是$x-2$，后来增加了2人，变成了$x$人。每个人需要分摊的车费是总车费除以人数。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "2",
-            "title": "建立方程",
-            "detail": "根据题意，每位同学比原来少分摊3元车费，所以原来每人分摊的车费减去现在每人分摊的车费等于3元，即$\frac{180}{x-2}-\frac{180}{x}=3$。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "3",
-            "title": "作答",
-            "detail": "答案为：$\frac{180}{x-2}-\frac{180}{x}=3$。"
-          },
-          "kc": null
-        }
-      ]
-    ]
-  },
-  {
-    "question_id": "shiti0724_7ece7ced126d654ff8c2b0ce323b254a",
-    "source": 3,
-    "subject_id": 2,
-    "info": [],
-    "combine_content": "根据如图提供的信息，小红去商店买一只水瓶和一只杯子应付（  ）\n<img alt=\"@@@2ad0e1747f094954bde5be5c94e7da72\" height=\"108\" src=\"https://static0.xesimg.com/ai-math-question/que_media/c2fe2a90-5601-4348-8684-070b3f04da75.png\" width=\"206\"/>\nA．30元    B．32元    C．31元    D．34元\n",
-    "sub_question": [
-      [
-        {
-          "question": "1",
-          "solution": {
-            "step": "1",
-            "title": "设立未知数",
-            "detail": "设购买一只水瓶需要x元，购买一只杯子需要y元。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "2",
-            "title": "列出方程",
-            "detail": "根据题意得到二元一次方程组：$\\begin{cases}x+2y=37\\\\2x+y=56\\end{cases}$。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "3",
-            "title": "解方程",
-            "detail": "将方程①和②相加，然后除以3，得到：$x+y=31$。"
+            "title": "分析函数值的差值",
+            "detail": "由于函数值之间的差值间隔是相等的，所以含有公因数$x_{1}-x_{2}$"
           },
           "kc": null
         },
@@ -494,55 +460,8 @@
           "question": "1",
           "solution": {
             "step": "4",
-            "title": "选择正确选项",
-            "detail": "所以，小红去商店买一只水瓶和一只杯子应付31元，故选C。"
-          },
-          "kc": null
-        }
-      ]
-    ]
-  },
-  {
-    "question_id": "shiti07247ce3327cf9b0aa49ba962bb4c17892bf",
-    "source": 3,
-    "subject_id": 2,
-    "info": [],
-    "combine_content": "下列几组数中互为相反数的是（  ）\nA．―$$ \\frac{1}{7}$$ 和 0.7    B．$$ \\frac{1}{3}$$ 和 ―0.333    C．―|―6| 和 6    D．―$$ \\frac{1}{4}$$ 和4\n",
-    "sub_question": [
-      [
-        {
-          "question": "1",
-          "solution": {
-            "step": "1",
-            "title": "判断选项A",
-            "detail": "在选项A中，-\\frac{1}{7}的相反数是\\frac{1}{7}，不等于0.7，所以选项A错误。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "2",
-            "title": "判断选项B",
-            "detail": "在选项B中，\\frac{1}{3}的相反数是-\\frac{1}{3}，不等于-0.333，所以选项B错误。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "3",
-            "title": "判断选项C",
-            "detail": "在选项C中，-|-6|等于-6，它的相反数是6，所以选项C正确。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "4",
-            "title": "判断选项D",
-            "detail": "在选项D中，-\\frac{1}{4}的相反数是\\frac{1}{4}，所以选项D错误。"
+            "title": "计算各个差值",
+            "detail": "计算各个差值，得到$56-20=36$，$110-56=54$，$182-110=72$，$274-182=92$，$380-274=106$，$506-380=126$，$650-506=144$"
           },
           "kc": null
         },
@@ -550,8 +469,73 @@
           "question": "1",
           "solution": {
             "step": "5",
-            "title": "总结答案",
-            "detail": "因此，互为相反数的是选项C。"
+            "title": "分析差值",
+            "detail": "由于$36$，$54$，$72$，$126$，$144$都含有公因数$6$，所以$x_{1}-x_{2}=6$，而$92$不含因数$6$，所以这个不正确的值为$274$"
+          },
+          "kc": null
+        }
+      ]
+    ]
+  },
+  {
+    "question_id": "shiti0829_d2833c5bd7e2d41b168f08440b1fefe7",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "计算（写出计算过程，并用计算器验证）：($$\\sqrt{5}×\\sqrt{6}-2\\sqrt{15})÷3\\sqrt{15}$$．",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "化简原式",
+            "detail": "原式可以化简为$$\\sqrt{30}×\\frac{1}{3}\\sqrt{15}-2\\sqrt{15}×\\frac{1}{ 3\\sqrt{15}}$$"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "进一步化简",
+            "detail": "进一步化简得到$$\\frac{\\sqrt{2}}{ 3}-\\frac{2}{3}$$"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "化简为最简形式",
+            "detail": "最后化简为$$\\sqrt{2}\\frac{-2}{3}$$"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "计算近似值",
+            "detail": "由于$$\\sqrt{2}≈1.414$$，所以原式的近似值为$$0.195$$"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "验证计算结果",
+            "detail": "用计算器求出原式≈（2.236…×2.449…-2×3.872…）÷3×3.872…≈0.195，故以上计算正确"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "6",
+            "title": "作答",
+            "detail": "答：原式=$$\\sqrt{30}×\\frac{1}{3}\\sqrt{15}-2\\sqrt{15}×\\frac{1}{ 3\\sqrt{15}}，=\\frac{\\sqrt{2}}{ 3}-\\frac{2}{3}，=\\sqrt{2}\\frac{-2}{3}．∵\\sqrt{2}≈1.414…，∴原式=\\sqrt{2}\\frac{-2}{3}$$≈0.195，用计算器求出原式≈（2.236…×2.449…-2×3.872…）÷3×3.872…≈0.195．故以上计算正确．"
           },
           "kc": null
         }
@@ -628,6 +612,64 @@
     ]
   },
   {
+    "question_id": "shiti07128d38d5d768dde6da38ccd9bdf66e6964",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "在①( $$ \\sqrt{2}$$ b－c)cos A=acosC ，②sin(B+C)= $$ \\sqrt{2}$$ －1+2sin$$^{2} \\frac{A}{2}$$  ， ③$$ \\sqrt{2}$$ acosC= $$ \\sqrt{2}$$ b－c ，这三个条件中任选一个作为已知条件，然后解答问题．  \n在△ABC 中，内角 A，B，C 的对边分别为 a，b，c，已知$$\\underline{              }$$．\n（1）求角A的大小；\n\n\n（2）若 a=2 ，且△ ABC 的面积为 2，求b+c．\n\n\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "选择条件①求解角A",
+            "detail": "选择条件①，将其化为角的形式，得到$cosA=\\frac{\\sqrt{2}}{2}$，进而求出角A的大小。"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "选择条件②求解角A",
+            "detail": "选择条件②，利用倍角公式将$sin(B+C)=\\sqrt{2}-1+2sin^{2}\\frac{A}{2}$化简为$sinA=\\sqrt{2}-cosA$，再利用辅助角公式求解，即可求出角A的大小。"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "选择条件③求解角A",
+            "detail": "选择条件③，将其化为角的形式，通过化简运算，即可求出角A的大小。"
+          },
+          "kc": null
+        }
+      ],
+      [
+        {
+          "question": "2",
+          "solution": {
+            "step": "1",
+            "title": "利用面积公式求得bc",
+            "detail": "利用面积公式，得到$bc=4\\sqrt{2}$。"
+          },
+          "kc": null
+        },
+        {
+          "question": "2",
+          "solution": {
+            "step": "2",
+            "title": "利用余弦定理求得b+c",
+            "detail": "再利用余弦定理，得到$(b+c)^{2}=a^{2}+2bc+2bc cosA$，通过计算，即可求出b+c。"
+          },
+          "kc": null
+        }
+      ]
+    ]
+  },
+  {
     "question_id": "shiti0814fea5d86f529bb45769e0151cd4cf6a61",
     "source": 3,
     "subject_id": 2,
@@ -650,71 +692,6 @@
             "step": "2",
             "title": "解方程求解a",
             "detail": "解这个方程，得到$a=-2$"
-          },
-          "kc": null
-        }
-      ]
-    ]
-  },
-  {
-    "question_id": "shiti0724e17e4fee8b3fec1ba4dbebac59007edd",
-    "source": 3,
-    "subject_id": 2,
-    "info": [],
-    "combine_content": "三角形各边（从小到大）长度的平方比，如下列各组，其中不是直角三角形的是 （     ）\nA．9∶25∶26    B．1∶3∶4    C．1∶1∶2    D．25∶144∶169\n",
-    "sub_question": [
-      [
-        {
-          "question": "1",
-          "solution": {
-            "step": "1",
-            "title": "理解题目要求",
-            "detail": "题目要求我们找出不是直角三角形的选项，我们可以利用勾股定理的逆定理，即如果一个三角形的两小边的平方和等于最长边的平方，那么这个三角形就是直角三角形。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "2",
-            "title": "验证选项A",
-            "detail": "对于选项A，我们有$9+25\\neq26$，所以选项A不是直角三角形。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "3",
-            "title": "验证选项B",
-            "detail": "对于选项B，我们有$1+3=4$，所以选项B是直角三角形。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "4",
-            "title": "验证选项C",
-            "detail": "对于选项C，我们有$1+1=2$，所以选项C是直角三角形。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "5",
-            "title": "验证选项D",
-            "detail": "对于选项D，我们有$25+144=169$，所以选项D是直角三角形。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "6",
-            "title": "得出结论",
-            "detail": "因此，选项A是不是直角三角形的选项。"
           },
           "kc": null
         }
@@ -769,19 +746,19 @@
     ]
   },
   {
-    "question_id": "shiti0724_54a5d2b71a6b43be969ea931c4ce8b60",
+    "question_id": "shiti0724_7ece7ced126d654ff8c2b0ce323b254a",
     "source": 3,
     "subject_id": 2,
     "info": [],
-    "combine_content": "观察图中的函数图象，则关于$$ x$$的不等式$$ ax-bx>c$$的解集为（    ）\n<img alt=\"@@@4da04799-e547-48d3-ade7-9e40b6dcfe05\" height=\"153\" src=\"https://static0.xesimg.com/ai-math-question/que_media/84bda390-21bd-47ca-bb5a-0736b7254a40.png\" width=\"183\"/>\nA．$$ x<2$$    B．$$ x<1$$    C．$$ x>2$$    D．$$ x>1$$\n",
+    "combine_content": "根据如图提供的信息，小红去商店买一只水瓶和一只杯子应付（  ）\n<img alt=\"@@@2ad0e1747f094954bde5be5c94e7da72\" height=\"108\" src=\"https://static0.xesimg.com/ai-math-question/que_media/c2fe2a90-5601-4348-8684-070b3f04da75.png\" width=\"206\"/>\nA．30元    B．32元    C．31元    D．34元\n",
     "sub_question": [
       [
         {
           "question": "1",
           "solution": {
             "step": "1",
-            "title": "观察图象",
-            "detail": "由图象可知，两图象的交点坐标是（1，2）。"
+            "title": "设立未知数",
+            "detail": "设购买一只水瓶需要x元，购买一只杯子需要y元。"
           },
           "kc": null
         },
@@ -789,8 +766,8 @@
           "question": "1",
           "solution": {
             "step": "2",
-            "title": "确定不等式的解集",
-            "detail": "当$x>1$时，$ax>bx+c$，所以关于$x$的不等式$ax-bx>c$的解集为$x>1$。"
+            "title": "列出方程",
+            "detail": "根据题意得到二元一次方程组：$\\begin{cases}x+2y=37\\\\2x+y=56\\end{cases}$。"
           },
           "kc": null
         },
@@ -798,46 +775,8 @@
           "question": "1",
           "solution": {
             "step": "3",
-            "title": "选择正确选项",
-            "detail": "综上，所以选择D选项。"
-          },
-          "kc": null
-        }
-      ]
-    ]
-  },
-  {
-    "question_id": "shiti0814202deb7ff7ed17d321b19cbba86ac693",
-    "source": 3,
-    "subject_id": 2,
-    "info": [],
-    "combine_content": "当1＜x＜2时，化简$$ \\sqrt{{{x}}^{{2}}{-4x+4}}$$ +$$ \\sqrt{{{x}}^{{2}}{-2x+1}}$$得（  ）\nA．2x-3    B．1    C．3-2x    D．-1\n",
-    "sub_question": [
-      [
-        {
-          "question": "1",
-          "solution": {
-            "step": "1",
-            "title": "将原式转化为平方差形式",
-            "detail": "原式可以转化为$\\sqrt{(x-2)^2}+\\sqrt{(x-1)^2}$"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "2",
-            "title": "将平方差转化为绝对值形式",
-            "detail": "根据平方差的性质，$\\sqrt{(x-2)^2}+\\sqrt{(x-1)^2}$可以转化为$|x-2|+|x-1|$"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "3",
-            "title": "根据x的取值范围化简绝对值",
-            "detail": "由于$1<x<2$，所以$|x-2|=2-x$，$|x-1|=x-1$，所以原式化简为$2-x+x-1=1$"
+            "title": "解方程",
+            "detail": "将方程①和②相加，然后除以3，得到：$x+y=31$。"
           },
           "kc": null
         },
@@ -845,8 +784,8 @@
           "question": "1",
           "solution": {
             "step": "4",
-            "title": "得出答案",
-            "detail": "所以，原式化简后的结果为$1$，对应选项B"
+            "title": "选择正确选项",
+            "detail": "所以，小红去商店买一只水瓶和一只杯子应付31元，故选C。"
           },
           "kc": null
         }
@@ -854,19 +793,19 @@
     ]
   },
   {
-    "question_id": "shiti0724_a7b50464e1529c23611cd372a268264c",
+    "question_id": "shiti0829_f9ae3aa2a4bec1e5e485cc0a30310d48",
     "source": 3,
     "subject_id": 2,
     "info": [],
-    "combine_content": "在以下绿色食品、回收、节能、节水四个标志中，是轴对称图形的是（  ）\nA．<img alt=\"@@@ec02e388ba6e420a9a80349c364b3fc3\" height=\"65\" src=\"https://static0.xesimg.com/ai-math-question/que_media/3e62fc74-a6f4-4c46-b0da-7adc0d191338.png\" width=\"65\"/>    B．<img alt=\"@@@01a279c5590247bb8bc04d624bd69d16\" height=\"64\" src=\"https://static0.xesimg.com/ai-math-question/que_media/f75e27ac-aafd-4e4c-b0bf-df3f86c5c603.png\" width=\"65\"/>    C．<img alt=\"@@@b02238ee6ea54084b4e443d4b591d933\" height=\"68\" src=\"https://static0.xesimg.com/ai-math-question/que_media/ef458558-5aa0-492b-b1a3-2261fe1ca79b.png\" width=\"67\"/>    D．<img alt=\"@@@b03250ebcf49418d82e02f90f89fcbe1\" height=\"65\" src=\"https://static0.xesimg.com/ai-math-question/que_media/85605eb1-2014-430c-8e27-d5d48d10ac2b.png\" width=\"65\"/>\n",
+    "combine_content": "某校同学去春游，包一辆面包车，租价是180元，出发时又增加2名同学，结果每位同学比原来少分摊3元车费，设实际参加春游的同学有x人，则所列的方程为$$\\underline{      }$$．",
     "sub_question": [
       [
         {
           "question": "1",
           "solution": {
             "step": "1",
-            "title": "理解轴对称图形的概念",
-            "detail": "如果一个图形沿着一条直线对折后两部分完全重合，这样的图形叫做轴对称图形，这条直线叫做对称轴。"
+            "title": "理解题意",
+            "detail": "根据题意，原来的同学人数是$x-2$，后来增加了2人，变成了$x$人。每个人需要分摊的车费是总车费除以人数。"
           },
           "kc": null
         },
@@ -874,64 +813,66 @@
           "question": "1",
           "solution": {
             "step": "2",
+            "title": "建立方程",
+            "detail": "根据题意，每位同学比原来少分摊3元车费，所以原来每人分摊的车费减去现在每人分摊的车费等于3元，即$\frac{180}{x-2}-\frac{180}{x}=3$。"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "作答",
+            "detail": "答案为：$\frac{180}{x-2}-\frac{180}{x}=3$。"
+          },
+          "kc": null
+        }
+      ]
+    ]
+  },
+  {
+    "question_id": "shiti07127d2474d7067459fdaa455c8dfe995c9d",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "某暗箱中放有10个形状大小一样的球，其中有三个红球、若干个白球和蓝球，若从中任取一个是白球的概率为$$ \\frac{1}{2}$$，则蓝球的个数是$$\\underline{      }$$．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "计算白球的个数",
+            "detail": "根据题目描述，从暗箱中任取一个球是白球的概率为$\\frac{1}{2}$，暗箱中总共有10个球，因此，白球的数目为$10\\times \\frac{1}{2}=5$个。"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "计算蓝球的个数",
+            "detail": "暗箱中总共有10个球，其中红球有3个，白球有5个，因此，蓝球的个数为$10-3-5=2$个。"
+          },
+          "kc": null
+        }
+      ]
+    ]
+  },
+  {
+    "question_id": "shiti07247ce3327cf9b0aa49ba962bb4c17892bf",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "下列几组数中互为相反数的是（  ）\nA．―$$ \\frac{1}{7}$$ 和 0.7    B．$$ \\frac{1}{3}$$ 和 ―0.333    C．―|―6| 和 6    D．―$$ \\frac{1}{4}$$ 和4\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
             "title": "判断选项A",
-            "detail": "选项A的图形是轴对称图形，所以选项A符合题意。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "3",
-            "title": "判断选项B",
-            "detail": "选项B的图形不是轴对称图形，所以选项B不符合题意。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "4",
-            "title": "判断选项C",
-            "detail": "选项C的图形不是轴对称图形，所以选项C不符合题意。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "5",
-            "title": "判断选项D",
-            "detail": "选项D的图形不是轴对称图形，所以选项D不符合题意。"
-          },
-          "kc": null
-        },
-        {
-          "question": "1",
-          "solution": {
-            "step": "6",
-            "title": "选择正确选项",
-            "detail": "综上，所以选择A选项。"
-          },
-          "kc": null
-        }
-      ]
-    ]
-  },
-  {
-    "question_id": "shiti0712_ac0cc7e75704ead3ccd5d46a378d1529",
-    "source": 3,
-    "subject_id": 2,
-    "info": [],
-    "combine_content": "如图，若将线段AB平移至A$${_{1}}$$B$${_{1}}$$，则a+b的值为(  )  \n<img alt=\"图片_x0020_100005\" height=\"126\" src=\"https://static0.xesimg.com/ai-math-question/que_media/e5cacbe9-df95-4b6b-9ac5-7e881e1f20e5.png\" width=\"174\"/>\nA．﹣3    B．3    C．﹣2    D．0\n",
-    "sub_question": [
-      [
-        {
-          "question": "1",
-          "solution": {
-            "step": "1",
-            "title": "确定平移规律",
-            "detail": "根据点的平移规律，点A平移到A$_1$，得到平移的规律为向左平移2个单位，向下平移1个单位。"
+            "detail": "在选项A中，-\\frac{1}{7}的相反数是\\frac{1}{7}，不等于0.7，所以选项A错误。"
           },
           "kc": null
         },
@@ -939,8 +880,8 @@
           "question": "1",
           "solution": {
             "step": "2",
-            "title": "确定B$_1$点的坐标",
-            "detail": "按照平移规律，B点平移到B$_1$，得到B$_1$点的坐标为(1, 2)。"
+            "title": "判断选项B",
+            "detail": "在选项B中，\\frac{1}{3}的相反数是-\\frac{1}{3}，不等于-0.333，所以选项B错误。"
           },
           "kc": null
         },
@@ -948,8 +889,8 @@
           "question": "1",
           "solution": {
             "step": "3",
-            "title": "求出a、b的值",
-            "detail": "由于B$_1$点的坐标为(1, 2)，所以a=1，b=2。"
+            "title": "判断选项C",
+            "detail": "在选项C中，-|-6|等于-6，它的相反数是6，所以选项C正确。"
           },
           "kc": null
         },
@@ -957,8 +898,8 @@
           "question": "1",
           "solution": {
             "step": "4",
-            "title": "计算a+b的值",
-            "detail": "a+b=1+2=3。"
+            "title": "判断选项D",
+            "detail": "在选项D中，-\\frac{1}{4}的相反数是\\frac{1}{4}，所以选项D错误。"
           },
           "kc": null
         },
@@ -966,8 +907,133 @@
           "question": "1",
           "solution": {
             "step": "5",
-            "title": "选择正确选项",
-            "detail": "综上，所以选择B选项"
+            "title": "总结答案",
+            "detail": "因此，互为相反数的是选项C。"
+          },
+          "kc": null
+        }
+      ]
+    ]
+  },
+  {
+    "question_id": "shiti0712_1cb7e5d9fe772fbafa272c0bff72cd56",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，在平面直角坐标系中，O为坐标原点，$$ \\Delta AOB$$为$$ Rt\\Delta $$，点A的坐标是$$ (1，0)$$，$$ \\angle BAO=60°$$，把$$ Rt\\Delta AOB$$绕点A按顺时针方向旋转$$ 90°$$后，得到$$ Rt\\Delta A{O}^{\\prime }{B}^{\\prime }$$，则$$ Rt\\Delta A{O}^{\\prime }{B}^{\\prime }$$的外接圆圆心坐标是（  ）\n<img alt=\"\" height=\"78\" src=\"https://static0.xesimg.com/ai-math-question/que_media/4229fb6d-5d41-4544-92bf-2152e3f763c5.png\" width=\"96\"/>\nA．$$ (1+\\frac{\\sqrt{3}}{2}，\\frac{1}{2})$$    B．$$ (\\frac{\\sqrt{3}}{2}，\\frac{1}{2})$$    C．$$ (\\frac{1+\\sqrt{3}}{2}，1)$$    D．$$ (\\frac{1}{2}，\\frac{1+\\sqrt{3}}{2})$$\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "理解题目给出的信息",
+            "detail": "根据题目描述，我们知道三角形$AOB$是一个直角三角形，且点A的坐标是$(1,0)$，$\\angle BAO=60°$。然后，三角形$AOB$绕点A顺时针旋转$90°$，得到三角形$A{O}^{\\prime }{B}^{\\prime }$。我们需要找到三角形$A{O}^{\\prime }{B}^{\\prime }$的外接圆的圆心坐标。"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "分析旋转后的三角形",
+            "detail": "由于三角形$AOB$绕点A顺时针旋转$90°$，得到三角形$A{O}^{\\prime }{B}^{\\prime }$，所以三角形$A{O}^{\\prime }{B}^{\\prime }$的外接圆的圆心就是三角形$AOB$的外接圆的圆心。"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "计算外接圆的圆心坐标",
+            "detail": "由于三角形$AOB$是一个等腰直角三角形，所以其外接圆的圆心就是直角顶点，即点A，坐标为$(1,0)$。然后，三角形$AOB$绕点A顺时针旋转$90°$，得到三角形$A{O}^{\\prime }{B}^{\\prime }$，其外接圆的圆心坐标为$(\\frac{1}{2}, \\frac{1+\\sqrt{3}}{2})$。"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "选择正确的选项",
+            "detail": "因此，三角形$A{O}^{\\prime }{B}^{\\prime }$的外接圆的圆心坐标为$(\\frac{1}{2}, \\frac{1+\\sqrt{3}}{2})$，对应选项D。"
+          },
+          "kc": null
+        }
+      ]
+    ]
+  },
+  {
+    "question_id": "shiti0724_0f580451ab54a6961804c85865e5cffa",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "我们已学习了角平分线的概念，那么你会用他们解决有关问题吗？\n（1）如图1所示，将长方形笔记本活页纸片的一角折过去，使角的顶点A落在A′处，BC为折痕．若∠ABC＝50°，求∠A′BD的度数．\n（2）在（1）条件下，如果又将它的另一个角也斜折过去，并使BD边与BA′重合，折痕为BE，如图2所示，求∠2和∠CBE的度数．\n（3）如果将图2中改变∠ABC的大小，则BA′的位置也随之改变，那么（2）中∠CBE的大小会不会改变？请说明．\n<img alt=\"@@@77f23170-c163-4575-878a-c3c32512e7ec\" height=\"147\" src=\"https://static0.xesimg.com/ai-math-question/que_media/26589db5-f9a4-47f7-bff6-a4b1e62cb50d.png\" width=\"239\"/>  \n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "利用折叠的性质",
+            "detail": "由折叠的性质可得$\\angle A'BC=\\angle ABC=50°$。"
+          },
+          "kc": null
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "计算角度",
+            "detail": "由平角的定义可得$\\angle A'BD=180°-\\angle ABC-\\angle A'BC=180°-50°-50°=80°$。"
+          },
+          "kc": null
+        }
+      ],
+      [
+        {
+          "question": "2",
+          "solution": {
+            "step": "1",
+            "title": "利用折叠的性质",
+            "detail": "由（1）的结论可得$\\angle DBD'=80°$，由折叠的性质可得$\\angle 2=\\frac{1}{2}\\angle DBD'=\\frac{1}{2}\\times80°=40°$。"
+          },
+          "kc": null
+        },
+        {
+          "question": "2",
+          "solution": {
+            "step": "2",
+            "title": "利用角平分线的性质",
+            "detail": "由角平分线的性质可得$\\angle CBE=\\angle A'BC+\\angle D'BE=\\frac{1}{2}\\times180°=90°$。"
+          },
+          "kc": null
+        }
+      ],
+      [
+        {
+          "question": "3",
+          "solution": {
+            "step": "1",
+            "title": "利用折叠的性质",
+            "detail": "由折叠的性质可得，$\\angle 1=\\angle ABC=\\frac{1}{2}\\angle ABA'$，$\\angle 2=\\angle EBD=\\frac{1}{2}\\angle DBD'$。"
+          },
+          "kc": null
+        },
+        {
+          "question": "3",
+          "solution": {
+            "step": "2",
+            "title": "计算角度",
+            "detail": "因此，$\\angle 1+\\angle 2=\\frac{1}{2} (\\angle ABA'+\\angle DBD')=\\frac{1}{2}\\times180°=90°$。"
+          },
+          "kc": null
+        },
+        {
+          "question": "3",
+          "solution": {
+            "step": "3",
+            "title": "作答",
+            "detail": "所以，无论如何改变$\\angle ABC$的大小，$\\angle CBE$的大小都不会改变，永远是平角的一半。"
           },
           "kc": null
         }

@@ -10,7 +10,7 @@ from collections import defaultdict
 from typing import *
 from config import config_dict
 
-config = config_dict["test"]
+config = config_dict["online"]
 kc_dir = config["kc_dir"]
 kc_file = config["kc_file"]
 

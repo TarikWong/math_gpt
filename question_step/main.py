@@ -14,7 +14,7 @@ from call_gpt import send_chat_request
 import kc_handler
 from process_data import *
 from utils import obj_to_dict
-from config import config_dict
+from config3 import config_dict
 
 warnings.filterwarnings("ignore")
 config = config_dict["online"]
@@ -26,7 +26,7 @@ OUT_SUB = "{}{}_sub.json".format(config["output_dir"], config["input_file_name"]
 OUT_RESULT = "{}_result.json".format(config["input_file_name"].split(".")[0])
 OUTPUT_DIR = config["output_dir"]
 SAMPLE_CNT = config["sample_cnt"]
-
+print("INPUT_FILE:", INPUT_FILE)
 
 class Level:
     def __init__(self, system: str, example: str) -> None:

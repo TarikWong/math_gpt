@@ -8,7 +8,7 @@ config_dict = {
 
     "online": {
         "log_dir": "/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/log/",
-        "input_file_name": "source2_sample50000.csv",
+        "input_file_name": "source3_sample5000.csv",
         "input_dir": "/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/",
         "output_dir": "/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/tmp/",
         "sublevel_system": "/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/prompts/system/step-1.md",

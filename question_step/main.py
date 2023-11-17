@@ -14,10 +14,11 @@ from call_gpt import send_chat_request
 import kc_handler
 from process_data import *
 from utils import obj_to_dict
-from config3 import config_dict
+from config import config_dict
 
 warnings.filterwarnings("ignore")
-config = config_dict["online"]
+# config = config_dict["online"]
+config = config_dict["test"]
 
 logger.add("{}{}.log".format(config["log_dir"], config["input_file_name"].split(".")[0]))  ## 日志文件目录
 INPUT_FILE = "{}{}".format(config["input_dir"], config["input_file_name"])  ## 输入文件
@@ -28,19 +29,21 @@ OUTPUT_DIR = config["output_dir"]
 SAMPLE_CNT = config["sample_cnt"]
 print("INPUT_FILE:", INPUT_FILE)
 
+
 class Level:
-    def __init__(self, system: str, example: str) -> None:
+    def __init__(self, system: str, example_list: list) -> None:
         self.system = system
-        self.example = example
+        self.example_list = example_list
         self.knowledge = kc_handler.Knowledge()
 
     def load_examples(self):
         """加载few-shot文件."""
         examples = []
-        example_md = open(self.example).read()
-        user, assistant = self.find_code_blocks(example_md)
-        examples.append({"role": "user", "content": user})
-        examples.append({"role": "assistant", "content": assistant})
+        for e in self.example_list:
+            example_md = open(e).read()
+            user, assistant = self.find_code_blocks(example_md)
+            examples.append({"role": "user", "content": user})
+            examples.append({"role": "assistant", "content": assistant})
         return examples
 
     @staticmethod
@@ -87,9 +90,9 @@ class SubLevel(Level):
     def __init__(
             self,
             system=config["sublevel_system"],
-            example=config["sublevel_example"],
+            example_list=config["sublevel_examples"],
     ) -> None:
-        super().__init__(system=system, example=example)
+        super().__init__(system=system, example_list=example_list)
 
     def load_system(self):
         system = open(self.system, mode="r").read()
@@ -114,12 +117,14 @@ class SubLevel(Level):
             system=system,
             examples=examples,
             question=query,
-            engine="GPT4",
+            # engine="GPT4",
+            engine="GPT4-FAST",
         )
         try:
             kc_result = json.loads(response["response"])
             print("question_id: '{}', SubLevel kc_result: {}".format(question_id, kc_result))
             assert type(kc_result) is list, "GPT4 response failed!"
+            # assert type(kc_result) is Dict, "GPT4 response failed!"
             return kc_result
         except json.decoder.JSONDecodeError as e:
             logger.info("error")
@@ -130,10 +135,10 @@ class LastLevel(Level):
     def __init__(
             self,
             system=config["lastlevel_system"],
-            example=config["lastlevel_example"],
+            example_list=config["lastlevel_examples"],
             sub_level_kc: List[str] = None,
     ) -> None:
-        super().__init__(system=system, example=example)
+        super().__init__(system=system, example_list=example_list)
         self.sub_list = sub_level_kc
         self.kc_mapping = self.knowledge.mapping
 
@@ -166,7 +171,8 @@ class LastLevel(Level):
             system=system,
             examples=examples,
             question=query,
-            engine="GPT4",
+            # engine="GPT4",
+            engine="GPT4-FAST",
         )
         try:
             kc_result = json.loads(response["response"])
@@ -189,10 +195,16 @@ class Service:
             out_tmp_sub=out_tmp_sub,
             out_tmp_result=out_tmp_result)
 
+    # def modify_first_response(self, first_response):
+    #     return [
+    #         item for item in first_response if item in self.sub_level.sub_level_kc_set
+    #     ]
     def modify_first_response(self, first_response):
-        return [
-            item for item in first_response if item in self.sub_level.sub_level_kc_set
-        ]
+        for kc in first_response["kc"]:
+            if kc not in self.sub_level.sub_level_kc_set:
+                first_response["kc"].remove(kc)
+                del first_response["reason"][kc]
+        return first_response
 
     def modify_second_response(self, second_response, first_response):
         for item in second_response:

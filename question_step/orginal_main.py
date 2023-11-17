@@ -75,8 +75,8 @@ class Level:
 class SubLevel(Level):
     def __init__(
             self,
-            system="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/system/step-1.md",
-            example="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/examples/example-1.md",
+            system="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/system/system-sublevel.md",
+            example="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/examples/example-sublevel-01.md",
     ) -> None:
         super().__init__(system=system, example=example)
 
@@ -88,8 +88,8 @@ class SubLevel(Level):
 class LastLevel(Level):
     def __init__(
             self,
-            system="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/system/step-2.md",
-            example="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/examples/example-2.md",
+            system="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/system/system-lastlevel.md",
+            example="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/examples/example-lastlevel-01.md",
             sub_level_kc: List[str] = None,
     ) -> None:
         super().__init__(system=system, example=example)

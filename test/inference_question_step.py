@@ -509,8 +509,7 @@ def get_one_generation_result(input_question, args, model, tokenizer, device):
         if one_stream['finish_reason'] == "length":
             break
 
-        refreshed_target, round_int, one_calculated_thought, status = refresh_thought_and_code(gen_target, round_int,
-                                                                                               one_calculated_thought)
+        refreshed_target, round_int, one_calculated_thought, status = refresh_thought_and_code(gen_target, round_int, one_calculated_thought)
         if status == "error":
             break
         gen_target = refreshed_target

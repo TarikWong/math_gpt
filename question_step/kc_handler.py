@@ -10,7 +10,7 @@ from collections import defaultdict
 from typing import *
 from config import config_dict
 
-config = config_dict["online"]
+config = config_dict["test"]
 kc_dir = config["kc_dir"]
 kc_file = config["kc_file"]
 
@@ -30,9 +30,7 @@ class Knowledge:
     ]
     sheet_name = ["副本" + item for item in sheet_name]
 
-    def __init__(
-            self, sheet_list=None, lask_kc_file_name: str = "kc_extend_mapping.json"
-    ) -> None:
+    def __init__(self, sheet_list=None, lask_kc_file_name: str = "kc_extend_mapping.json") -> None:
         self.kc_file = "{}/{}".format(kc_dir, kc_file)
         self.last_kc_file_name = lask_kc_file_name
         if sheet_list is not None:

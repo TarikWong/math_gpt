@@ -173,6 +173,9 @@ class Question:
     def add_first_step(self, first_step):
         setattr(self, "first", first_step)
 
+    def add_second_step(self, second_step):
+        setattr(self, "second", second_step)
+
 
 def to_json_file(file_name: str, obj: List[Any], default=obj_to_dict):
     with open(file=file_name, mode="w", encoding="utf-8") as f:
@@ -223,7 +226,7 @@ class DataProcessor:
                     sub_question=soul,
                 )
             )
-        to_json_file(file_name=self.out_tmp, obj=question_list)
+        # to_json_file(file_name=self.out_tmp, obj=question_list)
         return question_list
 
     def generate_question(self):
@@ -231,7 +234,7 @@ class DataProcessor:
         data_list = self.transformer_question()
         for data in data_list:
             question_list.append(data.sample_sub_question())
-        to_json_file(file_name=self.out_tmp_sub, obj=question_list)
+        # to_json_file(file_name=self.out_tmp_sub, obj=question_list)
         return question_list
 
     def load_json(self):
@@ -276,15 +279,17 @@ if __name__ == "__main__":
     # print('=========== original end ===========')
 
     # 随机抽样数据写入临时文件
-    sample_cnt = 5000
-    df = pd.read_csv('/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/source2.csv')
-    data = df.sample(sample_cnt)
-    data.to_csv(os.path.join(DATA_DIR, "source2_sample{}.csv".format(str(sample_cnt))), index=False)
+    # sample_cnt = 5000
+    # df = pd.read_csv('/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/source3.csv')
+    # data = df.sample(sample_cnt)
+    # data.to_csv(os.path.join(DATA_DIR, "source2_sample{}.csv".format(str(sample_cnt))), index=False)
 
-    # 数据处理
-    # ssd = SingleSourceData(file_dir='source2_sample_2000.csv', source='2')
-    # data = ssd.new_data
-    # print(data.head(3))
-    # print('去重后new_kc数量：', len(data["new_kc_str"].unique()))
+    # 根据测试数据question_id重新抽取原始数据
+    input_df = pd.read_csv("/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/source3.csv")
+    question_df = pd.read_excel(
+        "/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/tmp/source3_sample_eval_20231111.xlsx")
+    question_list = question_df['question_id'].tolist()
+    new_df = input_df[input_df['question_id'].isin(question_list)]
+    new_df.to_csv(os.path.join(DATA_DIR, "source3_sample_input.csv"), index=False)
 
     print('done.')

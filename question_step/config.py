@@ -20,7 +20,7 @@ class Config(object):
             "local": "/Users/tuo/PycharmProjects/math_gpt/question_step"
         }
 
-    def get_config(self, input_file, output_file, kc_file="初中知识点（纯）.xlsx", sample_cnt=10, env="线上", version="基础", subject="数学", grade="初中") -> dict:
+    def get_config(self, input_file="input.csv", output_file="output.json", kc_file="初中知识点（纯）.xlsx", sample_cnt=10, env="线上", version="基础", subject="数学", grade="初中") -> dict:
         config_dict = {
             "sample_cnt": sample_cnt,
             "kc_file": kc_file,

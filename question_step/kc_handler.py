@@ -8,11 +8,12 @@ import json
 import os
 from collections import defaultdict
 from typing import *
-from config import config_dict
+from config import Config
 
-config = config_dict["test"]
-kc_dir = config["kc_dir"]
-kc_file = config["kc_file"]
+config = Config()
+config_dict = config.get_config()
+kc_dir = config_dict["kc_dir"]
+kc_file = config_dict["kc_file"]
 
 
 class Knowledge:

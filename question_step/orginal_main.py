@@ -46,7 +46,7 @@ class Level:
         system = self.load_system()
         print("system:", system)
         examples = self.load_examples()
-        print("example:", examples)
+        print("examples:", examples)
         query = json.dumps(sample, ensure_ascii=False, default=obj_to_dict)
         print("query:", query)
         response = send_chat_request(
@@ -76,7 +76,7 @@ class SubLevel(Level):
     def __init__(
             self,
             system="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/system/system-sublevel.md",
-            example="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/examples/example-sublevel-01.md",
+            example="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/examples/examples-sublevel-01.md",
     ) -> None:
         super().__init__(system=system, example=example)
 
@@ -89,7 +89,7 @@ class LastLevel(Level):
     def __init__(
             self,
             system="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/system/system-lastlevel.md",
-            example="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/examples/example-lastlevel-01.md",
+            example="/mnt/pfs/zitao_team/shiluyou/question_step/prompts/examples/examples-lastlevel-01.md",
             sub_level_kc: List[str] = None,
     ) -> None:
         super().__init__(system=system, example=example)

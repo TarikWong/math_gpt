@@ -6,7 +6,7 @@
 import json
 
 
-class Config(object):
+class ConfigParser(object):
 
     def __init__(self):
         self.outline = {
@@ -122,7 +122,7 @@ class Config(object):
                 ),
             ],
 
-            "kc_dir": "{base_dir}/{version}/{subject}/{grade}/kc".format(
+            "kc_dir": "{base_dir}/kc/{version}/{subject}/{grade}".format(
                 **{
                     "base_dir": self.base_dir[self.outline["环境"][env]],
                     "version": self.outline["版本"][version],
@@ -135,47 +135,7 @@ class Config(object):
 
 
 if __name__ == "__main__":
-    c = Config()
-    d = c.get_config(input_file="输入文件.txt", output_file="输出文件.json", sample_cnt=10, env="本地", version="基础",
-                     subject="数学", grade="初中")
+    c = ConfigParser()
+    d = c.get_config(input_file="输入文件.txt", output_file="输出文件.json", sample_cnt=10, env="本地", version="基础", subject="数学", grade="初中")
     print(json.dumps(d, ensure_ascii=False, indent=4))
 
-#     def get_test_config(self):
-#         config_dict = {
-#             "log_dir": "/Users/tuo/PycharmProjects/math_gpt/log/",
-#             "input_file_name": "source3_sample_input.csv",
-#             "input_dir": "/Users/tuo/PycharmProjects/math_gpt/question_step/data/",
-#             "output_dir": "/Users/tuo/PycharmProjects/math_gpt/question_step/tmp/",
-#             "sublevel_system": "/Users/tuo/PycharmProjects/math_gpt/prompts/system/basic/system-sublevel.md",
-#             "sublevel_examples": ["/Users/tuo/PycharmProjects/math_gpt/prompts/examples/basic/example-sublevel-01.md",
-#                                   "/Users/tuo/PycharmProjects/math_gpt/prompts/examples/basic/example-sublevel-02.md"],
-#             "lastlevel_system": "/Users/tuo/PycharmProjects/math_gpt/prompts/system/basic/system-lastlevel.md",
-#             "lastlevel_examples": ["/Users/tuo/PycharmProjects/math_gpt/prompts/examples/basic/example-lastlevel-01.md",
-#                                    "/Users/tuo/PycharmProjects/math_gpt/prompts/examples/basic/example-lastlevel-02.md"],
-#             "sample_cnt": 20,
-#             "kc_dir": "/Users/tuo/PycharmProjects/math_gpt/question_step/kc",
-#             "kc_file": "初中知识点（纯）.xlsx",
-#             "data_dir": "/Users/tuo/PycharmProjects/math_gpt/question_step/data/"}
-#         return config_dict
-#
-#
-# config_dict = {
-#
-#     # CoT
-#     "test-CoT": {
-#         "log_dir": "/Users/tuo/PycharmProjects/math_gpt/log/",
-#         "input_file_name": "source3_sample_input.csv",
-#         "input_dir": "/Users/tuo/PycharmProjects/math_gpt/question_step/data/",
-#         "output_dir": "/Users/tuo/PycharmProjects/math_gpt/question_step/tmp/",
-#         "sublevel_system": "/Users/tuo/PycharmProjects/math_gpt/prompts/system/CoT/system-sublevel-style01.md",
-#         "sublevel_examples": ["/Users/tuo/PycharmProjects/math_gpt/prompts/examples/CoT/example-cot-sublevel-01.md",
-#                               "/Users/tuo/PycharmProjects/math_gpt/prompts/examples/CoT/example-cot-sublevel-02.md"],
-#         "lastlevel_system": "/Users/tuo/PycharmProjects/math_gpt/prompts/system/CoT/system-lastlevel-style01.md",
-#         "lastlevel_examples": ["/Users/tuo/PycharmProjects/math_gpt/prompts/examples/CoT/example-cot-lastlevel-01.md",
-#                                "/Users/tuo/PycharmProjects/math_gpt/prompts/examples/CoT/example-cot-lastlevel-02.md"],
-#         "sample_cnt": 211,
-#         "kc_dir": "/Users/tuo/PycharmProjects/math_gpt/question_step/kc",
-#         "kc_file": "初中知识点（纯）.xlsx",
-#         "data_dir": "/Users/tuo/PycharmProjects/math_gpt/question_step/data/"},
-#
-# }

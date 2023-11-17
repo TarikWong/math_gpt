@@ -61,7 +61,7 @@ class Level:
         examples = self.load_examples()
         query = json.dumps(sample, ensure_ascii=False, default=obj_to_dict)
         # print("system:", system)
-        # print("example:", examples)
+        # print("examples:", examples)
         # print("query:", query)
         response = send_chat_request(
             system=system,
@@ -108,7 +108,7 @@ class SubLevel(Level):
         messages.append({"role": "user", "content": query})
 
         # print("system:", system)
-        # print("first example:", examples)
+        # print("first examples:", examples)
         # print("query:", query)
         # print("messages: ", messages)
         # print("===")
@@ -162,7 +162,7 @@ class LastLevel(Level):
         messages.append({"role": "user", "content": query})
 
         # print("system:", system)
-        # print("second example:", examples)
+        # print("second examples:", examples)
         # print("query:", query)
         # print("messages: ", messages)
         # print("===")

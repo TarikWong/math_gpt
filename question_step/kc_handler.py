@@ -8,10 +8,10 @@ import json
 import os
 from collections import defaultdict
 from typing import *
-from config import Config
+from config import ConfigParser
 
-config = Config()
-config_dict = config.get_config()
+cp = ConfigParser()
+config_dict = cp.get_config()
 kc_dir = config_dict["kc_dir"]
 kc_file = config_dict["kc_file"]
 

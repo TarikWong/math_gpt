@@ -22,7 +22,7 @@ config = cp.get_config(input_file="source3_sample_input.csv", output_file="sourc
                        lastlevel_system_file="system-lastlevel-style02.md",
                        sublevel_examples_list=["example-cot-sublevel-01.md", "example-cot-sublevel-02.md"],
                        lastlevel_examples_list=["example-cot-lastlevel-01.md", "example-cot-lastlevel-02.md"],
-                       version="推理过程", sample_cnt=5, dir_check=True)
+                       version="推理过程", sample_cnt=50, dir_check=True)
 
 logger.add(config["log_file"])  ## 日志
 INPUT_FILE = config["input_file"]  ## 输入文件
@@ -107,9 +107,9 @@ class SubLevel(Level):
         examples = self.load_examples()
         query = json.dumps(sample, ensure_ascii=False, default=obj_to_dict)
 
-        messages = [{"role": "system", "content": system}]
-        messages += examples
-        messages.append({"role": "user", "content": query})
+        # messages = [{"role": "system", "content": system}]
+        # messages += examples
+        # messages.append({"role": "user", "content": query})
 
         # print("system:", system)
         # print("first examples:", examples)
@@ -161,9 +161,9 @@ class LastLevel(Level):
         examples = self.load_examples()
         query = json.dumps(sample, ensure_ascii=False, default=obj_to_dict)
 
-        messages = [{"role": "system", "content": system}]
-        messages += examples
-        messages.append({"role": "user", "content": query})
+        # messages = [{"role": "system", "content": system}]
+        # messages += examples
+        # messages.append({"role": "user", "content": query})
 
         # print("system:", system)
         # print("second examples:", examples)

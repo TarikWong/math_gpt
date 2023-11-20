@@ -22,7 +22,7 @@ config = cp.get_config(input_file="source3_sample_input.csv", output_file="sourc
                        lastlevel_system_file="system-lastlevel-style02.md",
                        sublevel_examples_list=["example-cot-sublevel-01.md", "example-cot-sublevel-02.md"],
                        lastlevel_examples_list=["example-cot-lastlevel-01.md", "example-cot-lastlevel-02.md"],
-                       version="推理过程", sample_cnt=5)
+                       version="推理过程", sample_cnt=5, dir_check=True)
 
 logger.add(config["log_file"])  ## 日志
 INPUT_FILE = config["input_file"]  ## 输入文件

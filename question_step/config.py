@@ -26,7 +26,8 @@ class ConfigParser(object):
     def get_config(self, input_file="input.csv", output_file="output.json",
                    sublevel_system_file="system-sublevel.md", lastlevel_system_file="system-lastlevel.md",
                    sublevel_examples_list=None, lastlevel_examples_list=None,
-                   kc_file="初中知识点（纯）.xlsx", sample_cnt=10, env="线上", version="基础", subject="数学", grade="初中") -> dict:
+                   kc_file="初中知识点（纯）.xlsx", sample_cnt=10, env="线上", version="基础", subject="数学", grade="初中",
+                   dir_check=False) -> dict:
         if lastlevel_examples_list is None:
             lastlevel_examples_list = ["example-lastlevel-01.md", "example-lastlevel-02.md"]
         if sublevel_examples_list is None:
@@ -146,22 +147,23 @@ class ConfigParser(object):
             ),
         }
 
-        # 目录校验，不存在就创建目录，但不会创建文件
-        dir_dict = self.__search_dir(config_dict)
-        for k, v in dir_dict.items():
-            dir_dict[k] = self.__dir_inspector(v)
+        if dir_check:
+            # 目录校验，不存在就创建目录，但不会创建文件
+            dir_dict = self.__search_dir(config_dict)
+            for k, v in dir_dict.items():
+                dir_dict[k] = self.__create_dir(v)
 
-        print("【{}】 config_dict: ".format(self.__get_current_time_string()),
-              json.dumps(config_dict, ensure_ascii=False, indent=4), "\n==========================================")
-        print("【{}】 dir_dict: ".format(self.__get_current_time_string()),
-              json.dumps(dir_dict, ensure_ascii=False, indent=4))
-        print("================ 加载参数配置完成 ================")
+            print("【{}】 config_dict: ".format(self.__get_current_time_string()),
+                  json.dumps(config_dict, ensure_ascii=False, indent=4), "\n==========================================")
+            print("【{}】 dir_dict: ".format(self.__get_current_time_string()),
+                  json.dumps(dir_dict, ensure_ascii=False, indent=4))
+            print("================ 加载参数配置完成 ================")
         return config_dict
 
     def __search_dir(self, target_dict: dict, search_str="_dir"):
         return {k: v for k, v in target_dict.items() if search_str in k}
 
-    def __dir_inspector(self, target_dir: str):
+    def __create_dir(self, target_dir: str):
         if not os.path.exists(target_dir):
             os.makedirs(target_dir)
             return "mkdir successfully"
@@ -176,6 +178,6 @@ if __name__ == "__main__":
     c = ConfigParser()
     # d = c.get_config(input_file="输入文件.csv", output_file="输出文件.json", sample_cnt=10, env="本地", version="基础",
     #                  subject="数学", grade="初中")
-    d = c.get_config(input_file="输入文件.csv", output_file="输出文件.json", sample_cnt=10, env="线上", version="基础",
-                     subject="数学", grade="初中")
+    # d = c.get_config(input_file="输入文件.csv", output_file="输出文件.json", sample_cnt=10, env="线上", version="基础",
+    #                  subject="数学", grade="初中")
     print("done.")

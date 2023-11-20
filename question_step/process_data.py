@@ -9,19 +9,24 @@ from utils import obj_to_dict
 from config import ConfigParser
 
 cp = ConfigParser()
-config = cp.get_config(env="本地")
+config = cp.get_config(env="本地", grade="高中")
 DATA_DIR = config["input_dir"]
 
 
 def split_dataset(
         # 初中数学
-        file_dir: str = os.path.join(DATA_DIR, "精美解析结果库_subject_2_grade_group_2.csv")
+        # file_dir: str = os.path.join(DATA_DIR, "精美解析结果库_subject_2_grade_group_2.csv")
+
+        # 高中数学
+        file_dir: str = os.path.join(DATA_DIR, "精美解析结果库_subject_2_grade_group_3.csv")
 ):
+    print("file_dir: ", file_dir)
+
     """将初中数学的全量数据划分为教研云，题拍拍以及其他三部分数据。"""
-    data = pd.read_csv(file_dir, low_memory=True)
-    data[data["source"] == 1].to_csv(os.path.join(DATA_DIR, "source1.csv"), index=False)
-    data[data["source"] == 2].to_csv(os.path.join(DATA_DIR, "source2.csv"), index=False)
-    data[data["source"] == 3].to_csv(os.path.join(DATA_DIR, "source3.csv"), index=False)
+    # data = pd.read_csv(file_dir, low_memory=True)
+    # data[data["source"] == 1].to_csv(os.path.join(DATA_DIR, "source1.csv"), index=False)
+    # data[data["source"] == 2].to_csv(os.path.join(DATA_DIR, "source2.csv"), index=False)
+    # data[data["source"] == 3].to_csv(os.path.join(DATA_DIR, "source3.csv"), index=False)
 
 
 def get_s1_kc(data: dict):
@@ -292,4 +297,5 @@ if __name__ == "__main__":
     # new_df = input_df[input_df['question_id'].isin(question_list)]
     # new_df.to_csv(os.path.join(DATA_DIR, "source3_sample_input.csv"), index=False)
 
+    split_dataset()
     print('done.')

@@ -18,7 +18,7 @@ from config import ConfigParser
 warnings.filterwarnings("ignore")
 cp = ConfigParser()
 config = cp.get_config(input_file="source3_sample_input.csv", output_file="source3_sample_basic.json", env="本地",
-                       sample_cnt=50)
+                       sample_cnt=50, dir_check=True)
 
 logger.add(config["log_file"])  ## 日志
 INPUT_FILE = config["input_file"]  ## 输入文件

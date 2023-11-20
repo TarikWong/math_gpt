@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 # @Time : 2023/10/19 6:19 下午
 # @Author : tuo.wang
-# @Version : 
-# @Function :
-# cat main.py
+# @Version : CoT版本（包含推理过程）
+# @Function : 知识点打标
 import concurrent.futures
 import json
 import re
@@ -14,20 +13,24 @@ from call_gpt import send_chat_request
 import kc_handler
 from process_data import *
 from utils import obj_to_dict
-from config import config_dict
+from config import ConfigParser
 
 warnings.filterwarnings("ignore")
-# config = config_dict["online"]
-config = config_dict["test-CoT"]
+cp = ConfigParser()
+config = cp.get_config(input_file="source3_sample_input.csv", output_file="source3_sample_cot.json", env="本地",
+                       sublevel_system_file="system-sublevel-style02.md",
+                       lastlevel_system_file="system-lastlevel-style02.md",
+                       sublevel_examples_list=["example-cot-sublevel-01.md", "example-cot-sublevel-02.md"],
+                       lastlevel_examples_list=["example-cot-lastlevel-01.md", "example-cot-lastlevel-02.md"],
+                       version="推理过程", sample_cnt=5)
 
-logger.add("{}{}.log".format(config["log_dir"], config["input_file_name"].split(".")[0]))  ## 日志文件目录
-INPUT_FILE = "{}{}".format(config["input_dir"], config["input_file_name"])  ## 输入文件
-OUT_SOLUTIONS = "{}{}_solutions.json".format(config["output_dir"], config["input_file_name"].split(".")[0])  ## 输出文件
-OUT_SUB = "{}{}_sub.json".format(config["output_dir"], config["input_file_name"].split(".")[0])
-OUT_RESULT = "{}_result.json".format(config["input_file_name"].split(".")[0])
+logger.add(config["log_file"])  ## 日志
+INPUT_FILE = config["input_file"]  ## 输入文件
+OUT_SOLUTIONS = "{}{}_solutions.json".format(config["output_dir"], config["output_file_name"].split(".")[0])
+OUT_SUB = "{}{}_sub.json".format(config["output_dir"], config["output_file_name"].split(".")[0])
+OUT_RESULT = config["output_file_name"]
 OUTPUT_DIR = config["output_dir"]
 SAMPLE_CNT = config["sample_cnt"]
-print("INPUT_FILE:", INPUT_FILE)
 
 
 class Level:
@@ -67,7 +70,8 @@ class Level:
             system=system,
             examples=examples,
             question=query,
-            engine="GPT4-FAST",
+            engine="GPT4",
+            # engine="GPT4-FAST",
         )
         try:
             kc_result = json.loads(response["response"])
@@ -117,8 +121,8 @@ class SubLevel(Level):
             system=system,
             examples=examples,
             question=query,
-            # engine="GPT4",
-            engine="GPT4-FAST",
+            engine="GPT4",
+            # engine="GPT4-FAST",
         )
         try:
             kc_result = json.loads(response["response"])
@@ -171,8 +175,8 @@ class LastLevel(Level):
             system=system,
             examples=examples,
             question=query,
-            # engine="GPT4",
-            engine="GPT4-FAST",
+            engine="GPT4",
+            # engine="GPT4-FAST",
         )
         try:
             kc_result = json.loads(response["response"])
@@ -248,19 +252,23 @@ class Service:
             data = self.data_processor.load_json()
 
         print("len(data): ", len(data))
+        # print(data)
         self.parallel_execution(data_list=data)
         # 最后结果写入json文件...
         to_json_file(file_name="{}{}".format(OUTPUT_DIR, self.data_processor.out_tmp_result), obj=data)
 
 
+def pretty_print(**args_dict):
+    for k, v in args_dict.items():
+        print("参数 {}:".format(k))
+        print("--------------------")
+        print(v)
+        print("--------------------\n")
+    print("================ main接收输入参数打印完成 ================")
+
+
 if __name__ == "__main__":
-    parameters = """INPUT_FILE: {}\nSAMPLE_CNT: {}\nOUTPUT_DIR: {}\nOUT_SUB: {}\nOUT_RESULT: {}""".format(INPUT_FILE,
-                                                                                                          SAMPLE_CNT,
-                                                                                                          OUTPUT_DIR,
-                                                                                                          OUT_SUB,
-                                                                                                          OUT_RESULT)
-    print(parameters)
-    print("####################\n")
+    pretty_print(INPUT_FILE=INPUT_FILE, SAMPLE_CNT=SAMPLE_CNT, OUTPUT_DIR=OUTPUT_DIR, OUT_RESULT=OUT_RESULT)
 
     server = Service(
         file_path=INPUT_FILE,

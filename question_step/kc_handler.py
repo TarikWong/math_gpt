@@ -11,7 +11,7 @@ from typing import *
 from config import ConfigParser
 
 cp = ConfigParser()
-config_dict = cp.get_config()
+config_dict = cp.get_config(env="本地")
 kc_dir = config_dict["kc_dir"]
 kc_file = config_dict["kc_file"]
 

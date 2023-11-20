@@ -6,10 +6,11 @@ from typing import *
 from dataclasses import dataclass
 from kc_handler import Knowledge
 from utils import obj_to_dict
-from config import config_dict
+from config import ConfigParser
 
-config = config_dict["online"]
-DATA_DIR = config["data_dir"]
+cp = ConfigParser()
+config = cp.get_config(env="本地")
+DATA_DIR = config["input_dir"]
 
 
 def split_dataset(
@@ -285,11 +286,10 @@ if __name__ == "__main__":
     # data.to_csv(os.path.join(DATA_DIR, "source2_sample{}.csv".format(str(sample_cnt))), index=False)
 
     # 根据测试数据question_id重新抽取原始数据
-    input_df = pd.read_csv("/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/source3.csv")
-    question_df = pd.read_excel(
-        "/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/tmp/source3_sample_eval_20231111.xlsx")
-    question_list = question_df['question_id'].tolist()
-    new_df = input_df[input_df['question_id'].isin(question_list)]
-    new_df.to_csv(os.path.join(DATA_DIR, "source3_sample_input.csv"), index=False)
+    # input_df = pd.read_csv("/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/source3.csv")
+    # question_df = pd.read_excel("/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/tmp/source3_sample_eval_20231111.xlsx")
+    # question_list = question_df['question_id'].tolist()
+    # new_df = input_df[input_df['question_id'].isin(question_list)]
+    # new_df.to_csv(os.path.join(DATA_DIR, "source3_sample_input.csv"), index=False)
 
     print('done.')

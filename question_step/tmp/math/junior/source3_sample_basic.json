@@ -1,0 +1,2992 @@
+[
+  {
+    "question_id": "shiti0712_80adb21dc030d2ced3909446396901a9",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，▱ABCD的周长为36，对角线AC，BD相交于点O．点E是CD的中点，BD=12，则△DOE的周长为$$\\underline{}$$．  \n<img alt=\"\" height=\"85\" src=\"https://static0.xesimg.com/ai-math-question/que_media/ceefe46c-54f1-447e-835b-8ae40a464026.png\" width=\"168\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "根据平行四边形的性质求解",
+            "detail": "根据平行四边形的性质，对边相等，对角线互相平分，得到OB=OD。"
+          },
+          "kc": {
+            "1": [
+              "平行四边形的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "根据中位线的性质求解",
+            "detail": "因为E点是CD的中点，所以OE是△BCD的中位线，根据中位线的性质，OE= $$ \frac{1}{2}$$ BC。"
+          },
+          "kc": {
+            "2": []
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "求解△DOE的周长",
+            "detail": "根据题目给出的平行四边形ABCD的周长为36，BD=12，可以求出BC=6，所以OE=3，OD=6，DE=6，所以△DOE的周长为15。"
+          },
+          "kc": {
+            "3": [
+              "平行四边形的周长与面积"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "作答",
+            "detail": "答：△DOE的周长为15。"
+          },
+          "kc": {
+            "4": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "平行四边形",
+      "几何图形",
+      "线段的基础"
+    ]
+  },
+  {
+    "question_id": "shiti0814ac97eb6c13710b2adb74c0fe84927900",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "将点A（﹣5，3）向右平移3个单位长度，那么平移后的对应点$$ {A}^{\\prime }$$的坐标为$$\\underline{}$$．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "理解平移规则",
+            "detail": "根据平移的规则，当一个点向右平移时，其横坐标会增加，而纵坐标不变。"
+          },
+          "kc": {
+            "1": [
+              "坐标系中的平移-点的平移",
+              "平移的定义与性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "计算平移后的坐标",
+            "detail": "点A的坐标为(-5,3)，向右平移3个单位长度后，横坐标变为$-5+3=-2$，纵坐标不变，所以平移后的对应点$A'$的坐标为(-2,3)。"
+          },
+          "kc": {
+            "2": [
+              "坐标系中的平移-点的平移",
+              "平移的定义与性质",
+              "点的坐标"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "平移",
+      "平面直角坐标系"
+    ]
+  },
+  {
+    "question_id": "shiti0724_436ae3eb32f079069e835f7dafa093f4",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "有一个数值转换器，流程如图所示．当输入$$ x$$值为64时，输出$$ y$$ 的值是（   ）\n<img alt=\"@@@5d781671-8512-4082-b3d1-1429442fe4ff\" height=\"207\" src=\"https://static0.xesimg.com/ai-math-question/que_media/90149e0d-e04b-4e1f-9b86-cd73d4d2a04d.png\" width=\"420\"/>\nA．2    B．4    C．$$ \\sqrt{2}$$    D．$$ \\sqrt[3]{2}$$\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "计算输入值的平方根",
+            "detail": "当输入$x$的值为64时，计算$\\sqrt{64}=8$，得到的结果是有理数。"
+          },
+          "kc": {
+            "1": [
+              "开平方",
+              "平方根的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "计算上一步结果的立方根",
+            "detail": "计算$\\sqrt[3]{8}=2$，得到的结果是有理数。"
+          },
+          "kc": {
+            "2": [
+              "开立方",
+              "立方根的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "计算上一步结果的平方根",
+            "detail": "计算$\\sqrt{2}$，得到的结果是无理数。"
+          },
+          "kc": {
+            "3": [
+              "无理数的定义",
+              "开平方",
+              "平方根的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "输出结果",
+            "detail": "因为$\\sqrt{2}$是无理数，所以输出，即$y=\\sqrt{2}$。"
+          },
+          "kc": {
+            "4": [
+              "无理数的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "选择正确选项",
+            "detail": "综上，所以选择C选项"
+          },
+          "kc": {
+            "5": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "平方根",
+      "立方根",
+      "实数",
+      "有理数"
+    ]
+  },
+  {
+    "question_id": "shiti0814_c083bf5e6baeee15e483a4f97cac0652",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，矩形ABCD的对角线相交于O，AB＝2，∠AOB＝60°，则对角线AC的长为$$\\underline{}$$．\n<img alt=\"@@@025ec6770c48423aa34baed175037a85\" height=\"93\" src=\"https://static0.xesimg.com/ai-math-question/que_media/bb7bc103-d35e-42e9-a250-dfbecf05641d.png\" width=\"123\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "根据矩形的性质",
+            "detail": "根据矩形的性质，我们知道OA=OB，AC=2OA"
+          },
+          "kc": {
+            "1": [
+              "矩形的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "确定三角形AOB的类型",
+            "detail": "由于∠AOB=60°，所以三角形AOB是等边三角形，因此OA=AB=2"
+          },
+          "kc": {
+            "2": [
+              "等边三角形的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "计算对角线AC的长度",
+            "detail": "由于AC=2OA，所以AC=2×2=4"
+          },
+          "kc": {
+            "3": [
+              "矩形的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "作答",
+            "detail": "故填4"
+          },
+          "kc": {
+            "4": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "矩形",
+      "等边三角形",
+      "角的基础"
+    ]
+  },
+  {
+    "question_id": "shiti0814_c03fe3caec77260e8bfaac6f3a15ec93",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "已知，如图，在菱形ABCD中，对角线AC、BD相交于点O，DE//AC，AE//BD．\n<img alt=\"@@@e80b7ae246a74d87be124fed1598463f\" height=\"152\" src=\"https://static0.xesimg.com/ai-math-question/que_media/ea462488-70c6-4f5f-8f66-10c92fcb15e8.png\" width=\"165\"/>\n(1)求证：四边形AODE是矩形：\n(2)若$$ AB=10$$，$$ \\angle BCD=120°$$，求四边形AODE的面积．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "证明四边形AODE是平行四边形",
+            "detail": "由于DE//AC，AE//BD，所以四边形AODE是平行四边形。"
+          },
+          "kc": {
+            "1": [
+              "平行四边形的定义",
+              "平行线的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "证明四边形AODE是矩形",
+            "detail": "在菱形ABCD中，AC⊥BD，所以∠AOD=90°，因此四边形AODE是矩形。"
+          },
+          "kc": {
+            "2": [
+              "菱形的性质",
+              "矩形的定义"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "菱形",
+      "平行四边形",
+      "矩形"
+    ]
+  },
+  {
+    "question_id": "shiti0814_5509a858497687616c795ab0eaeab09b",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "已知$$ △ABC≌△DEF$$，根据图中信息，得$$ x=$$（    ）\n<img alt=\"@@@163c912b74614cc7b4e356234893ec90\" height=\"163\" src=\"https://static0.xesimg.com/ai-math-question/que_media/116515f2-116d-4c44-8e80-a74d260164a0.png\" width=\"343\"/>\nA．15    B．18    C．20    D．25\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "计算角A的度数",
+            "detail": "在$\\triangle ABC$中，$\\angle B=50°$，$\\angle C=60°$，所以$\\angle A=180°-50°-60°=70°$。"
+          },
+          "kc": {
+            "1": [
+              "角的和差"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "利用全等三角形的性质",
+            "detail": "因为$\\triangle ABC \\cong \\triangle DEF$，所以$\\angle A$与$\\angle D$为对应角，且$BC$与$EF$为对应边。"
+          },
+          "kc": {
+            "2": [
+              "对应角",
+              "全等三角形的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "确定x的值",
+            "detail": "因为$BC=EF$，所以$x=20$。"
+          },
+          "kc": {
+            "3": [
+              "对应边"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "选择正确选项",
+            "detail": "综上，所以选择C选项。"
+          },
+          "kc": {
+            "4": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "全等三角形的基础",
+      "角的比较与运算"
+    ]
+  },
+  {
+    "question_id": "shiti08146c5a46f110765917fbe3e521b3b55750",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "下列说法正确的是（  ）\nA．﹣3πa$$^{2}$$b的系数是﹣3    B．$$ \\frac{1}{2}$$xy$$^{2}$$的次数是2\nC．﹣2x$$^{3}$$+3x$$^{2}$$﹣x的次数是6    D．a$$^{2}$$﹣2a﹣3的常数项是﹣3\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "判断选项A",
+            "detail": "根据系数的定义，-3πa$^{2}$b的系数是-3π，而不是-3，所以选项A是错误的。"
+          },
+          "kc": {
+            "1": [
+              "单项式的系数"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "判断选项B",
+            "detail": "根据次数的定义，$ \frac{1}{2}$xy$^{2}$的次数是3，而不是2，所以选项B是错误的。"
+          },
+          "kc": {
+            "2": [
+              "单项式的次数"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "判断选项C",
+            "detail": "根据次数的定义，-2x$^{3}$+3x$^{2}$-x的次数是3，而不是6，所以选项C是错误的。"
+          },
+          "kc": {
+            "3": [
+              "多项式的次数"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "判断选项D",
+            "detail": "根据常数项的定义，a$^{2}$-2a-3的常数项是-3，所以选项D是正确的。"
+          },
+          "kc": {
+            "4": [
+              "多项式的项"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "得出答案",
+            "detail": "所以，正确的选项是D。"
+          },
+          "kc": {
+            "5": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "单项式",
+      "多项式"
+    ]
+  },
+  {
+    "question_id": "shiti0829_666b2b2c365d77f6d1feacbbd630360c",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "下列各式表示y是x的反比例函数的是（ ）   A．xy=-2 B．y= -$$\\frac{1}{2x}   C．y= \\frac{x}{3}$$ D．y=-2x+1 ",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "判断选项A",
+            "detail": "对于选项A，$xy=-2$，既可以说$y$是$x$的反比例函数，也可以说$x$是$y$的反比例函数，故本选项错误"
+          },
+          "kc": {
+            "1": [
+              "反比例函数的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "判断选项B",
+            "detail": "对于选项B，$y=-\frac{1}{2x}$，这是反比例函数的形式，故本选项正确"
+          },
+          "kc": {
+            "2": [
+              "反比例函数的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "判断选项C",
+            "detail": "对于选项C，$y=\frac{x}{3}$，$y$是$x$的正比例函数，故本选项错误"
+          },
+          "kc": {
+            "3": [
+              "正比例函数的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "判断选项D",
+            "detail": "对于选项D，$y=-2x+1$，$y$是$x$的一次函数，故本选项错误"
+          },
+          "kc": {
+            "4": [
+              "一次函数的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "作答",
+            "detail": "综上所述，正确答案是选项B"
+          },
+          "kc": {
+            "5": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "反比例函数",
+      "一次函数",
+      "正比例函数"
+    ]
+  },
+  {
+    "question_id": "shiti0712_1c54da20ac9be65cb5d3434c39d8418a",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，菱形ABCD中，对角线AC、BD相交于点O，E为AD边中点，且AC=6，BD=8，则线段OE的长为（  ）\n<img alt=\"\" height=\"119\" src=\"https://static0.xesimg.com/ai-math-question/que_media/a3016cbf-d509-4735-8eb0-53a7933e1ac9.png\" width=\"179\"/>\nA．3    B．2.4    C．2.5    D．$$ \\sqrt{5}$$\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "确定菱形的对角线长度",
+            "detail": "菱形ABCD中，对角线AC=6，BD=8。"
+          },
+          "kc": {
+            "1": [
+              "菱形的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "计算菱形的半对角线长度",
+            "detail": "因为菱形的对角线互相垂直且相交于中点，所以OA=OC=\\frac{1}{2}AC=3，OB=OD=\\frac{1}{2}BD=4。"
+          },
+          "kc": {
+            "2": [
+              "菱形的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "利用勾股定理计算AD的长度",
+            "detail": "因为AO⊥BO，所以根据勾股定理，AD=\\sqrt{AO^2+BO^2}=\\sqrt{3^2+4^2}=5。"
+          },
+          "kc": {
+            "3": [
+              "勾股定理"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "计算线段OE的长度",
+            "detail": "因为E为AD边中点，所以OE=\\frac{1}{2}AD=\\frac{1}{2}*5=2.5。"
+          },
+          "kc": {
+            "4": []
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "选择正确选项",
+            "detail": "综上，所以选择C选项"
+          },
+          "kc": {
+            "5": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "菱形",
+      "勾股定理"
+    ]
+  },
+  {
+    "question_id": "shiti07125876c350c5ddcb5fd57d37907138149c",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "若不等式组 $$ \\left\\{\\begin{array}{c}x>a-3，\\\\ x\\le 15-3a\\end{array}\\right.$$ 无解，化简 $$ |3-a|-|a-4|$$ 得$$\\underline{}$$．  \n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "求解不等式组的解",
+            "detail": "由于不等式组 $\\left\\{\\begin{array}{c}x>a-3，\\\\ x\\le 15-3a\\end{array}\\right.$ 无解，因此我们有 $15-3a\\le a-3$"
+          },
+          "kc": {
+            "1": [
+              "一元一次不等式（组）的定义",
+              "解一元一次不等式（组）"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "求解不等式",
+            "detail": "解这个不等式，得到 $a\\ge 4.5$"
+          },
+          "kc": {
+            "2": [
+              "一元一次不等式（组）的定义",
+              "解一元一次不等式（组）"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "计算表达式的值",
+            "detail": "因此，$|3-a|-|a-4|$ 的值为 $a-3-a+4=1$"
+          },
+          "kc": {
+            "3": [
+              "绝对值的定义与性质"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "不等式",
+      "绝对值",
+      "一元一次不等式（组）"
+    ]
+  },
+  {
+    "question_id": "shiti0814ab87f03702583e0f5e2c0b0ed105ab34",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "下列各组数，不能作为直角三角形的三边长的是（     ）\nA．3，4，5    B．1，1，$$ \\sqrt{2}$$    C．2，3，4    D．6，8，10\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "使用勾股定理的逆定理验证选项A",
+            "detail": "根据勾股定理的逆定理，我们需要验证两较小边的平方和是否等于最长边的平方。对于选项A，我们有$3^{2} + 4^{2} = 25 = 5^{2}$，因此，这组数能构成直角三角形，所以选项A是错误的。"
+          },
+          "kc": {
+            "1": [
+              "勾股定理的逆定理"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "使用勾股定理的逆定理验证选项B",
+            "detail": "对于选项B，我们有$1^{2} + 1^{2} = 2 = (\\sqrt{2})^{2}$，因此，这组数能构成直角三角形，所以选项B是错误的。"
+          },
+          "kc": {
+            "2": [
+              "勾股定理的逆定理"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "使用勾股定理的逆定理验证选项C",
+            "detail": "对于选项C，我们有$2^{2} + 3^{2} = 13 \\neq 4^{2}$，因此，这组数不能构成直角三角形，所以选项C是正确的。"
+          },
+          "kc": {
+            "3": [
+              "勾股定理的逆定理"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "使用勾股定理的逆定理验证选项D",
+            "detail": "对于选项D，我们有$6^{2} + 8^{2} = 100 = 10^{2}$，因此，这组数能构成直角三角形，所以选项D是错误的。"
+          },
+          "kc": {
+            "4": [
+              "勾股定理的逆定理"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "得出结论",
+            "detail": "因此，不能作为直角三角形的三边长的是选项C。"
+          },
+          "kc": {
+            "5": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "勾股定理",
+      "直角三角形"
+    ]
+  },
+  {
+    "question_id": "shiti0814_700f2884d687419d41598ed9de5a6794",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，已知数轴上点A表示的数为6，B是数轴上一点，且AB＝10．动点P从点O出发，以每秒6个单位长度的速度沿数轴向右匀速运动，设运动时间为t（t＞0）秒．\n（1）写出数轴上点B表示的数$$\\underline{}$$ $$\\underline{}$$ $$\\underline{}$$；当t＝3时，OP＝$$\\underline{}$$ $$\\underline{}$$ $$\\underline{}$$\n（2）动点R从点B出发，以每秒8个单位长度的速度沿数轴向右匀速运动，若点P，R同时出发，问点R运动多少秒时追上点P？\n（3）动点R从点B出发，以每秒8个单位长度的速度沿数轴向右匀速运动，若点P，R同时出发，问点R运动多少秒时PR相距2个单位长度？\n<img alt=\"@@@9a247605bdca4490a74e98b7d99092bd\" height=\"33\" src=\"https://static0.xesimg.com/ai-math-question/que_media/5797ef34-9856-4b27-8edb-e15e55945418.png\" width=\"252\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "3",
+          "solution": {
+            "step": "1",
+            "title": "设立方程",
+            "detail": "设点R运动x秒时，PR=2。分两种情况：一种情况是当点R在点P的左侧时，有8x=4+6x-2；另一种情况是当点R在点P的右侧时，有8x=4+6x+2。"
+          },
+          "kc": {
+            "1": [
+              "数轴的定义",
+              "用数轴上的点表示有理数"
+            ]
+          }
+        },
+        {
+          "question": "3",
+          "solution": {
+            "step": "2",
+            "title": "解方程",
+            "detail": "解方程8x=4+6x-2，得到x=1；解方程8x=4+6x+2，得到x=3。所以，点R运动1秒时，PR=2，或者点R运动3秒时，PR=2。"
+          },
+          "kc": {
+            "2": [
+              "一元一次方程的定义",
+              "等式的性质"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "数轴",
+      "一元一次方程",
+      "正数和负数"
+    ]
+  },
+  {
+    "question_id": "shiti0712_d48b9049b0b447069fb97fc49271d608",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "为备战第19届亚运会，甲、乙两名运动员进行射击训练．在相同的条件下，两人各射击10次，成绩如图所示，则运动员________的成绩更加稳定．\n<img alt=\"@@@e5ab3400-cbd8-4de7-bba4-e5824746697e\" height=\"157\" src=\"https://static0.xesimg.com/ai-math-question/que_media/23d2fe32-f800-40f2-9202-73594d88a414.png\" width=\"553\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "计算甲、乙两人的平均成绩",
+            "detail": "甲的平均成绩为：$\\bar{x}_{甲}=\\frac{6+10+8+9+8+7+8+10+7+7}{10}=8$，乙的平均成绩为：$\\bar{x}_{乙}=\\frac{7+10+7+7+9+8+7+9+9+7}{10}=8$"
+          },
+          "kc": {
+            "1": [
+              "平均数"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "计算甲、乙两人的成绩方差",
+            "detail": "甲成绩的方差为：$s_{甲}=\\frac{1}{10}\\times [(6-8)^{2}+(10-8)^{2}+\\dots +(7-8)^{2}+(7-8)^{2}]=1.6$，乙成绩的方差为：$s_{乙}=\\frac{1}{10}\\times [(7-8)^{2}+(10-8)^{2}+\\dots +(9-8)^{2}+(7-8)^{2}]=1.2$"
+          },
+          "kc": {
+            "2": [
+              "方差"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "比较甲、乙两人的成绩方差",
+            "detail": "由$s_{甲}>s_{乙}$可知乙的成绩更加稳定。故答案为：乙"
+          },
+          "kc": {
+            "3": [
+              "方差"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "数据的分析"
+    ]
+  },
+  {
+    "question_id": "shiti0829_50c63a9df290d92db3f3c67e1ace48dc",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "下列调查中,适宜采用普查方式的是( )\nA.调查市场上酸奶的质量情况\nB.调查我市中小学生的视力情况\nC.调查某品牌圆珠笔芯的使用寿命\nD.调查乘坐飞机的旅客是否携带危禁物品",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "分析各选项是否适合普查",
+            "detail": "选项A、B、C的调查对象数量较多，且调查具有破坏性，适合抽查；选项D事关重大，必须进行全面调查，适合普查。"
+          },
+          "kc": {
+            "1": [
+              "全面调查与抽样调查"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "选择正确答案",
+            "detail": "因此，选项D是正确答案。"
+          },
+          "kc": {
+            "2": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "统计调查"
+    ]
+  },
+  {
+    "question_id": "shiti0814_0ef618e746430a31188665c9da90a405",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "下列图形中，有且只有 2 条对称轴的是（    ）\nA．<img alt=\"@@@1c2d0f0327e641558a57b199900d4973\" height=\"50\" src=\"https://static0.xesimg.com/ai-math-question/que_media/b967c857-f934-4af0-ae91-ec173f454718.png\" width=\"88\"/>    B．<img alt=\"@@@a15e253f6f7f404589d46bc843aa2db7\" height=\"43\" src=\"https://static0.xesimg.com/ai-math-question/que_media/147f80bf-bedf-4565-851e-b1031e3fe9dc.png\" width=\"98\"/>    C．<img alt=\"@@@c8dbf20877974a33894ae8b336081960\" height=\"48\" src=\"https://static0.xesimg.com/ai-math-question/que_media/07927758-d3e8-4695-87f6-12ceab3c37a8.png\" width=\"50\"/>    D．<img alt=\"@@@d3690a30d6c44931ba703b9f68daea02\" height=\"54\" src=\"https://static0.xesimg.com/ai-math-question/que_media/95d634b1-0890-4ef1-8cd6-33059a4ec5b3.png\" width=\"56\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "判断选项A",
+            "detail": "矩形有两条对称轴，符合题意。"
+          },
+          "kc": {
+            "1": [
+              "矩形的性质",
+              "轴对称的定义与性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "判断选项B",
+            "detail": "平行四边形不是轴对称图形，没有对称轴，不符合题意。"
+          },
+          "kc": {
+            "2": [
+              "平行四边形的性质",
+              "轴对称的定义与性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "判断选项C",
+            "detail": "正方形有4条对称轴，不符合题意。"
+          },
+          "kc": {
+            "3": [
+              "正方形的性质",
+              "轴对称的定义与性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "判断选项D",
+            "detail": "圆有无数条对称轴，不符合题意。"
+          },
+          "kc": {
+            "4": [
+              "圆的定义",
+              "轴对称的定义与性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "选择正确选项",
+            "detail": "综上，所以选择A选项。"
+          },
+          "kc": {
+            "5": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "矩形",
+      "平行四边形",
+      "正方形",
+      "圆的相关概念",
+      "轴对称"
+    ]
+  },
+  {
+    "question_id": "shiti071237c4825344c99beef084c2d7e42c2926",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "为支持某地新冠肺炎疫情的防控工作，某医院派出甲、乙等五名医护人员，分别派往$$ A$$，$$ B$$，$$ C$$三个区，每区至少一人，若甲、乙前往$$ A$$区或$$ C$$区，且甲、乙恰好分在同一个区，则不同的安排方法有（  ）\nA．12种    B．24种    C．30种    D．48种\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "确定分组方式",
+            "detail": "根据题目描述，甲、乙必须在同一区，且每个区至少有一人。因此，我们可以将甲、乙和另一人共三人分为一组，剩下的两人一人一组。或者，将甲、乙一组，另外三人一组，两人一组一人。"
+          },
+          "kc": {
+            "1": []
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "计算分组方式的数量",
+            "detail": "对于第一种分组方式，我们可以选择另一人的方式有3种，然后将三个区分配给三组的方式有$3!$种。因此，第一种分组方式的数量为$3\times 3!=18$。对于第二种分组方式，我们可以选择三人一组的方式有$3$种，然后将三个区分配给三组的方式有$3!$种。因此，第二种分组方式的数量为$3\times 3!=18$。所以，总的安排方法有$18+18=36$种。"
+          },
+          "kc": {
+            "2": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "概率"
+    ]
+  },
+  {
+    "question_id": "shiti0712eb8d75aa3c9b3df6a88ca916844dd6c1",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "﹣3的绝对值是（  ）\nA．﹣3    B．3    C．- $$ \\frac{1}{3}$$    D．$$ \\frac{1}{3}$$\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "列出绝对值的表达式",
+            "detail": "根据题目，我们需要求的是$|-3|$的值。"
+          },
+          "kc": {
+            "1": [
+              "绝对值的定义与性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "根据绝对值定义求解",
+            "detail": "绝对值的定义是一个数距离数轴原点的距离，所以$|-3|$的值为3。"
+          },
+          "kc": {
+            "2": [
+              "绝对值的定义与性质"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "绝对值"
+    ]
+  },
+  {
+    "question_id": "shiti07242c6e917bbf029191d71b2f04d5cb03dc",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "一个扇形的圆心角为，半径为，则此扇形的面积为$$\\underline{          }$$．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "应用扇形面积公式",
+            "detail": "根据扇形面积的公式，面积等于半径的平方乘以圆心角，再除以2，即$\\frac{1}{2}r^2\\theta$。"
+          },
+          "kc": {
+            "1": [
+              "扇形的面积公式"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "代入已知数值",
+            "detail": "将已知的半径$r$和圆心角$\\theta$代入公式，得到扇形的面积。"
+          },
+          "kc": {
+            "2": [
+              "扇形的面积公式"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "弧长及扇形的面积"
+    ]
+  },
+  {
+    "question_id": "shiti0712_e814431583b9381b257f8b7f4ab8beff",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "某正方体的每个面上都有一个汉字，如图是它的一种展开图，那么在原正方体中，与“现”字所在面相对的面上的汉字是（  ）\n<img alt=\"@@@80928e1c-ab41-4133-bdf0-1bc582fcdec6\" height=\"143\" src=\"https://static0.xesimg.com/ai-math-question/que_media/0354889b-0c48-42d6-83f1-17fa8986bb89.png\" width=\"183\"/>  \nA．中    B．国    C．式    D．化\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "理解正方体展开图",
+            "detail": "根据正方体的表面展开图，我们可以看到“现”字所在的面。"
+          },
+          "kc": {
+            "1": [
+              "立体图形展开图"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "找到相对面",
+            "detail": "根据正方体的表面展开图找相对面的方法：一线隔一个，即可找到与“现”字所在面相对的面上的汉字是“化”。"
+          },
+          "kc": {
+            "2": [
+              "立体图形展开图"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "选择正确选项",
+            "detail": "综上，所以选择D选项"
+          },
+          "kc": {
+            "3": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "正方形",
+      "几何图形"
+    ]
+  },
+  {
+    "question_id": "shiti0724f82df716b970aab4b71da0550b29bf57",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "下列二次根式中属于最简二次根式的是(  )\nA．$$ \\sqrt{5}$$    B．$$ \\sqrt{8}$$    C．$$ \\sqrt{\\frac{1}{2}}$$    D．$$ \\sqrt{0.3}$$\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "判断选项A",
+            "detail": "选项A是$$\\sqrt{5}$$，5没有平方因数，所以$$\\sqrt{5}$$是最简二次根式。"
+          },
+          "kc": {
+            "1": [
+              "最简二次根式"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "判断选项B",
+            "detail": "选项B是$$\\sqrt{8}$$，8有平方因数4，所以$$\\sqrt{8}$$不是最简二次根式。"
+          },
+          "kc": {
+            "2": [
+              "最简二次根式"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "判断选项C",
+            "detail": "选项C是$$\\sqrt{\\frac{1}{2}}$$，可以化简为$$\\frac{\\sqrt{1}}{\\sqrt{2}}$$，即$$\\frac{1}{\\sqrt{2}}$$，不是最简二次根式。"
+          },
+          "kc": {
+            "3": [
+              "最简二次根式"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "判断选项D",
+            "detail": "选项D是$$\\sqrt{0.3}$$，0.3没有平方因数，所以$$\\sqrt{0.3}$$是最简二次根式。"
+          },
+          "kc": {
+            "4": [
+              "最简二次根式"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "得出结论",
+            "detail": "所以，选项A和选项D是最简二次根式。"
+          },
+          "kc": {
+            "5": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "平方根",
+      "二次根式"
+    ]
+  },
+  {
+    "question_id": "shiti07125ce7d0d00e76d55ba63d16105f6074d8",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "把锐角△ABC的各边都扩大2倍得△A′B′C′,那么∠A、∠A′的余弦值关系是（     ）\nA．cosA=cosA′    B．cosA=2cosA′    C．2cosA=cosA′    D．不确定的\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "理解三角函数的性质",
+            "detail": "根据三角函数的性质，当一个三角形的各边长度都扩大相同倍数时，其角度不变。因此，角度A和角度A'的余弦值也不会改变。"
+          },
+          "kc": {
+            "1": [
+              "位似图形的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "选择正确的选项",
+            "detail": "因此，cosA=cosA'，所以选择A选项。"
+          },
+          "kc": {
+            "2": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "位似",
+      "余角和补角"
+    ]
+  },
+  {
+    "question_id": "shiti0814_827d6aebebd5d8a2ee640e4b03501bb1",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，一个多边形纸片按图示的剪法剪去一个内角后，得到一个内角和为2340°的新多边形，则原多边形的边数为$$\\underline{}$$．\n<img alt=\"@@@6eea9d83db9c4443a42fd305ae01e5d4\" height=\"81\" src=\"https://static0.xesimg.com/ai-math-question/que_media/7562bd6d-c91e-4379-b506-9cd7315826f4.png\" width=\"126\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "应用多边形内角和公式",
+            "detail": "设新多边形是n边形，由多边形内角和公式得：$(n-2)180°=2340°$"
+          },
+          "kc": {
+            "1": [
+              "多边形的内角和"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "求解n的值",
+            "detail": "解这个方程，得到$n=15$"
+          },
+          "kc": {
+            "2": [
+              "多边形的内角和"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "求解原多边形的边数",
+            "detail": "原多边形是$15-1=14$"
+          },
+          "kc": {
+            "3": []
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "作答",
+            "detail": "故答案为：14"
+          },
+          "kc": {
+            "4": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "多边形及其内角和"
+    ]
+  },
+  {
+    "question_id": "shiti08144baf07b9fa475d8a71896f73e1810f49",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "分式$$ \\frac{1}{{x}^{2}-{y}^{2}}$$，$$ \\frac{1}{{x}^{2}+xy}$$的最简公分母是（    ）\nA．$$ {x}^{2}-{y}^{2}$$    B．$$ {x}^{2}+xy$$\nC．$$ \\left(x+y\\right)\\left(x-y\\right)$$    D．$$ x\\left(x+y\\right)\\left(x-y\\right)$$\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "分解分母",
+            "detail": "首先，我们将两个分式的分母进行因式分解，得到$\frac{1}{{x}^{2}-{y}^{2}}=\frac{1}{(x+y)(x-y)}$，$\frac{1}{{x}^{2}+xy}=\frac{1}{x(x+y)}$"
+          },
+          "kc": {
+            "1": [
+              "因式分解的定义",
+              "提公因式法"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "求最简公分母",
+            "detail": "然后，我们找出两个分式的最简公分母，即$x(x+y)(x-y)$"
+          },
+          "kc": {
+            "2": [
+              "最简公分母"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "选择答案",
+            "detail": "因此，选项D是正确的"
+          },
+          "kc": {
+            "3": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "因式分解",
+      "分式"
+    ]
+  },
+  {
+    "question_id": "shiti081455b492b0e4b4c3bcef3cdcea6c5e847e",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "一次函数y=kx+b图象经过（2，3）和（1，1）两点．\n(1)求这个一次函数的解析式；\n(2)当x=3时，求y的值．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "将点代入一次函数的解析式",
+            "detail": "将点（2，3）和（1，1）代入一次函数的解析式y=kx+b，得到方程组：$\\left\\{\\begin{array}{c}3=2k+b\\\\ 1=k+b\\end{array}\\right.$"
+          },
+          "kc": {
+            "1": [
+              "二元一次方程组的定义",
+              "一次函数的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "解方程组求得k和b的值",
+            "detail": "解这个方程组，得到$\\left\\{\\begin{array}{c}k=2\\\\ b=-1\\end{array}\\right.$"
+          },
+          "kc": {
+            "2": [
+              "解二元一次方程组"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "写出一次函数的解析式",
+            "detail": "因此，一次函数的解析式为：$y=2x-1$"
+          },
+          "kc": {
+            "3": [
+              "一次函数的定义"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "一次函数",
+      "二元一次方程组"
+    ]
+  },
+  {
+    "question_id": "shiti08146023bc7a589a0c635a6053d2ac9c20dc",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "调查青铜峡市全民健身情况，这种调查适合用$$\\underline{}$$（填“普查”或“抽样调查”）\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "理解调查方式的选择",
+            "detail": "普查和抽样调查是两种常见的调查方式。普查是对全部对象进行调查，结果准确，但耗费的人力、物力和时间较多。抽样调查是从全部对象中抽取一部分进行调查，结果近似，但节省了人力、物力和时间。"
+          },
+          "kc": {
+            "1": [
+              "全面调查与抽样调查"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "选择合适的调查方式",
+            "detail": "由于调查青铜峡市全民健身情况的工作量较大，因此选择抽样调查的方式进行。"
+          },
+          "kc": {
+            "2": [
+              "全面调查与抽样调查"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "统计调查"
+    ]
+  },
+  {
+    "question_id": "shiti0724e06af086bb5b75adce9047763fc0e608",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "单项式$$ -3\\pi {x}^{2}$$的系数是$$\\underline{}$$．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "理解单项式的系数的概念",
+            "detail": "单项式的系数是单项式中未知数前的数。在单项式$-3\\pi x^{2}$中，$-3\\pi$是未知数$x$的系数。"
+          },
+          "kc": {
+            "1": [
+              "单项式的系数"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "确定单项式的系数",
+            "detail": "因此，单项式$-3\\pi x^{2}$的系数是$-3\\pi$。"
+          },
+          "kc": {
+            "2": [
+              "单项式的系数"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "单项式"
+    ]
+  },
+  {
+    "question_id": "shiti0829_42858788fe40180ffc3d159f09165f30",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "若a$$^{3}＝－125，那么a＝\\underline{        }；若（－2）^{x}＝－8，则x＝\\underline{        }$$．",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "求解a的值",
+            "detail": "由于$(-5)^{3}=-125$，所以$a=-5$"
+          },
+          "kc": {
+            "1": [
+              "开立方"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "作答",
+            "detail": "答：$a=-5$"
+          },
+          "kc": {
+            "2": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "立方根",
+      "幂的运算"
+    ]
+  },
+  {
+    "question_id": "shiti0814_50ae014ecfe1b5df2bb9254bdc19313b",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，∠ABC的平分线BE交AC于点E，点D在AB上，且DB＝DE．\n<img alt=\"@@@eec11a4e-9533-4002-a81e-359cacae8402\" height=\"173\" src=\"https://static0.xesimg.com/ai-math-question/que_media/b616e28d-31c5-4733-a920-2b50bdc3e3a9.png\" width=\"126\"/>\n(1)求证：DE$$ {∥}$$BC；\n(2)若∠A＝36°，AB＝AC，求∠BEC的度数．\n",
+    "sub_question": [
+      [
+        {
+          "question": "2",
+          "solution": {
+            "step": "1",
+            "title": "利用等腰三角形的性质",
+            "detail": "由于∠A＝36°，且AB＝AC，所以∠ABC=∠C=\\frac{1}{2}(180°-∠A)=\\frac{1}{2}(180°-36°)=72°。"
+          },
+          "kc": {
+            "1": [
+              "等腰三角形的性质"
+            ]
+          }
+        },
+        {
+          "question": "2",
+          "solution": {
+            "step": "2",
+            "title": "求出∠CBE的度数",
+            "detail": "因为BE是∠ABC的平分线，所以∠ABE=∠CBE=36°。"
+          },
+          "kc": {
+            "2": []
+          }
+        },
+        {
+          "question": "2",
+          "solution": {
+            "step": "3",
+            "title": "利用三角形内角和定理求出∠BEC",
+            "detail": "根据三角形内角和定理，∠BEC=180°-∠CBE-∠C=72°。"
+          },
+          "kc": {
+            "3": [
+              "角的和差"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "角平分线",
+      "等腰三角形",
+      "角的比较与运算",
+      "平行线"
+    ]
+  },
+  {
+    "question_id": "shiti0814ef96e41543b96272c407e82c3ba332b3",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "多边形的内角和不可能是（    ）\nA．$$ 360°$$    B．$$ 900°$$    C．$$ 1260°$$    D．$$ 1750°$$\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "理解多边形内角和的规律",
+            "detail": "多边形的内角和可以表示成$(n-2) \\cdot 180°$，这意味着多边形的内角和是$180°$的倍数。"
+          },
+          "kc": {
+            "1": [
+              "多边形的内角和"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "检查选项A",
+            "detail": "$360°$除以$180°$等于$2$，是$180°$的倍数，所以可能是多边形的内角和。"
+          },
+          "kc": {
+            "2": [
+              "多边形的内角和"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "检查选项B",
+            "detail": "$900°$除以$180°$等于$5$，是$180°$的倍数，所以可能是多边形的内角和。"
+          },
+          "kc": {
+            "3": [
+              "多边形的内角和"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "检查选项C",
+            "detail": "$1260°$除以$180°$等于$7$，是$180°$的倍数，所以可能是多边形的内角和。"
+          },
+          "kc": {
+            "4": [
+              "多边形的内角和"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "检查选项D",
+            "detail": "$1750°$不是$180°$的倍数，所以不可能是多边形的内角和。"
+          },
+          "kc": {
+            "5": [
+              "多边形的内角和"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "6",
+            "title": "得出答案",
+            "detail": "因此，答案是选项D。"
+          },
+          "kc": {
+            "6": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "多边形及其内角和"
+    ]
+  },
+  {
+    "question_id": "shiti0724_4a0c7accda411584c3ce10758276c69f",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，已知AD∥BC，AB⊥BC，AB=3．点E为射线 BC上一个动点，连接AE，将△ABE沿AE折叠，点B落在点B′处，过点B′作AD的垂线，分别交AD，BC于点M，N．当点B′为线段MN的三等分点时，BE的长为$$\\underline{}$$ ．\n<img alt=\"@@@d05c36c2-46eb-4ba7-97ac-b34208f12953\" height=\"189\" src=\"https://static0.xesimg.com/ai-math-question/que_media/8c46d1bf-a9b0-4a38-a43f-614d26a34613.png\" width=\"247\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "根据题意分析图形",
+            "detail": "根据题意，我们知道四边形ABNM是矩形，所以AB=MN=3，AM=BN。根据折叠的性质，我们有AB=AB'，BE=B'E。"
+          },
+          "kc": {
+            "1": [
+              "垂直的定义",
+              "矩形的性质",
+              "矩形的定义",
+              "平行线的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "当MB'=1，B'N=2时，求解BE的长度",
+            "detail": "在右角三角形AM'B'中，由勾股定理得：AM=\\sqrt{3^2-1^2}=2\\sqrt{2}。设BE=B'E=x，在右角三角形EN'B'中，由勾股定理得：x^2=2^2+(2\\sqrt{2}-x)^2，解得x=\\frac{3\\sqrt{2}}{2}"
+          },
+          "kc": {
+            "2": [
+              "勾股定理"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "当MB'=2，B'N=1时，求解BE的长度",
+            "detail": "在右角三角形AM'B'中，由勾股定理得：AM=\\sqrt{3^2-2^2}=\\sqrt{5}。设BE=B'E=x，在右角三角形EN'B'中，由勾股定理得：x^2=1^2+(\\sqrt{5}-x)^2，解得x=\\frac{3\\sqrt{5}}{5}"
+          },
+          "kc": {
+            "3": [
+              "勾股定理"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "作答",
+            "detail": "所以，BE的长度为\\frac{3\\sqrt{2}}{2}或\\frac{3\\sqrt{5}}{5}"
+          },
+          "kc": {
+            "4": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "矩形",
+      "勾股定理",
+      "平行线",
+      "垂线"
+    ]
+  },
+  {
+    "question_id": "shiti0712221d7adcf79d9b0a95eb9196c7626a3c",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "甲、乙、丙、丁四名同学进行体温测量，他们5天的平均体温都是36.7度，方差分别是$$ {s}_{甲}^{2}=0.4，{s}_{乙}^{2}=0.6$$，$$ {s}_{丙}^{2}=0.2，{s}_{丁}^{2}=0.3$$，则体温最稳定的是（  ）\nA．甲    B．乙    C．丙    D．丁\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "理解方差的含义",
+            "detail": "方差是衡量数据波动性的一个重要指标，方差越大，数据的波动性越大；方差越小，数据的稳定性越好。"
+          },
+          "kc": {
+            "1": [
+              "方差"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "比较四个同学的体温方差",
+            "detail": "根据题目给出的四个同学的体温方差，我们可以看出，${s}_{丙}^{2}=0.2$是最小的，因此，丙同学的体温最稳定。"
+          },
+          "kc": {
+            "2": [
+              "方差"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "数据的分析"
+    ]
+  },
+  {
+    "question_id": "shiti0829_bc83c836299387d6e1313a67d9c31451",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "已知a-b=-3,c+d=2,则(b+c)-(a-d)=$$\\underline{     }$$.",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "将表达式进行整理",
+            "detail": "原式可以整理为$b+c-a+d$"
+          },
+          "kc": {
+            "1": [
+              "有理数的加法"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "利用已知条件进行替换",
+            "detail": "根据已知条件，$a-b=-3$，$c+d=2$，所以原式可以替换为$-(a-b)+(c+d)$"
+          },
+          "kc": {
+            "2": [
+              "有理数的加法"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "进行计算",
+            "detail": "将已知条件代入，得到$-(-3)+2=5$"
+          },
+          "kc": {
+            "3": [
+              "有理数的加法"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "作答",
+            "detail": "答：$(b+c)-(a-d)=5$"
+          },
+          "kc": {
+            "4": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "有理数的运算"
+    ]
+  },
+  {
+    "question_id": "shiti0814fe2ef28d16cf4224e7999341cd5cadb4",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "已知$$ \\left\\{\\begin{array}{c}x=2\\\\ y=1\\end{array}\\right. $$是二元一次方程组$$ \\left\\{\\begin{array}{c}mx+ny=8\\\\ nx{-}my=1\\end{array}\\right. $$的解，求2m-n的算术平方根．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "将已知解代入方程组",
+            "detail": "已知$x=2$，$y=1$是二元一次方程组$mx+ny=8$，$nx-my=1$的解，代入得到新的方程组$2m+n=8$，$2n-m=1$"
+          },
+          "kc": {
+            "1": [
+              "二元一次方程组的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "解新的方程组",
+            "detail": "解这个新的方程组，得到$m=3$，$n=2$"
+          },
+          "kc": {
+            "2": [
+              "二元一次方程组的定义",
+              "解二元一次方程组"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "求2m-n的算术平方根",
+            "detail": "将$m=3$，$n=2$代入$2m-n$，得到$2*3-2=4$，其算术平方根为$\\sqrt{4}=2$"
+          },
+          "kc": {
+            "3": [
+              "解二元一次方程组"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "二元一次方程组"
+    ]
+  },
+  {
+    "question_id": "shiti08141bba810ece981aaff6320677c3de4d6b",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "解二元一次方程组：$$ \\{\\begin{array}{c}3x-y=6\\\\ x+y=-2\\end{array}$$．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "使用加减消元法",
+            "detail": "将两个方程相加，得到新的方程$4x=4$"
+          },
+          "kc": {
+            "1": [
+              "解二元一次方程组"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "求解x",
+            "detail": "解这个方程，得到$x=1$"
+          },
+          "kc": {
+            "2": [
+              "解二元一次方程组"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "求解y",
+            "detail": "将$x=1$代入原方程$x+y=-2$，得到$y=-3$"
+          },
+          "kc": {
+            "3": [
+              "解二元一次方程组"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "得出解",
+            "detail": "因此，方程组的解为$x=1$，$y=-3$"
+          },
+          "kc": {
+            "4": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "二元一次方程组"
+    ]
+  },
+  {
+    "question_id": "shiti0829_89a04ab4a063981a3418af63606dd962",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "已知函数y=(k-1)xk$$^{2}$$为正比例函数，则k的值为（ ）A．k≠±1B．k=±1C．k=-1D．k=1 ",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "理解正比例函数的定义",
+            "detail": "正比例函数的定义是：如果函数$y=kx$中的$k$为常数，那么函数$y=kx$就是正比例函数。"
+          },
+          "kc": {
+            "1": [
+              "正比例函数的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "比较给定函数和正比例函数",
+            "detail": "比较给定的函数$y=(k-1)xk^{2}$和正比例函数$y=kx$，我们可以看出，当$k=-1$时，函数$y=(k-1)xk^{2}$可以化简为正比例函数的形式。"
+          },
+          "kc": {
+            "2": [
+              "正比例函数的定义",
+              "函数解析式的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "选择正确的选项",
+            "detail": "因此，选项C：$k=-1$是正确的。"
+          },
+          "kc": {
+            "3": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "正比例函数",
+      "函数的基础"
+    ]
+  },
+  {
+    "question_id": "shiti0712_a1f4765ba2f28f74f8fdba4011494739",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "甲、乙两名同学5次数学成绩如图，他们成绩的方差$$ {s}_{\\mathrm{甲}}^{2}$$和$$ {s}_{\\mathrm{乙}}^{2}$$的大小关系是（    ）\n<img alt=\"@@@9f5cc03b-f692-40fe-b84a-06de6e72ed94\" height=\"157\" src=\"https://static0.xesimg.com/ai-math-question/que_media/ad18c6ec-10c8-411c-bbe7-63b00e5483c1.png\" width=\"266\"/>  \nA．$$ {s}_{\\mathrm{甲}}^{2}>{s}_{\\mathrm{乙}}^{2}$$    B．$$ {s}_{\\mathrm{甲}}^{2}={s}_{\\mathrm{乙}}^{2}$$    C．$$ {s}_{\\mathrm{甲}}^{2}<{s}_{\\mathrm{乙}}^{2}$$    D．无法确定\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "观察统计图",
+            "detail": "通过观察统计图，我们可以看到甲的成绩波动较大，而乙的成绩波动较小。"
+          },
+          "kc": {
+            "1": [
+              "统计图的选择"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "理解方差的含义",
+            "detail": "方差是用来衡量数据的离散程度的，也就是数据的波动程度。波动大的数据，其方差就大。"
+          },
+          "kc": {
+            "2": [
+              "方差"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "确定方差的大小关系",
+            "detail": "因为甲的成绩波动较大，所以${s}_{\\mathrm{甲}}^{2}>{s}_{\\mathrm{乙}}^{2}$。"
+          },
+          "kc": {
+            "3": [
+              "方差"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "选择正确选项",
+            "detail": "综上，所以选择A选项"
+          },
+          "kc": {
+            "4": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "数据的分析",
+      "统计图"
+    ]
+  },
+  {
+    "question_id": "shiti0712a72287896f7bf9a2403dc09b793c32f2",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "已知实数x，y，z满足$$ \\left\\{\\begin{array}{c}x+y+z=7\\\\ 4x+y-2z=2\\end{array}\\right.$$，则代数式3(x﹣z)+1的值是(  )\nA．﹣2    B．﹣4    C．﹣5    D．﹣6\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "将第二个方程变形",
+            "detail": "将第二个方程$4x+y-2z=2$变形为$y=2-4x+2z$"
+          },
+          "kc": {
+            "1": [
+              "二元一次方程组的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "将变形后的第二个方程代入第一个方程",
+            "detail": "将$y=2-4x+2z$代入第一个方程$x+y+z=7$，得到$x+(2-4x+2z)+z=7$，化简得到$x=2$"
+          },
+          "kc": {
+            "2": [
+              "解二元一次方程组"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "将$x=2$代入第二个方程求解$z$",
+            "detail": "将$x=2$代入第二个方程$4x+y-2z=2$，得到$y=2z$"
+          },
+          "kc": {
+            "3": [
+              "解二元一次方程组"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "将$x=2$和$y=2z$代入第一个方程求解$z$",
+            "detail": "将$x=2$和$y=2z$代入第一个方程$x+y+z=7$，得到$z=1$"
+          },
+          "kc": {
+            "4": [
+              "解二元一次方程组"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "将$x=2$和$z=1$代入代数式求解",
+            "detail": "将$x=2$和$z=1$代入代数式$3(x-z)+1$，得到$3(2-1)+1=4$"
+          },
+          "kc": {
+            "5": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "三元一次方程组",
+      "实数"
+    ]
+  },
+  {
+    "question_id": "shiti0814_42eebd9286bb4d4b6d744988aebd4919",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "下列四个汽车标志中，不是轴对称的图形的是（    ）\nA．<img alt=\"@@@16205e4f-517f-4969-921f-43ddf9ab0dc3\" height=\"57\" src=\"https://static0.xesimg.com/ai-math-question/que_media/59554352-698d-4844-b278-63acb11bf561.png\" width=\"153\"/>    B．<img alt=\"@@@caab1a6e-d67b-40e0-afe0-5d95e32007e3\" height=\"57\" src=\"https://static0.xesimg.com/ai-math-question/que_media/3ab05225-5426-4f38-afea-2796c500c37a.png\" width=\"80\"/>    C．<img alt=\"@@@4f898515-b1b3-45ca-94dc-338bc5b84411\" height=\"57\" src=\"https://static0.xesimg.com/ai-math-question/que_media/f534a44a-cdc8-4c1c-a1b3-1792a8439f60.png\" width=\"65\"/>    D．<img alt=\"@@@7a1bd536-ad87-45ba-a7b4-bbfc3379bd7a\" height=\"57\" src=\"https://static0.xesimg.com/ai-math-question/que_media/b93d606d-748a-47e9-a262-49090192f3de.png\" width=\"108\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "分析选项A",
+            "detail": "选项A的图形是轴对称图形，所以选项A不符合题意。"
+          },
+          "kc": {
+            "1": [
+              "轴对称的定义与性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "分析选项B",
+            "detail": "选项B的图形是轴对称图形，所以选项B不符合题意。"
+          },
+          "kc": {
+            "2": [
+              "轴对称的定义与性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "分析选项C",
+            "detail": "选项C的图形是轴对称图形，所以选项C不符合题意。"
+          },
+          "kc": {
+            "3": [
+              "轴对称的定义与性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "分析选项D",
+            "detail": "选项D的图形不是轴对称图形，所以选项D符合题意。"
+          },
+          "kc": {
+            "4": [
+              "轴对称的定义与性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "选择正确选项",
+            "detail": "综上，所以选择D选项。"
+          },
+          "kc": {
+            "5": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "轴对称"
+    ]
+  },
+  {
+    "question_id": "shiti08142054ba5e50cbfdd25726a16956d9dcc9",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "若方程组$$ \\left\\{\\begin{array}{c}ax+y=b\\\\ x-by=a\\end{array}\\right. $$的解是$$ \\left\\{\\begin{array}{c}x=1\\\\ y=1\\end{array}\\right. $$，则$$ 2a+b=\\underline{}$$．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "将已知解代入原方程组",
+            "detail": "将$x=1$和$y=1$代入原方程组$\\left\\{\\begin{array}{c}ax+y=b\\\\ x-by=a\\end{array}\\right.$，得到新的方程组$\\left\\{\\begin{array}{c}a+1=b\\\\ 1-b=a\\end{array}\\right.$"
+          },
+          "kc": {
+            "1": [
+              "解二元一次方程组"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "解新的方程组",
+            "detail": "解这个新的方程组，得到$a=0$和$b=1$"
+          },
+          "kc": {
+            "2": [
+              "解二元一次方程组"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "计算$2a+b$的值",
+            "detail": "将$a=0$和$b=1$代入$2a+b$，得到$2a+b=1$"
+          },
+          "kc": {
+            "3": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "二元一次方程组"
+    ]
+  },
+  {
+    "question_id": "shiti0814_86513d8cd5df8906023182251a6fbd6b",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "把不等式组$$ \\left\\{\\begin{array}{c}2x+1>-1\\\\ x+2\\le 3\\end{array}\\right. $$的解集表示在数轴上，下列选项正确的是（ ）\nA．<img height=\"49\" src=\"https://static0.xesimg.com/ai-math-question/que_media/b7016114-f8f7-4b64-bfce-1e77c44d21a2.png\" width=\"150\"/>    B．<img height=\"49\" src=\"https://static0.xesimg.com/ai-math-question/que_media/56c1c79e-7bbd-4b8f-b098-d65e3440debd.png\" width=\"148\"/>\nC．<img height=\"49\" src=\"https://static0.xesimg.com/ai-math-question/que_media/1c0112a8-c158-400d-9b4b-982176c86ab3.png\" width=\"163\"/>    D．<img height=\"38\" src=\"https://static0.xesimg.com/ai-math-question/que_media/e55b259e-794c-4f0b-9b25-ddc1c9682cbd.png\" width=\"157\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "解第一个不等式",
+            "detail": "解不等式$2x+1>-1$，得到$x>-1$。"
+          },
+          "kc": {
+            "1": [
+              "解一元一次不等式（组）"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "解第二个不等式",
+            "detail": "解不等式$x+2\\le 3$，得到$x\\le 1$。"
+          },
+          "kc": {
+            "2": [
+              "解一元一次不等式（组）"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "确定不等式组的解集",
+            "detail": "因此，不等式组的解集为$-1<x\\le 1$。"
+          },
+          "kc": {
+            "3": [
+              "一元一次不等式（组）的解集"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "选择正确选项",
+            "detail": "根据“大于向右，小于向左，包括端点用实心，不包括端点用空心”的原则，选择B选项。"
+          },
+          "kc": {
+            "4": [
+              "在数轴上表示不等式（组）的解集"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "不等式",
+      "一元一次不等式（组）",
+      "数轴"
+    ]
+  },
+  {
+    "question_id": "shiti0712d877d6181d3f4841a103c052b7b25dc7",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "下列计算结果为$$ {a}^{6}$$的是（    ）\nA．$$ {\\left(-{a}^{3}\\right)}^{2}$$    B．$$ {a}^{7}÷{a}^{-1}$$    C．$$ {a}^{3}+{a}^{3}$$    D．$$ {a}^{2}\\cdot {a}^{3}$$\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "计算选项A",
+            "detail": "根据乘方的运算法则，$(-a^{3})^{2}=a^{6}$，符合题意"
+          },
+          "kc": {
+            "1": [
+              "积的乘方"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "计算选项B",
+            "detail": "根据同底数幂的乘除法则，$a^{7}÷a^{-1}=a^{8}$，不符合题意"
+          },
+          "kc": {
+            "2": [
+              "同底数幂相除"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "计算选项C",
+            "detail": "根据合并同类项的运算法则，$a^{3}+a^{3}=2a^{3}$，不符合题意"
+          },
+          "kc": {
+            "3": [
+              "合并同类项"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "计算选项D",
+            "detail": "根据同底数幂的乘法法则，$a^{2}\\cdot a^{3}=a^{5}$，不符合题意"
+          },
+          "kc": {
+            "4": [
+              "同底数幂相乘"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "得出答案",
+            "detail": "因此，只有选项A的计算结果为$a^{6}$，所以答案是A"
+          },
+          "kc": {
+            "5": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "幂的运算",
+      "整式的加减"
+    ]
+  },
+  {
+    "question_id": "shiti08142da50e2af766ca46c6edc5aa0512f538",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "计算：\n(1)$$ -{2}^{2}+|-7|+3\\times (-5)$$；\n(2)$$ 2(a-2b)-(2b-3a)$$．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "按照运算顺序进行计算",
+            "detail": "根据运算顺序，先进行乘方运算，得到$-{2}^{2}=-4$，然后计算绝对值，得到$|-7|=7$，最后进行乘法运算，得到$3\times (-5)=-15$。"
+          },
+          "kc": {
+            "1": [
+              "有理数的乘方",
+              "绝对值的定义与性质",
+              "有理数的乘法"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "进行加减运算",
+            "detail": "将上一步得到的结果进行加减运算，得到$-4+7-15=-12$。"
+          },
+          "kc": {
+            "2": [
+              "有理数的减法",
+              "有理数的加法"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "正数和负数",
+      "有理数的运算",
+      "绝对值"
+    ]
+  },
+  {
+    "question_id": "shiti07127f5932404abb27440dff3df614ef372b",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "三角形的三条$$\\underline{}$$线交于一点，这点称为三角形的重心．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "确定三角形的重心",
+            "detail": "三角形的重心是三角形的三条中线的交点。"
+          },
+          "kc": {
+            "1": [
+              "三角形的重心",
+              "三角形的中线"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "与三角形有关的线段"
+    ]
+  },
+  {
+    "question_id": "shiti081402fe24acc48479c155d9dc47c1ed35d5",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "下列实数中，为有理数的是（    ）．\nA．$$ \\sqrt{5}$$    B．0    C．$$ \\sqrt[3]{2}$$    D．$$ -3{π}$$\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "判断A选项",
+            "detail": "$\\sqrt{5}$的结果是无法开方得到有限小数或无限循环小数，所以A选项是无理数。"
+          },
+          "kc": {
+            "1": [
+              "无理数的定义",
+              "开平方"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "判断B选项",
+            "detail": "0是整数，整数是有理数的一种，所以B选项是有理数。"
+          },
+          "kc": {
+            "2": [
+              "有理数的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "判断C选项",
+            "detail": "$\\sqrt[3]{2}$的结果是无法开方得到有限小数或无限循环小数，所以C选项是无理数。"
+          },
+          "kc": {
+            "3": [
+              "无理数的定义",
+              "开立方"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "判断D选项",
+            "detail": "$\\pi$是无限不循环小数，所以D选项是无理数。"
+          },
+          "kc": {
+            "4": [
+              "无理数的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "得出答案",
+            "detail": "所以，这四个选项中，只有B选项是有理数。"
+          },
+          "kc": {
+            "5": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "有理数",
+      "实数",
+      "立方根",
+      "平方根"
+    ]
+  },
+  {
+    "question_id": "shiti0724_e6bf9fa4a5528f368d25d85c7a192a1d",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，从图甲到图乙的变换是（    ）\n<img height=\"138\" src=\"https://static0.xesimg.com/ai-math-question/que_media/0280b8d4-ab08-4372-ad0e-d75d234b83a1.png\" width=\"343\"/>\nA．轴对称变换    B．平移变换    C．旋转变换    D．相似变换\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "观察图形变换",
+            "detail": "从图甲到图乙的图形的形状相同，大小不相同，图甲与图乙是相似形。"
+          },
+          "kc": {
+            "1": [
+              "位似图形的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "判断变换类型",
+            "detail": "根据图形的变化，可以判断从图甲到图乙的变换是相似变换。"
+          },
+          "kc": {
+            "2": [
+              "位似图形的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "选择正确选项",
+            "detail": "综上，所以选择D选项"
+          },
+          "kc": {
+            "3": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "位似"
+    ]
+  },
+  {
+    "question_id": "shiti0724_3a38410f709fccdb01e93d7ef649ec3c",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，已知 $$ △ABC$$ 和 $$ △CDE$$ 都是等边三角形，且A、C、E三点共线. $$ AD$$ 与 $$ BE$$ 交于点O， $$ AD$$ 与 $$ BC$$ 交于点P， $$ BE$$ 与 $$ CD$$ 交于点Q，连结 $$ PQ$$ .以下六个结论：①$$ AD=BE$$ ；②$$ \\angle AOB=60°$$ ；③$$ AP=BQ$$ ；④$$ DE=DP$$ ；⑤$$ PQ//AE$$ ；⑥$$ OC平分\\angle AOE$$ .其中正确结论的有（  ）个  \n<img alt=\"\" height=\"115\" src=\"https://static0.xesimg.com/ai-math-question/que_media/ee417e50-653e-485e-a6fd-8e22a043ab15.png\" width=\"174\"/>\nA．3    B．4    C．5    D．6\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "利用等边三角形的性质证明两个三角形全等",
+            "detail": "根据等边三角形的性质，利用SAS证明$\\triangle ACD \\cong \\triangle BCE$，则可得出$AD=AE$，对结论①作出判断"
+          },
+          "kc": {
+            "1": [
+              "SAS",
+              "全等三角形的定义",
+              "等边三角形的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "利用三角形的外角的性质求角度",
+            "detail": "由步骤1得$\\angle CBE=\\angle DAC$，然后根据三角形的外角的性质得出$\\angle AOB=\\angle CBE+\\angle CEB=60°$，对结论②作出判断"
+          },
+          "kc": {
+            "2": [
+              "角的和差",
+              "等边三角形的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "利用SAS证明两个三角形全等",
+            "detail": "由步骤1得$\\angle CBE=\\angle DAC$，再利用SAS证明$\\triangle CQB \\cong \\triangle CPA$，得出$AP=BQ$，对结论③作出判断"
+          },
+          "kc": {
+            "3": [
+              "SAS",
+              "全等三角形的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "比较两个线段的长度",
+            "detail": "由于$\\angle QCP=60°$，$\\angle DPC=\\angle BCA+\\angle PAC＞60°$，得出$CD>DP$，即$DE>PD$，对结论④作出判断"
+          },
+          "kc": {
+            "4": []
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "5",
+            "title": "判断两条线段是否平行",
+            "detail": "先求出$\\triangle PCQ$为等边三角形，$\\angle PQC=\\angle DCE=60°$，则可判定$PQ\\parallel AE$，对结论⑤作出判断"
+          },
+          "kc": {
+            "5": [
+              "平行线的判定",
+              "等边三角形的性质"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "6",
+            "title": "判断一条线段是否平分一个角",
+            "detail": "作$CM\\perp AD$，$CN\\perp BE$，连接$OC$，根据全等三角形的性质得出$CM=CN$，则可判定$OC$平分$\\angle AOE$，对结论⑥作出判断"
+          },
+          "kc": {
+            "6": [
+              "全等三角形的性质",
+              "角的平分线及等分线"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "7",
+            "title": "作答",
+            "detail": "根据以上分析，结论①、②、③、⑤、⑥是正确的，结论④是错误的，所以正确结论的有5个，所以答案是C"
+          },
+          "kc": {
+            "7": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "等边三角形",
+      "全等三角形的判定",
+      "全等三角形的基础",
+      "角的比较与运算",
+      "平行线"
+    ]
+  },
+  {
+    "question_id": "shiti0814_f3b644a5cdcb84d5ca1caac350f55cb8",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "主视图、左视图、俯视图分别是下列三个图形的物体是（ ）\n<img alt=\"@@@9dba0c5830564641a058833ec7a14d4f\" height=\"92\" src=\"https://static0.xesimg.com/ai-math-question/que_media/a30b0ad6-46f9-4252-b169-7f8bccc0d2dd.jpeg\" width=\"279\"/>\nA．<img alt=\"@@@a582d184a3ee47bca771d979c4bef280\" height=\"51\" src=\"https://static0.xesimg.com/ai-math-question/que_media/0cad2ace-93c3-42fa-bfca-08319a3b9c16.jpeg\" width=\"71\"/>    B．<img alt=\"@@@2c297db4bf4a4f108ba45ad93f330ada\" height=\"50\" src=\"https://static0.xesimg.com/ai-math-question/que_media/51b82aba-0d10-43b3-8c5a-b614e5a3f3ca.jpeg\" width=\"64\"/>    C．<img alt=\"@@@be528ee62e454acaaedd3031a10b62c5\" height=\"45\" src=\"https://static0.xesimg.com/ai-math-question/que_media/4aba026f-2ca1-4f00-a827-1c68032c4955.jpeg\" width=\"71\"/>    D．<img alt=\"@@@48e876262e90486bbb0660f73653d068\" height=\"51\" src=\"https://static0.xesimg.com/ai-math-question/que_media/e866787d-0a5d-48be-a1d3-46cbb80dd4b4.jpeg\" width=\"71\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "分析三视图",
+            "detail": "根据三视图想象立体图形，从主视图可以看出左边的一列有两个，左视图可以看出左边的一列后面一行有两个，俯视图中左边的一列有两排。"
+          },
+          "kc": {
+            "1": [
+              "正投影"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "确定立体图形",
+            "detail": "从主视图可以看出左边的一列有两个，右边的两列只有一行（第二行）；从左视图可以看出左边的一列后面一行有两个，左边的一列只有一行（第二行）；从俯视图可以看出左边的一列有两排，右边的两列只有一排（第二排）。"
+          },
+          "kc": {
+            "2": [
+              "正投影"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "选择正确选项",
+            "detail": "综上，所以选择D选项"
+          },
+          "kc": {
+            "3": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "投影"
+    ]
+  },
+  {
+    "question_id": "shiti08148b6e208d6947919471018c0b9cefe38a",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "解方程：$$ {x}^{2}+10x+25=9$$．\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "化为一般形式",
+            "detail": "将方程$x^{2}+10x+25=9$化为一般形式，得到$x^{2}+10x+16=0$"
+          },
+          "kc": {
+            "1": [
+              "平方差公式",
+              "一元二次方程的定义"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "计算判别式",
+            "detail": "计算判别式$\\Delta =10^{2}-4\\times 1\\times 16=36$"
+          },
+          "kc": {
+            "2": [
+              "一元二次方程根的判别式"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "使用公式法求解",
+            "detail": "使用公式法求解，得到$x=\\frac{-10\\pm \\sqrt{36}}{2}$"
+          },
+          "kc": {
+            "3": [
+              "解一元二次方程"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "得出解",
+            "detail": "因此，方程的解为$x_{1}=-2$，$x_{2}=-8$"
+          },
+          "kc": {
+            "4": [
+              "解一元二次方程"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "一元二次方程",
+      "乘法公式"
+    ]
+  },
+  {
+    "question_id": "shiti0712_ed96b0648bf3de04ffcf30465b8ff332",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，AD是△ABC的外接圆⊙O的直径，点P在BC延长线上，且满足∠PAC=∠B．\n（1）求证：PA是⊙O的切线；\n（2）弦CE⊥AD交AB于点F，若AF•AB=12 ，求AC的长．\n<img alt=\"@@@32787b345c224396aa4e905385568096\" height=\"132\" src=\"https://static0.xesimg.com/ai-math-question/que_media/dd57142f-0667-49d0-aef8-f09ca484ce0b.png\" width=\"239\"/>\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "利用圆的性质",
+            "detail": "由于$AD$是$\\odot O$的直径，所以$\\angle ACD=90°$，因此$\\angle CAD+\\angle D=90°$。"
+          },
+          "kc": {
+            "1": []
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "利用已知条件",
+            "detail": "由于$\\angle PAC=\\angle PBA$，且$\\angle D=\\angle PBA$，所以$\\angle CAD+\\angle PAC=90°$。"
+          },
+          "kc": {
+            "2": [
+              "角的和差"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "利用切线的判定定理",
+            "detail": "由于$\\angle PAD=90°$，且点$A$在$\\odot O$上，所以$PA$是$\\odot O$的切线。"
+          },
+          "kc": {
+            "3": [
+              "切线的判定定理"
+            ]
+          }
+        }
+      ]
+    ],
+    "first": [
+      "圆的相关概念",
+      "直线与圆的位置关系"
+    ]
+  },
+  {
+    "question_id": "shiti0814_c59bc229c8734312256934074ac85b8a",
+    "source": 3,
+    "subject_id": 2,
+    "info": [],
+    "combine_content": "如图，正六边形ABCDEF的边长为6，以顶点A为圆心，AB的长为半径画圆，则图中阴影部分图形的周长为（  ）\n<img alt=\"@@@c394ece9-9dbf-4243-ba2a-016f21d0da72\" height=\"204\" src=\"https://static0.xesimg.com/ai-math-question/que_media/810172f5-e2f7-4e75-8201-1d8fe7dc3c25.png\" width=\"222\"/>\nA．2π    B．4π    C．2π+12    D．4π+12\n",
+    "sub_question": [
+      [
+        {
+          "question": "1",
+          "solution": {
+            "step": "1",
+            "title": "求正六边形的内角",
+            "detail": "正六边形的内角$\\angle FAB=180°-\\frac{1}{6}\\times 360°=120°$。"
+          },
+          "kc": {
+            "1": [
+              "正多边形的中心与中心角"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "2",
+            "title": "求圆弧长度",
+            "detail": "根据弧长公式，$l_{\\stackrel{⌢}{FB}}=\\frac{120\\pi \\times 6}{180}=4\\pi$。"
+          },
+          "kc": {
+            "2": [
+              "弧长公式"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "3",
+            "title": "求阴影部分图形的周长",
+            "detail": "阴影部分图形的周长为$AF+AB+l_{\\stackrel{⌢}{FB}}=4\\pi +12$。"
+          },
+          "kc": {
+            "3": [
+              "点线面体"
+            ]
+          }
+        },
+        {
+          "question": "1",
+          "solution": {
+            "step": "4",
+            "title": "选择正确选项",
+            "detail": "综上，所以选择D选项"
+          },
+          "kc": {
+            "4": []
+          }
+        }
+      ]
+    ],
+    "first": [
+      "正多边形与圆",
+      "弧长及扇形的面积",
+      "几何图形"
+    ]
+  }
+]

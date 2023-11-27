@@ -1,75 +1,76 @@
-from call_gpt import send_chat_request
-import json
-
-import pandas as pd
-
-# i = """{
-#     "kc":[
-#         {"1":["平移的定义与性质"]},
-#         {"2":["平移的定义与性质"]},
-#         {"3":[]}
-#     ],
-#     "reason":[
-#             {"1":{"平移的定义与性质":"第一步是理解平移的性质。在平面直角坐标系中，如果一个图形的所有点的纵坐标都减去一个相同的值，那么这个图形就会向下平移相应的单位。这是因为在平面直角坐标系中，纵坐标决定了点在垂直方向上（也就是上下）的位置。如果我们减小每个点的纵坐标值，那么每个点都会向下移动，所以整个图形也就向下平移了。"}},
-#             {"2":{"平移的定义与性质":"第二步是应用刚才理解到的平移性质。根据题目描述，三角形所有顶点横坐标保持不变、纵坐标都减去5, 这意味着三角形沿垂直方向（即上下方向）发生了位移，并且位移量为5单位长度。由于我们已经知道当纵坐标减小时图形会向下平移，所以可以确定这等价于将三角形整体向下平移5个单位。"}},
-#             {"3":{}}
+# from call_gpt import send_chat_request
+# import json
+# import string
+#
+# import pandas as pd
+#
+# import string
+#
+#
+# def million_to_billion(m):
+#     return m * 1000000 / 1000000000
+#
+#
+# def billion_to_million(m):
+#     return m * 1000000000 / 1000000
+#
+#
+# def trillion_to_billion(m):
+#     return m * 1000
+#
+#
+# if __name__ == "__main__":
+#     approach2_models_params = [
+#         {"parameters": 400, "tokens": billion_to_million(7.7)},
+#         {"parameters": billion_to_million(1), "tokens": billion_to_million(20.0)},
+#         {"parameters": billion_to_million(10), "tokens": billion_to_million(219.5)},
+#         {"parameters": billion_to_million(67), "tokens": billion_to_million(trillion_to_billion(1.7))},
+#         {"parameters": billion_to_million(175), "tokens": billion_to_million(trillion_to_billion(4.3))},
+#         {"parameters": billion_to_million(280), "tokens": billion_to_million(trillion_to_billion(7.1))},
+#         {"parameters": billion_to_million(520), "tokens": billion_to_million(trillion_to_billion(13.4))},
+#         {"parameters": billion_to_million(trillion_to_billion(1)),
+#          "tokens": billion_to_million(trillion_to_billion(26.5))},
+#         {"parameters": billion_to_million(trillion_to_billion(10)),
+#          "tokens": billion_to_million(trillion_to_billion(292.0))},
 #     ]
-# }"""
-
-
-# i = """{
-#     "kc":[
-#         {"1":["平移的定义与性质"]},
-#         {"2":["平移的定义与性质"]},
-#         {"3":["测试"]}
-#     ],
-#     "reason":[
-#             {"1":{"平移的定义与性质":"第一步是理解平移的性质。在平面直角坐标系中，如果一个图形的所有点的纵坐标都减去一个相同的值，那么这个图形就会向下平移相应的单位。这是因为在平面直角坐标系中，纵坐标决定了点在垂直方向上（也就是上下）的位置。如果我们减小每个点的纵坐标值，那么每个点都会向下移动，所以整个图形也就向下平移了。"}},
-#             {"2":{"平移的定义与性质":"第二步是应用刚才理解到的平移性质。根据题目描述，三角形所有顶点横坐标保持不变、纵坐标都减去5, 这意味着三角形沿垂直方向（即上下方向）发生了位移，并且位移量为5单位长度。由于我们已经知道当纵坐标减小时图形会向下平移，所以可以确定这等价于将三角形整体向下平移5个单位。"}},
-#             {"3":{"测试":"测试原因"}}
+#
+#     for i in approach2_models_params:
+#         print(
+#             "parameters: {}, tokens: {}, rate: {}".format(i["parameters"], i["tokens"], i["tokens"] / i["parameters"]))
+#
+#     print("===")
+#
+#     approach3_models_params = [
+#         {"parameters": 400, "tokens": billion_to_million(9.2)},
+#         {"parameters": billion_to_million(1), "tokens": billion_to_million(27.1)},
+#         {"parameters": billion_to_million(10), "tokens": billion_to_million(410.1)},
+#         {"parameters": billion_to_million(67), "tokens": billion_to_million(trillion_to_billion(4.1))},
+#         {"parameters": billion_to_million(175), "tokens": billion_to_million(trillion_to_billion(12.0))},
+#         {"parameters": billion_to_million(280), "tokens": billion_to_million(trillion_to_billion(20.1))},
+#         {"parameters": billion_to_million(520), "tokens": billion_to_million(trillion_to_billion(43.5))},
+#         {"parameters": billion_to_million(trillion_to_billion(1)),
+#          "tokens": billion_to_million(trillion_to_billion(94.1))},
+#         {"parameters": billion_to_million(trillion_to_billion(10)),
+#          "tokens": billion_to_million(trillion_to_billion(1425.5))},
 #     ]
-# }"""
-
-# def modify_first_response(first_response, kc_list=["概率"]):
-#     for kc in first_response["kc"]:
-#         if kc not in kc_list:
-#             first_response["kc"].remove(kc)
-#             del first_response["reason"][kc]
-#     return first_response
-
-
-# def modify_second_response(second_response, first_response=["测试"], last_level_kc_set=set(["平移的定义与性质"])):
-#     for idx in range(len(second_response["kc"])):
-#         for k, v in second_response["kc"][idx].items():
-#             for kc in set(list(v)):
-#                 if kc not in last_level_kc_set:
-#                     second_response["kc"][idx][k].remove(kc)
-#                     del second_response["reason"][idx][k][kc]
-#     return second_response
-
 #
-# second_response = json.loads(i)
-# i_new = modify_second_response(second_response)
-# print(i_new)
-
-
-# import os
+#     for i in approach3_models_params:
+#         print(
+#             "parameters: {}, tokens: {}, rate: {}".format(i["parameters"], i["tokens"], i["tokens"] / i["parameters"]))
 #
-# directory = "/Users/tuo/PycharmProjects/math_gpt/test/directory/a/b/c"  # 请用你想要检查或创建的目录路径替换此处
+#     print("Chinchilla")
+#     print(
+#         "parameters: {}, tokens: {}, rate: {}".format(billion_to_million(70),
+#                                                       billion_to_million(trillion_to_billion(1.4)),
+#                                                       billion_to_million(trillion_to_billion(1.4)) / billion_to_million(70)))
 #
-# # 检查目录是否存在
-# if not os.path.exists(directory):
-#     # 如果不存在，则创建该目录
-#     os.makedirs(directory)
-# else:
-#     print("aleardy exist.")
-# print("done")
+#
+# # with open('/Users/tuo/PycharmProjects/math_gpt/question_step/data/math/senior/kc1.txt', 'r') as file:
+# #     # with open('/Users/tuo/PycharmProjects/math_gpt/question_step/data/math/senior/kc2.txt', 'r') as file:
+# #     kc_list = file.readline().strip().split("@suzuki@")
+# #     count_dict = {item: 0 for item in kc_list}
+# #     print(json.dumps(count_dict, ensure_ascii=False, indent=4))
+# #     print(len(kc_list))
+#
 
-
-def search_dict(input_dict, search_str):
-    return {k: v for k, v in input_dict.items() if search_str in k}
-
-
-my_dict = {'apple': 1, 'banana': 2, 'grape': 3, 'pineapple': 4}
-new = search_dict(my_dict, "app")
-print(new)
+print(100- 77/663*100)

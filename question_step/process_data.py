@@ -169,8 +169,14 @@ class Question:
         self.sub_question = sub_question
         return self
 
-    def add_kc_key(self, kc_list):
-        for item, kc in zip(self.sub_question[0], kc_list):
+    def all_sub_question(self):
+        """选择所有子题."""
+        return self
+
+    def add_kc_key(self, sub_question, kc_list):
+        print("sub_question:", sub_question)
+        print("kc_list:", kc_list)
+        for item, kc in zip(sub_question, kc_list):
             if hasattr(item, "kc"):
                 setattr(item, "kc", kc)
             else:
@@ -209,7 +215,8 @@ class DataProcessor:
             question_id = line["question_id"]
             source = line["source"]
             subject_id = line["subject_id"]
-            response_json = json.loads(line["response_json"])
+            print(line["response_json"])
+            response_json = json.loads(str(line["response_json"]).replace("'", "\""))
             # info = line["new_kc"]
             info = []
             combine_content = line["combine_content"]
@@ -239,7 +246,8 @@ class DataProcessor:
         question_list = []
         data_list = self.transformer_question()
         for data in data_list:
-            question_list.append(data.sample_sub_question())
+            # question_list.append(data.sample_sub_question())
+            question_list.append(data.all_sub_question())
         # to_json_file(file_name=self.out_tmp_sub, obj=question_list)
         return question_list
 

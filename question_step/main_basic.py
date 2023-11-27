@@ -17,8 +17,8 @@ from config import ConfigParser
 
 warnings.filterwarnings("ignore")
 cp = ConfigParser()
-config = cp.get_config(input_file="source3_sample_input.csv", output_file="source3_sample_basic.json", env="本地",
-                       sample_cnt=50, dir_check=True)
+config = cp.get_config(input_file="ssss.csv", output_file="source3_sample_basic_test.json", env="本地",
+                       sample_cnt=1, dir_check=True)
 
 logger.add(config["log_file"])  ## 日志
 INPUT_FILE = config["input_file"]  ## 输入文件
@@ -66,8 +66,8 @@ class Level:
             system=system,
             examples=examples,
             question=query,
-            engine="GPT4",
-            # engine="GPT4-FAST",
+            # engine="GPT4",
+            engine="GPT4-FAST",
         )
         try:
             kc_result = json.loads(response["response"])
@@ -99,9 +99,8 @@ class SubLevel(Level):
         return system.format(kc_string=self.sub_level_kc_set)
 
     def generate(self, sample, question_id):
-        print("SubLevel generate")
+        # print("SubLevel generate")
         system = self.load_system()
-        print("system:", system)
         examples = self.load_examples()
         query = json.dumps(sample, ensure_ascii=False, default=obj_to_dict)
 
@@ -112,15 +111,15 @@ class SubLevel(Level):
         # print("system:", system)
         # print("examples:", examples)
         # print("query:", query)
-        print("messages: ", messages)
-        print("===")
+        # print("messages: ", messages)
+        # print("===")
 
         response = send_chat_request(
             system=system,
             examples=examples,
             question=query,
-            engine="GPT4",
-            # engine="GPT4-FAST",
+            # engine="GPT4",
+            engine="GPT4-FAST",
         )
         try:
             kc_result = json.loads(response["response"])
@@ -155,9 +154,8 @@ class LastLevel(Level):
         return kc_list
 
     def generate(self, sample, question_id):
-        print("LastLevel generate")
+        # print("LastLevel generate")
         system = self.load_system()
-        # print("system:", system)
         examples = self.load_examples()
         query = json.dumps(sample, ensure_ascii=False, default=obj_to_dict)
 
@@ -168,15 +166,15 @@ class LastLevel(Level):
         # print("system:", system)
         # print("examples:", examples)
         # print("query:", query)
-        print("messages: ", messages)
-        print("===")
+        # print("messages: ", messages)
+        # print("===")
 
         response = send_chat_request(
             system=system,
             examples=examples,
             question=query,
-            engine="GPT4",
-            # engine="GPT4-FAST",
+            # engine="GPT4",
+            engine="GPT4-FAST",
         )
         try:
             kc_result = json.loads(response["response"])
@@ -217,12 +215,20 @@ class Service:
         first = self.modify_first_response(first_response=first)
         print("first:", first)
         q.add_first_step(first)
-        second = LastLevel(sub_level_kc=first).generate(sample=q, question_id=q.question_id)  # 调用openai接口
-        second = self.modify_second_response(
-            second_response=second, first_response=first
-        )
-        print("second:", second)
-        q.add_kc_key(second)
+        # print("len(q.sub_question): ", len(q.sub_question))
+        for sub_question_idx in range(len(q.sub_question)):
+            new_q = Question(
+                question_id=q.question_id,
+                source=q.source,
+                subject_id=q.subject_id,
+                info=q.info,
+                combine_content=q.combine_content,
+                sub_question=[q.sub_question[sub_question_idx]],
+            )
+            second = LastLevel(sub_level_kc=first).generate(sample=new_q, question_id=q.question_id)  # 调用openai接口
+            second = self.modify_second_response(second_response=second, first_response=first)
+            print("second:", second)
+            q.add_kc_key(sub_question=q.sub_question[sub_question_idx], kc_list=second)
         logger.info(json.dumps(q, ensure_ascii=False, default=obj_to_dict))
 
     def parallel_execution(self, data_list, n_jobs=50):

@@ -53,7 +53,9 @@ class Knowledge:
         self.to_json_file(kc_details_json)
         return kc_details_json
 
-    def to_json_file(self, mapping_dict: Dict[str, List[str]]):
+    def to_json_file(self, mapping_dict: Dict[str, List[str]]=None):
+        if mapping_dict ==None:
+            mapping_dict = self._mapping
         with open(
                 os.path.join(kc_dir, self.last_kc_file_name), encoding="utf-8", mode="w"
         ) as f:
@@ -109,8 +111,10 @@ class Knowledge:
 
 if __name__ == "__main__":
     kc = Knowledge()
-    print("kc: {}".format(set(kc.sub_level_kc)))
-    print(len("{}".format(set(kc.sub_level_kc))))
+    print(kc.to_json_file())
+
+    # print("kc: {}".format(set(kc.sub_level_kc)))
+    # print(len("{}".format(set(kc.sub_level_kc))))
     # print(kc.sub_level_kc_cnt)
     # print(kc.last_level_kc_cnt)
     # print(kc.last_level_kc)

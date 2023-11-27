@@ -22,7 +22,7 @@ class ConfigParser(object):
             "local": "/Users/tuo/PycharmProjects/math_gpt/question_step"
         }
 
-    # default=basic
+    # default=basic初中数学
     def get_config(self, input_file="input.csv", output_file="output.json",
                    sublevel_system_file="system-sublevel.md", lastlevel_system_file="system-lastlevel.md",
                    sublevel_examples_list=None, lastlevel_examples_list=None,

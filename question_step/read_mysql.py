@@ -1,45 +1,28 @@
+# -*- coding: utf-8 -*-
+# @Time : 2023/11/27 5:44 下午
+# @Author : tuo.wang
+# @Version :
+# @Function :
 import pandas as pd
-import json
-from utils import obj_to_dict
-from loguru import logger
+from sqlalchemy import create_engine
 
-# 读取生产文件中的一行数据
-# df1 = pd.read_csv("/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/math/junior/source1.csv")
-# df2 = pd.read_csv("/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/math/junior/source2.csv")
-# df3 = pd.read_csv("/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/math/junior/source3.csv")
+# 创建数据库连接
+username = "lable_read"
+password = "j3T8im$d0Ss#7Ui2"
+host = "pc-2zem9nkj5n63a2n3v.mysql.polardb.rds.aliyuncs.com"  # 如果MySQL容器和Jupyter在同一个Docker网络中，请使用MySQL容器名称作为主机
+port = "3306"  # 默认MySQL端口
+database = "spier_data"
+table = "question_perfect"
 
+# cnt = 100
+engine = create_engine(
+    f"mysql+pymysql://{username}:{password}@{host}:{port}/{database}"
+)
 
-# question_id = "08606ce772234db2b83343eea0526c11"
-# result_row = df.loc[df['question_id'] == question_id]
-
-# print("source1: ", len(df1))
-# print("source2: ", len(df2))
-# print("source3: ", len(df3))
-# print("done.")
-
-
-# import json
-#
-# with open('/Users/tuo/PycharmProjects/exquisite_analysis_knowledge_tagging/question_step/tmp/math/junior/source3_sample_input_batch_10000.json', 'r') as f:
-#     data = json.load(f)
-#
-# print(len(data))
-# print("done.")
-
-
-import pandas as pd
-
-
-def query_dataframe(df, column, lst):
-    # 使用 isin() 函数过滤出包含在提供的 list 中的值
-    return df[df[column].isin(lst)]
-
-
-# 测试上述函数
-df = pd.read_csv(
-    "/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/math/junior/精美解析结果库_subject_2_grade_group_2.csv")
-
-lst = [
+query = '''
+SELECT * FROM question_perfect
+WHERE question_id IN 
+(
     'acc543961b654466a5df09890e9ffa6c',
     '89dfacbe679b411b94694866ec978b94',
     'fc118657e5444cb0a476ea21673135a2',
@@ -74,9 +57,12 @@ lst = [
     'f21e0056d355418390a6356f10a10258',
     'efe07b6585c34e4fa48fa3d00b55d1b9',
     '121_128800.json_131133175',
-    '2_66330.json_33076012',
-]
+    '2_66330.json_33076012'
+)
+'''
+df = pd.read_sql(query, engine)
 
-new_df = query_dataframe(df, "question_id", lst)
-new_df.to_csv("/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/math/junior/new.csv")
+# 查看前几行数据
+output_dir = "/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/math/senior/new.csv"
+df.to_csv(output_dir, index=False)
 print("done.")

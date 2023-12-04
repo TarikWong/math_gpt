@@ -9,24 +9,24 @@ from utils import obj_to_dict
 from config import ConfigParser
 
 cp = ConfigParser()
-config = cp.get_config(env="本地", grade="高中")
+config = cp.get_config(env="本地", grade="初中")
 DATA_DIR = config["input_dir"]
 
 
 def split_dataset(
         # 初中数学
-        # file_dir: str = os.path.join(DATA_DIR, "精美解析结果库_subject_2_grade_group_2.csv")
+        file_dir: str = os.path.join(DATA_DIR, "精美解析结果库_subject_2_grade_group_2.csv")
 
         # 高中数学
-        file_dir: str = os.path.join(DATA_DIR, "精美解析结果库_subject_2_grade_group_3.csv")
+        # file_dir: str = os.path.join(DATA_DIR, "精美解析结果库_subject_2_grade_group_3.csv")
 ):
     print("file_dir: ", file_dir)
 
     """将初中数学的全量数据划分为教研云，题拍拍以及其他三部分数据。"""
-    # data = pd.read_csv(file_dir, low_memory=True)
-    # data[data["source"] == 1].to_csv(os.path.join(DATA_DIR, "source1.csv"), index=False)
-    # data[data["source"] == 2].to_csv(os.path.join(DATA_DIR, "source2.csv"), index=False)
-    # data[data["source"] == 3].to_csv(os.path.join(DATA_DIR, "source3.csv"), index=False)
+    data = pd.read_csv(file_dir, low_memory=True)
+    data[data["source"] == 1].to_csv(os.path.join(DATA_DIR, "source1.csv"), index=False)
+    data[data["source"] == 2].to_csv(os.path.join(DATA_DIR, "source2.csv"), index=False)
+    data[data["source"] == 3].to_csv(os.path.join(DATA_DIR, "source3.csv"), index=False)
 
 
 def get_s1_kc(data: dict):
@@ -201,22 +201,29 @@ class DataProcessor:
             sample_cnt: int,
             out_tmp: str,
             out_tmp_sub: str,
-            out_tmp_result: str) -> None:
+            out_tmp_result: str,
+            need_sample: True
+    ) -> None:
         self.data = pd.read_csv(file_path)
         self.out_tmp = "{}{}_solutions.json".format(out_tmp, file_path.split("/")[-1].split(".")[0])
         self.out_tmp_sub = "{}{}_solutions_sub.json".format(out_tmp, file_path.split("/")[-1].split(".")[0])
         self.out_tmp_result = out_tmp_result
         self.sample_cnt = sample_cnt
+        self.need_sample = need_sample
 
     def transformer_question(self) -> List[Question]:
         question_list = []
-        data = self.data.sample(self.sample_cnt)
+        if self.need_sample:
+            data = self.data.sample(self.sample_cnt)
+        else:
+            data = self.data
         for _, line in data.iterrows():
             question_id = line["question_id"]
             source = line["source"]
             subject_id = line["subject_id"]
-            print(line["response_json"])
-            response_json = json.loads(str(line["response_json"]).replace("'", "\""))
+            # response_json = json.loads(str(line["response_json"]).replace("'", "\""))
+            response_json = json.loads(line["response_json"])
+
             # info = line["new_kc"]
             info = []
             combine_content = line["combine_content"]
@@ -293,10 +300,10 @@ if __name__ == "__main__":
     # print('=========== original end ===========')
 
     # 随机抽样数据写入临时文件
-    # sample_cnt = 5000
-    # df = pd.read_csv('/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/source3.csv')
-    # data = df.sample(sample_cnt)
-    # data.to_csv(os.path.join(DATA_DIR, "source2_sample{}.csv".format(str(sample_cnt))), index=False)
+    sample_cnt = 20
+    df = pd.read_csv('/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/math/junior/source1.csv')
+    data = df.sample(sample_cnt)
+    data.to_csv(os.path.join(DATA_DIR, "source1_sample{}.csv".format(str(sample_cnt))), index=False)
 
     # 根据测试数据question_id重新抽取原始数据
     # input_df = pd.read_csv("/mnt/pfs/zitao_team/big_model/wangtuo_data/question_step/data/source3.csv")
@@ -305,5 +312,5 @@ if __name__ == "__main__":
     # new_df = input_df[input_df['question_id'].isin(question_list)]
     # new_df.to_csv(os.path.join(DATA_DIR, "source3_sample_input.csv"), index=False)
 
-    split_dataset()
+    # split_dataset()
     print('done.')
